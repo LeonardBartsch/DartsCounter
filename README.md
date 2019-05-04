@@ -3,5 +3,5 @@
 LoL ich bin cool
 ...nicht
 
-Jetzt lass man hier was sinnvolles schreiben.
+Jetzt lass mal hier was sinnvolles schreiben.
 Genau!
