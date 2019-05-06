@@ -1,7 +1,11 @@
 # DartsCounter
 
-LoL ich bin cool
-...nicht
+Thema: Zähler für Dart spielen; verschiedene Spielmodi
 
-Jetzt lass mal hier was sinnvolles schreiben.
-Genau!
+Mitarbeiter: 
+	Fabian Liebing: Matrikelnummer: 3755438 E-Mail: fliebing@outlook.de
+	Philipp Raumanns: Matrikelnummer: 3745678 E-Mail: raumanns.p@gmx.de
+	Moritz Weinrich: Matrikelnummer: 3724741 E-Mail: moritz.weinrich@t-online.de
+	Leonard Bartsch: Matrikelnummer: 3739767 E-Mail: leonardbartsch@googlemail.com
+	
+Aufgabenbereiche: 
