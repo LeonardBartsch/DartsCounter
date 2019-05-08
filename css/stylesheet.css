@@ -58,5 +58,36 @@ td {
 }
 
 button:hover{
-  transform: scale(1.2);
+  transform: scale(1.05);
+}
+
+.spielenDiv{
+  position: relative;
+  margin-top: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.spielenButtonsDiv{
+  position: absolute;
+}
+
+.spielenButton{
+  margin: 10px;
+  border-radius: 5px;
+  border: solid;
+  width: 150px;
+  height: 50px;
+  box-shadow: 1px 1px 1px 1px;
+}
+
+.spielenTextDiv{
+  position: absolute; 
+  left: 250px;
+}
+h2{
+  margin-top: 10px;
+}
+.greenBackground{
+  background-color: #3F0;
 }
