@@ -77,14 +77,6 @@ button:hover{
   width: 250px;
 }
 
-.spielenButton{
-  margin: 10px;
-  border-radius: 5px;
-  border: solid;
-  width: 150px;
-  height: 50px;
-}
-
 .spielenTextDiv{
   width: 800px;
 }
@@ -93,7 +85,7 @@ h2{
   margin-top: 10px;
 }
 
-.spielenButton2 {
+.spielenButton{
   width: 165px;
   font-size: 1.15em;
   margin: 10px;
@@ -105,28 +97,28 @@ h2{
   text-decoration: none;
   text-align: center
   }
-  
-  .spielenButton2.green{
-    color: #20bf6b !important;
-    border-color: #20bf6b !important;
+
+  .spielenButton.green{
+    color: #20bf6b;
+    border-color: #20bf6b;
   }
 
-  .spielenButton2.grey{
-    color: #676968 !important;
-    border-color: #676968 !important;
+  .spielenButton.grey{
+    color: #676968;
+    border-color: #676968;
   }
 
-  .spielenButton2:hover{
-    color: #ffffff !important;
+  .spielenButton:hover{
+    color: #ffffff;
     transition: all 0.4s ease 0s;
   }
 
-  .spielenButton2.grey:hover{
+  .spielenButton.grey:hover{
     background: #676968;
-    border-color: #676968 !important;
+    border-color: #676968;
   }
 
-  .spielenButton2.green:hover {
+  .spielenButton.green:hover {
   background: rgb(52, 170, 22);
-  border-color: rgb(52, 170, 22) !important;
+  border-color: rgb(52, 170, 22);
   }
