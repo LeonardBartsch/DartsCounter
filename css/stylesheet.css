@@ -1,3 +1,13 @@
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ELEMENT-"KLASSEN"+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+h2{
+  margin-top: 10px;
+}
+
+
+td {
+  padding-bottom:5px;
+}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++UPPERPART-KLASSEN++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #logo {
   width: 100px;
   border-radius: 50%;
@@ -23,9 +33,9 @@ position: relative;
 
 .right {
   position: absolute;
-  top: 5px;
-  right: 15px;
-
+  top: 10px;
+  right: 130px;
+  width: 120px;
 }
 
 .left {
@@ -41,9 +51,6 @@ position: relative;
   margin-right: 40px;
 }
 
-td {
-  padding-bottom:5px;
-}
 
 .loginfont {
   font-size: 20px;
@@ -58,10 +65,7 @@ td {
   font-family: Consolas,monaco,monospace;
 }
 
-button:hover{
-  transform: scale(1.05);
-}
-
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv{
   position: relative;
   margin-top: 20px;
@@ -79,10 +83,6 @@ button:hover{
 
 .spielenTextDiv{
   width: 800px;
-}
-
-h2{
-  margin-top: 10px;
 }
 
 .spielenButton{
@@ -122,3 +122,25 @@ h2{
   background: rgb(52, 170, 22);
   border-color: rgb(52, 170, 22);
   }
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DROPDOWN-KLASSEN+++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.dropdown-menu {
+  display: none;
+  margin-top: 10px;
+  background-color: grey;
+  border-radius: 7px;
+  width: 200px;
+}
+
+.dropdown-container:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-button {
+  height: 70px;
+  width: 120px;
+}
+
+.dropdown-login {
+  margin-left: 16px;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
