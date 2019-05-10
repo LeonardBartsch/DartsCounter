@@ -36,9 +36,8 @@ position: relative;
 
 .right {
   position: absolute;
-  top: 10px;
-  right: 130px;
-  width: 120px;
+  top: 5px;
+  right: 15px;
 }
 
 .left {
@@ -59,7 +58,6 @@ position: relative;
   font-size: 20px;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-style: italic;
 }
 
 .fontfuersowas {
@@ -67,30 +65,29 @@ position: relative;
   font-weight: bold;
   font-family: Consolas,monaco,monospace;
 }
-/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++DROPDOWN-KLASSEN+++++++++++++++++++++++++++++++++++++++++++++++++++*/
-.dropdown-menu {
-  display: none;
-  margin-top: 10px;
-  background-color: grey;
-  border-radius: 7px;
+
+.inputBreite{
   width: 200px;
 }
 
-.dropdown-container:hover .dropdown-menu {
-  display: block;
+.accountButton{
+  border-radius: 6px;
+  border: 1px solid;
+  height: 25px;
 }
 
-.dropdown-button {
-  height: 70px;
-  width: 120px;
+.accountButton.green{
+  background-color: #12e775;
+  width: 110px;
+
+}
+.accountButton.grey{
+  background-color: #a9aaa9;
 }
 
-.dropdown-login {
-  margin-left: 16px;
+.accountButton:hover{
+  transform: scale(1.05);
 }
-
-
-
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv{
