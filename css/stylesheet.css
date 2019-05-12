@@ -8,7 +8,21 @@ td {
   padding-bottom:5px;
 }
 
+body {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
 
+hr {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++UPPERPART-KLASSEN++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #logo {
@@ -91,15 +105,12 @@ position: relative;
 
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv{
-  position: relative;
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
 }
 
-.spielenButtonsDiv, .spielenTextDiv{
-  float: left;
-}
+
 
 .spielenButtonsDiv{
   width: 250px;
@@ -145,4 +156,15 @@ position: relative;
   .spielenButton.green:hover {
   background: rgb(52, 170, 22);
   border-color: rgb(52, 170, 22);
+  }
+
+
+
+  /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
+  .newscontainer {
+    position: relative;
+    height: 100px;
+    margin-top: 30px;
+    margin-left: 10%;
+    margin-right: 10%;
   }
