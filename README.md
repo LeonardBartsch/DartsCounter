@@ -9,3 +9,7 @@ Mitarbeiter:
 	Leonard Bartsch: Matrikelnummer: 3739767 E-Mail: leonardbartsch@googlemail.com
 	
 Aufgabenbereiche: 
+	Start-Seite: Leonard, Fabian
+	Spielkonfiguration: Moritz
+	Account-Seite: Philipp
+	JS: Leonard
