@@ -174,15 +174,17 @@ position: relative;
   .news-pics {
     background-color: white;
     height: 500px;
-    width:
+    width: 500px;
   }
 
   .pfeil-links {
     height: 500px;
     background-color: black;
+    width: 200px;
   }
 
   .pfeil-rechts {
     height: 500px;
     background-color: black;
+    width: 200px;
   }
