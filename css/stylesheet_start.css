@@ -3,7 +3,6 @@
 h2{
     margin-top: 10px;
   }
-
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv{
   margin-top: 20px;
@@ -65,6 +64,7 @@ h2{
     margin-top: 30px;
     margin-left: 10%;
     margin-right: 10%;
+    margin-bottom: 25px;
   }
 
   .news-slideshow {
@@ -73,19 +73,22 @@ h2{
   }
 
   .news-pics {
-    background-color: white;
-    height: 500px;
+    background-color: black;
     width: 500px;
+    height: 400px;
   }
 
-  .pfeil-links {
-    height: 500px;
-    background-color: black;
-    width: 200px;
+  .pfeil {
+    width: 60px;
+    height:50px;
+  }
+  .pfeil.links {
+  margin-right: 30px;
   }
 
-  .pfeil-rechts {
-    height: 500px;
-    background-color: black;
-    width: 200px;
+  .pfeil.rechts {
+    margin-left: 30px;
   }
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEAMABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++*/
