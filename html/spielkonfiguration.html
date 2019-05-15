@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Spielkonfiguration</title>
+    <link rel="stylesheet" href="../css/stylesheet.css">
+  </head>
+  <body>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <div title="Upperpart">
+      <a href="index.html" class="center"><img src="../pics/Logo.jpg" alt="Logo" id="logo"></a>
+      <div class="intro-container" >
+        <div class="left rotate">
+          <span class="fontfuersowas">Dein Darts-Counter!</span>
+        </div>
+        <img src="../pics/Breitgezogen.png" alt="Breitgezogen" class="intropic">
+        <div class="right">
+          <form action="index.html" method="post">
+            <table class="marginrate">
+              <tr>
+                <td><span class="loginfont">Username:</span> </td>
+                <td><input type="text" class="inputBreite" name="Username" placeholder="Username"></td>
+              </tr>
+              <tr>
+                <td><span class="loginfont">Password:</span> </td>
+                <td><input type="text" class="inputBreite" name="Password" placeholder="Password"></td>
+              </tr>
+              <tr>
+                <td><input type="submit" class="accountButton green" name="Login" value="Login"></td>
+                <td><input type="submit" class="accountButton grey inputBreite" name="Registrieren" value="Registrieren"></td>
+              </tr>
+            </table>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SpielenAuswahl+++++++++++++++++++++++++++++++++++++++++++-->
+
+    <div class="Spielkonfiguration">
+    <table>
+      <form class="Spielkonfiguration" action="Spielkonfiguration.html" method="post"> <!-- eig nicht sensitiv ->get -->
+        <h2>Spieleinstellungen</h2>
+      <div class="Spieler">
+        <h3>Spieler</h3>
+        <input type="button" name="Spieler" value="1">
+        <input type="button" name="Spieler" value="2" checked>
+        <input type="number" name="Spieler" value="other" placeholder="other" min="3" max="8">
+      </div>
+      <div class="Dauer">
+        <h3>Dauer</h3>
+        <div class="Sets">
+          <h4>Sets</h4>
+          <input type="button" name="Set" value="1" checked>
+          <input type="button" name="Set" value="2">
+          <input type="number" name="Set" value="other" placeholder="other" min="3">
+        </div>
+        <div class="Legs">
+          <h4>Legs</h4>
+          <input type="button" name="Leg" value="1" checked>
+          <input type="button" name="Leg" value="2">
+          <input type="button" name="Leg" value="3">
+          <input type="button" name="Leg" value="4">
+          <input type="number" name="Leg" value="other" placeholder="other" min="5" max="14">
+        </div>
+      </div>
+      <div class="Punktanzahl">
+        <h3>Punktanzahl</h3>
+        <input type="button" name="Punkte" value="301">
+        <input type="button" name="Punkte" value="501" checked>
+        <input type="button" name="Punkte" value="701">
+      </div>
+      <div class="In/Out">
+        <h3>In/Out</h3>
+        <h4>In</h4>
+        <h4>Out</h4><br>
+        <input type="button" name="Single In" value="Single" checked>
+        <input type="button" name="Single Out" value="Single"><br>
+        <input type="button" name="Double In" value="Double">
+        <input type="button" name="Double Out" value="Double" checked><br>
+        <input type="button" name="Master In" value="Master">
+        <input type="button" name="Master Out" value="Master"><br>
+      </div>
+      <div>
+        <h3></h3>
+        <input type="submit" value="Spielen!">
+      </div>
+    </form>
+  </table>
+    </div>
+  </body>
+</html>
