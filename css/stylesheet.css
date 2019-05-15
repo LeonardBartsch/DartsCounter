@@ -95,7 +95,7 @@ position: relative;
 }
 
 .accountButton.orange{
-  background-color: #c98914;
+  background-color: #ee9e09;
   width: 110px;
 
 }
@@ -138,8 +138,8 @@ position: relative;
   }
 
   .spielenButton.orange{
-    color: #c98914;
-    border-color: #c98914;
+    color: #ee9e09;
+    border-color: #ee9e09;
   }
 
   .spielenButton.grey{
@@ -158,8 +158,8 @@ position: relative;
   }
 
   .spielenButton.orange:hover {
-    background: #c98914;
-    border-color: #c98914;
+    background: #ee9e09;
+    border-color: #ee9e09;
     }
 
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
