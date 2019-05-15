@@ -14,6 +14,8 @@ body {
   bottom: 0px;
   left: 0px;
   right: 0px;
+  background-color: #464545;
+  color: white;
 }
 
 hr {
@@ -23,6 +25,7 @@ hr {
   margin-left: 5%;
   margin-right: 5%;
 }
+
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++UPPERPART-KLASSEN++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 #logo {
@@ -41,6 +44,7 @@ position: relative;
   height: 100px;
   position: relative;
   margin-top: -30px;
+  color: black;
 }
 
 .intropic {
@@ -90,8 +94,8 @@ position: relative;
   height: 25px;
 }
 
-.accountButton.green{
-  background-color: #12e775;
+.accountButton.orange{
+  background-color: #c98914;
   width: 110px;
 
 }
@@ -133,14 +137,14 @@ position: relative;
   text-align: center
   }
 
-  .spielenButton.green{
-    color: #20bf6b;
-    border-color: #20bf6b;
+  .spielenButton.orange{
+    color: #c98914;
+    border-color: #c98914;
   }
 
   .spielenButton.grey{
-    color: #676968;
-    border-color: #676968;
+    color: black;
+    border-color: black;
   }
 
   .spielenButton:hover{
@@ -149,16 +153,14 @@ position: relative;
   }
 
   .spielenButton.grey:hover{
-    background: #676968;
-    border-color: #676968;
+    background: black;
+    border-color: black;
   }
 
-  .spielenButton.green:hover {
-  background: rgb(52, 170, 22);
-  border-color: rgb(52, 170, 22);
-  }
-
-
+  .spielenButton.orange:hover {
+    background: #c98914;
+    border-color: #c98914;
+    }
 
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
   .newscontainer {
