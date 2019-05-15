@@ -9,11 +9,6 @@ td {
 }
 
 body {
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
   background-color: #464545;
   color: white;
 }
@@ -95,7 +90,7 @@ position: relative;
 }
 
 .accountButton.orange{
-  background-color: #ee9e09;
+  background-color: #c98914;
   width: 110px;
 
 }
@@ -138,8 +133,8 @@ position: relative;
   }
 
   .spielenButton.orange{
-    color: #ee9e09;
-    border-color: #ee9e09;
+    color: #c98914;
+    border-color: #c98914;
   }
 
   .spielenButton.grey{
@@ -158,15 +153,35 @@ position: relative;
   }
 
   .spielenButton.orange:hover {
-    background: #ee9e09;
-    border-color: #ee9e09;
+    background: #c98914;
+    border-color: #c98914;
     }
 
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
   .newscontainer {
     position: relative;
-    height: 100px;
     margin-top: 30px;
     margin-left: 10%;
     margin-right: 10%;
+  }
+
+  .news-slideshow {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  .news-pics {
+    background-color: white;
+    height: 500px;
+    width:
+  }
+
+  .pfeil-links {
+    height: 500px;
+    background-color: black;
+  }
+
+  .pfeil-rechts {
+    height: 500px;
+    background-color: black;
   }
