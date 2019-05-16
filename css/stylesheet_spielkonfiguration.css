@@ -1,0 +1,55 @@
+.button{
+  width: 165px;
+  font-size: 1.15em;
+  margin: 10px;
+  background: white;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center
+  }
+
+  .button{
+    color: #ee9e09;
+    border-color: #ee9e09;
+  }
+  .button:hover{
+    color: #fff;
+    transition: all 0.4s ease 0s;
+    background: #ee9e09;
+    border-color: #ee9e09;
+    }
+
+/* muss noch other Farbe ändern
+    .placeholder{
+      color: #ee9e09;
+    }
+    */
+
+
+/* visuell Vorausgewählte */
+    .auswahl{
+      width: 165px;
+      font-size: 1.15em;
+      margin: 10px;
+      background: #ee9e09;
+      padding: 10px;
+      border: 2px solid ;
+      border-radius: 6px;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center
+      }
+
+      .auswahl{
+        color: black;
+        border-color: black;
+      }
+      .auswahl:hover{
+        color: #fff;
+        transition: all 0.4s ease 0s;
+        background: #ee9e09;
+        border-color: #ee9e09;
+        }

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Spielkonfiguration</title>
     <link rel="stylesheet" href="../css/stylesheet_main.css">
+    <link rel="stylesheet" href="../css/stylesheet_spielkonfiguration.css">
   </head>
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -47,47 +48,46 @@
         <h2>Spieleinstellungen</h2>
       <div class="Spieler">
         <h3>Spieler</h3>
-        <input type="button" name="Spieler" value="1">
-        <input type="button" name="Spieler" value="2" checked>
-        <input type="number" name="Spieler" value="other" placeholder="other" min="3" max="8">
+        <input class="button" type="button" name="Spieler" value="1">
+        <input class="auswahl" type="button" name="Spieler" value="2" checked>
+        <input class="button" type="number" name="Spieler" value="other" placeholder="other" min="3" max="8">
       </div>
       <div class="Dauer">
         <h3>Dauer</h3>
         <div class="Sets">
           <h4>Sets</h4>
-          <input type="button" name="Set" value="1" checked>
-          <input type="button" name="Set" value="2">
-          <input type="number" name="Set" value="other" placeholder="other" min="3">
+          <input class="auswahl" type="button" name="Set" value="1" checked>
+          <input class="button" type="button" name="Set" value="2">
+          <input class="button" type="number" name="Set" value="other" placeholder="other" min="3">
         </div>
         <div class="Legs">
           <h4>Legs</h4>
-          <input type="button" name="Leg" value="1" checked>
-          <input type="button" name="Leg" value="2">
-          <input type="button" name="Leg" value="3">
-          <input type="button" name="Leg" value="4">
-          <input type="number" name="Leg" value="other" placeholder="other" min="5" max="14">
+          <input class="auswahl" type="button" name="Leg" value="1" checked>
+          <input class="button" type="button" name="Leg" value="2">
+          <input class="button" type="button" name="Leg" value="3">
+          <input class="button" type="button" name="Leg" value="4">
+          <input class="button" type="number" name="Leg" value="other" placeholder="other" min="5" max="14">
         </div>
       </div>
       <div class="Punktanzahl">
         <h3>Punktanzahl</h3>
-        <input type="button" name="Punkte" value="301">
-        <input type="button" name="Punkte" value="501" checked>
-        <input type="button" name="Punkte" value="701">
+        <input class="button"type="button" name="Punkte" value="301">
+        <input class="auswahl" type="button" name="Punkte" value="501" checked>
+        <input class="button" type="button" name="Punkte" value="701">
       </div>
       <div class="In/Out">
         <h3>In/Out</h3>
-        <h4>In</h4>
-        <h4>Out</h4><br>
-        <input type="button" name="Single In" value="Single" checked>
-        <input type="button" name="Single Out" value="Single"><br>
-        <input type="button" name="Double In" value="Double">
-        <input type="button" name="Double Out" value="Double" checked><br>
-        <input type="button" name="Master In" value="Master">
-        <input type="button" name="Master Out" value="Master"><br>
+        <h4>In Out</h4>
+        <input class="auswahl" type="button" name="Single In" value="Single" checked>
+        <input class="button" type="button" name="Single Out" value="Single"><br>
+        <input class="button" type="button" name="Double In" value="Double">
+        <input class="auswahl" type="button" name="Double Out" value="Double" checked><br>
+        <input class="button" type="button" name="Master In" value="Master">
+        <input class="button" type="button" name="Master Out" value="Master"><br>
       </div>
       <div>
         <h3></h3>
-        <input type="submit" value="Spielen!">
+        <input class="auswahl" type="submit" value="Spielen!">
       </div>
     </form>
   </table>
