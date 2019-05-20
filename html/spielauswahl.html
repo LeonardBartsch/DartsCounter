@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Spielauswahl</title>
+        <link rel="stylesheet" href="../css/stylesheet_main.css">
+        <link rel="stylesheet" href="../css/stylesheet_spielauswahl.css">
+        <script src="../js/spielauswahl.js"></script>
+    </head>
+    <body>
+        <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+        <div title="Upperpart">
+            <a href="index.html" class="center"><img src="../pics/Logo.jpg" alt="Logo" id="logo"></a>
+            <div class="intro-container" >
+              <div class="left rotate">
+                <span class="fontfuersowas">Dein Darts-Counter!</span>
+              </div>
+              <img src="../pics/Breitgezogen.png" alt="Breitgezogen" class="intropic">
+              <div class="right">
+                <form action="index.html" method="post">
+                  <table class="marginrate">
+                    <tr>
+                      <td><span class="loginfont">Username:</span> </td>
+                      <td><input type="text" class="inputBreite" name="Username" placeholder="Username"></td>
+                    </tr>
+                    <tr>
+                      <td><span class="loginfont">Password:</span> </td>
+                      <td><input type="text" class="inputBreite" name="Password" placeholder="Password"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
+                      <td><input type="submit" class="accountButton grey inputBreite" name="Registrieren" value="Registrieren"></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+        </div>
+
+        <div class="einruecken">
+
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Spielmodi-Auswahl ++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        
+            <div class="spielModiDiv">
+                <h1>Spielauswahl</h1>
+                <table class="tabelle">
+                    <tr>
+                        <td>
+                            <div class="modi" onmouseover="beschreibungAnzeigen('standardText');" onmouseout="beschreibungAnzeigen('standardText');">
+                                <a href="#" class="spielModiButton border" onmouseover="beschreibungAnzeigen('normal');" onmouseout="beschreibungAnzeigen('normal');">Normales Spiel</a><br>
+                                <a href="#" class="spielModiButton border" onmouseover="beschreibungAnzeigen('cricket');" onmouseout="beschreibungAnzeigen('cricket');">Cricket</a><br>
+                                <a href="#" class="spielModiButton" onmouseover="beschreibungAnzeigen('bob');" onmouseout="beschreibungAnzeigen('bob');">Bob's 27</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="beschreibungDiv">
+                                <span id="standardText">Standard-Text</span>
+                                <span id="normal" class="unsichtbar">Normales Spiel</span>
+                                <span id="bob" class="unsichtbar">Bob's 27</span>
+                                <span id="cricket" class="unsichtbar">Cricket</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Favoriten ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+            <div class="favoritenDiv">
+                <h1>Favoriten</h1>
+                <ul>
+                    <li>Favorit 1</li>
+                    <li>Favorit 2</li>
+                    <li>Favorit 3</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

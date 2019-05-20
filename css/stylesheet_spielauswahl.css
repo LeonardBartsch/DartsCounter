@@ -1,0 +1,50 @@
+.spielModiButton {
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 0px 3px 0px;
+    height: 30px; 
+    width: 100%;
+    color: white;
+    background-color: #ee9e09;
+}
+
+.spielModiButton.border {
+    border-bottom: rgb(0, 0, 0) 1px solid;
+}
+
+.tabelle {
+    margin-top: 50px;
+    margin-right: auto;
+    width: 80%;
+    background-color: rgb(156, 156, 156);
+    
+}
+
+.spielModiDiv {
+    margin-top: 75px;
+}
+
+.modi {
+    border-color: #ee9e09;
+    border: 2px solid;
+}
+
+.beschreibungDiv {
+    width: 500px;
+}
+.einruecken {
+    margin-left: 200px;
+}
+
+.unsichtbar {
+    display: none;
+}
+
+span {
+    display: block;
+}
+
+.favoritenDiv {
+    margin-top: 40px;
+}
