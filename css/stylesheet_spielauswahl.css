@@ -1,24 +1,55 @@
 .spielModiButton {
     text-decoration: none;
     text-align: center;
+    font-size: 1.3rem;
     display: inline-block;
-    padding: 10px 0px 3px 0px;
-    height: 30px; 
-    width: 100%;
+    padding: 20px 0px 3px 0px;
+    height: 50px; 
+    width: 95%;
+    margin-right: 5px;
     color: white;
     background-color: #ee9e09;
+    border-right: 5px;
+    border-left: 5px;
+    border-color: #ee9e09;
+    border-style: solid;
 }
 
-.spielModiButton.border {
+.spielModiButton.trenner {
     border-bottom: rgb(0, 0, 0) 1px solid;
+}
+
+.spielModiButton.oben {
+    border-top: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.spielModiButton.unten {
+    border-bottom: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.spielModiButton:hover {
+    background-color: #f5c423;
+    transition: all 0.4s ease 0s;
+    border-right-color: #f5c423;
+    border-left-color: #f5c423;
+}
+
+.spielModiButton.oben:hover {
+    border-top-color: #f5c423;
+}
+
+.spielModiButton.unten:hover {
+    border-bottom-color: #f5c423;
 }
 
 .tabelle {
     margin-top: 50px;
     margin-right: auto;
     width: 80%;
-    background-color: rgb(156, 156, 156);
-    
 }
 
 .spielModiDiv {
@@ -26,12 +57,18 @@
 }
 
 .modi {
-    border-color: #ee9e09;
-    border: 2px solid;
+    width: 200px;
+    display: table-cell;
 }
 
 .beschreibungDiv {
-    width: 500px;
+    width: 700px;
+    height: 219px;
+    margin-left: 10px;
+    border: 2px black solid;
+    border-radius: 5px;
+    font-size: 1.3rem;
+    display: table-cell;
 }
 .einruecken {
     margin-left: 200px;
@@ -41,10 +78,11 @@
     display: none;
 }
 
-span {
-    display: block;
-}
-
 .favoritenDiv {
     margin-top: 40px;
 }
+
+.beschreibungText {
+    margin: 8px;
+}
+
