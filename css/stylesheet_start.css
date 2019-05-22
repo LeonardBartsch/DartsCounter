@@ -12,6 +12,9 @@ h1 {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
+  margin-bottom: 25px;
+  border: solid;
+  border-radius: 50px;
 }
 
 
@@ -115,4 +118,10 @@ h1 {
   margin-bottom: 25px;
   border: solid;
   border-radius: 50px;
+}
+
+.teammemberdiv {
+  width: 400px;
+  height: 280px;
+  border: solid;
 }
