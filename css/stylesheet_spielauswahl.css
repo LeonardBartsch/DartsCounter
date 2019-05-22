@@ -58,17 +58,17 @@
 
 .modi {
     width: 200px;
-    display: table-cell;
+    
 }
 
 .beschreibungDiv {
-    width: 700px;
+    min-width: 750px;
     height: 219px;
     margin-left: 10px;
     border: 2px black solid;
     border-radius: 5px;
     font-size: 1.3rem;
-    display: table-cell;
+    width: 100%;
 }
 .einruecken {
     margin-left: 200px;
@@ -84,5 +84,10 @@
 
 .beschreibungText {
     margin: 8px;
+}
+
+.ueberschrift {
+    margin-top: 30px;
+    text-align: center;
 }
 

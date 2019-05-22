@@ -12,16 +12,11 @@ h1 {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
+  min-width: 1000px;
 }
-
-
 
 .spielenButtonsDiv{
   width: 250px;
-}
-
-.spielenTextDiv{
-  width: 800px;
 }
 
 .spielenButton{
@@ -71,11 +66,11 @@ h1 {
     margin-bottom: 25px;
     border: solid;
     border-radius: 50px;
+    min-width: 1000px;
   }
 
   .news-slideshow {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 70px;
   }
 
   .news-pics {
@@ -115,4 +110,5 @@ h1 {
   margin-bottom: 25px;
   border: solid;
   border-radius: 50px;
+  min-width: 1000px;
 }
