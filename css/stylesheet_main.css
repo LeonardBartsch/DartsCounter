@@ -26,10 +26,10 @@ hr {
   border-radius: 50%;
 }
 .center {
-display:table;
 margin: auto;
 z-index: 1;
 position: relative;
+display: table;
 }
 
 .intro-container {
@@ -99,4 +99,3 @@ position: relative;
 .accountButton:hover{
   transform: scale(1.05);
 }
-
