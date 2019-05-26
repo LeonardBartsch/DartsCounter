@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Spielen</title>
+        <!--<link rel="icon" type="image/png" href="(GENAUE PFADANGABE/DATEINAME.png">-->
+        <link rel="stylesheet" href="../css/stylesheet_main.css">
+        <link rel="stylesheet" href="../css/stylesheet_spiel.css">
+    </head>
+    <body>
+        <!--+++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++-->
+
+        <div title="Upperpart">
+            <a href="index.html" class="center"><img src="../pics/Logo.jpg" alt="Logo" id="logo"></a>
+            <div class="intro-container" >
+              <div class="left rotate">
+                <span class="fontfuersowas">Dein Darts-Counter!</span>
+              </div>
+              <img src="../pics/Breitgezogen.png" alt="Breitgezogen" class="intropic">
+              <div class="right">
+                <form action="index.html" method="post">
+                  <table class="marginrate">
+                    <tr>
+                      <td><span class="loginfont">Username:</span> </td>
+                      <td><input type="text" class="inputBreite" name="Username" placeholder="Username"></td>
+                    </tr>
+                    <tr>
+                      <td><span class="loginfont">Password:</span> </td>
+                      <td><input type="text" class="inputBreite" name="Password" placeholder="Password"></td>
+                    </tr>
+                    <tr>
+                      <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
+                      <td><input type="submit" class="accountButton grey inputBreite" name="Registrieren" value="Registrieren"></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+        </div>
+
+        <!--+++++++++++++++++++++++++++++++++++++++++++Spielbeschreibung+++++++++++++++++++++++++++++++++-->
+
+        <div>
+            <h2 id="spielart">Spielart</h2>
+            <p id="spielbeschreibung">Hier steht die Beschreibung der Spielart und was der Spieler zu tun hat</p>
+        </div>
+
+        <!--+++++++++++++++++++++++++++++++++++++++++++Zwischenstände der Spieler++++++++++++++++++++++++-->
+
+        <hr>
+
+        <div>
+            <div class="spielerkachel">
+                <h3 id="name1">Spieler 1</h3>
+                <p>
+                    <span>Punkte: <span id="punkte1">501</span></span><br>
+                    <span>Würfe: <span id="wuerfe1">7</span></span><br>
+                    <span>Average: <span id="average1">80</span></span><br>
+                </p>
+            </div>
+            <div class="spielerkachel">
+                <h3 id="name2">Spieler 2</h3>
+                <p>
+                    <span>Punkte: <span id="punkte2">501</span></span><br>
+                    <span>Würfe: <span id="wuerfe2">7</span></span><br>
+                    <span>Average: <span id="average2">80</span></span><br>
+                </p>
+            </div>
+            <div class="spielerkachel">
+                <h3 id="name3">Spieler 3</h3>
+                <p>
+                    <span>Punkte: <span id="punkte3">501</span></span><br>
+                    <span>Würfe: <span id="wuerfe3">7</span></span><br>
+                    <span>Average: <span id="average3">80</span></span><br>
+                </p>
+            </div>
+            <div class="spielerkachel">
+                <h3 id="name4">Spieler 4</h3>
+                <p>
+                    <span>Punkte: <span id="punkte4">501</span></span><br>
+                    <span>Würfe: <span id="wuerfe4">7</span></span><br>
+                    <span>Average: <span id="average4">80</span></span><br>
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <!--++++++++++++++++++++++++++++++++++++++++++Wurf-Anzeige++++++++++++++++++++++++++++++++++++-->
+
+        <div>
+            <span id="Wurf1">40</span><span id="Wurf2">14</span><span id="Wurf3">0</span>
+        </div>
+
+        <hr>
+        
+        <!--++++++++++++++++++++++++++++++++++++++++++Punkte-Eingabe++++++++++++++++++++++++++++++++++-->
+
+        <div>
+            <div id="punkteButtons">
+
+            </div>
+
+            <div class="vl"></div>
+
+            <div id="multiplierButtons">
+                
+            </div>
+        </div>
+    </body>
+</html>
