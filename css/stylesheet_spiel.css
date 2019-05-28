@@ -8,11 +8,19 @@ hr {
 }
 
 .spielerkachel {
-    border: 2px solid;
-    border-radius: 4px;
+    border: 2px solid rgb(206, 91, 37);
+    border-radius: 8px;
     width: 20%;
     display: inline-block;
     margin: 20px;
+    background-color: rgb(206, 91, 37);
+}
+
+.spielerkachel.ausgewaehlt {
+    border-color: #ee9e09;
+    background-color: #ee9e09;
+    box-shadow: 0 0 10px #ee9e09;
+    color: black;
 }
 
 .divWrapper {
@@ -58,7 +66,10 @@ hr {
 }
 
 .punktButton.untereReihe {
-    width: 26%;
+    width: 25.5%;
+    background-color: rgb(41, 103, 160);
+    border-color: rgb(41, 103, 160);
+    color: white;
 }
 
 .punktButton:hover {
@@ -81,22 +92,31 @@ button {
 }
 
 #multiplierButtonsDiv {
-    margin-left: 30px;
+    margin-left: 10px;
     display: inline-block;
     width: 20%;
-    
+    position: relative;
+    bottom: 60px;
 }
 
 .multiplierButton {
-    display: block;
-    background-color: rgb(209, 208, 208);
-    border-color: rgb(209, 208, 208);
+    
+    background-color: rgb(170, 169, 169);
+    border-color: rgb(170, 169, 169);
     width: 60%;
     font-size: 1.3rem;
     height: 50px;
     margin: 10px;
 }
 
+.multiplierButton.ausgewaehlt {
+    box-shadow: 0 0 8px rgb(117, 188, 230);
+    background-color: rgb(209, 208, 208);
+    border-color: rgb(209, 208, 208);
+}
+
 .multiplierButton:hover {
-    box-shadow: 0 0 8px black;
+    box-shadow: 0 0 10px rgb(117, 188, 230);
+    background-color: rgb(209, 208, 208);
+    border-color: rgb(209, 208, 208);
 }

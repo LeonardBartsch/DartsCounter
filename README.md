@@ -13,4 +13,5 @@ Aufgabenbereiche:
 	Spielauswahl: Leonard
 	Spielkonfiguration: Moritz
 	Account-Seite: Philipp
+	Spielen-Seite: Leonard
 	JS: Leonard
