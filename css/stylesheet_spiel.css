@@ -120,3 +120,12 @@ button {
     background-color: rgb(209, 208, 208);
     border-color: rgb(209, 208, 208);
 }
+
+#spielAbschluss {
+    position: absolute;
+    top: 70%;
+    left: 30%;
+    width: 500px;
+    display: none;
+    background-color: white;
+}

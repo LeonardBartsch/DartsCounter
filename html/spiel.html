@@ -92,9 +92,9 @@
             <!--++++++++++++++++++++++++++++++++++++++++++Wurf-Anzeige++++++++++++++++++++++++++++++++++++-->
 
             <div class="wurfAnzeige">
-                <span id="Wurf1" class="wurf ausgewaehlt">0</span>
-                <span id="Wurf2" class="wurf">0</span>
-                <span id="Wurf3" class="wurf">0</span>
+                <span id="wurf1" class="wurf ausgewaehlt">0</span>
+                <span id="wurf2" class="wurf">0</span>
+                <span id="wurf3" class="wurf">0</span>
             </div>
 
             <hr>
@@ -104,37 +104,37 @@
             <div class="divWrapper">
                 <div id="punkteButtonsDiv">
                     <div>
-                        <button type="button" class="punktButton" onclick="werfen(1)">1</button>
-                        <button type="button" class="punktButton" onclick="werfen(2)">2</button>
-                        <button type="button" class="punktButton" onclick="werfen(3)">3</button>
-                        <button type="button" class="punktButton" onclick="werfen(4)">4</button>
-                        <button type="button" class="punktButton" onclick="werfen(5)">5</button>
+                        <button type="button" class="punktButton">1</button>
+                        <button type="button" class="punktButton">2</button>
+                        <button type="button" class="punktButton">3</button>
+                        <button type="button" class="punktButton">4</button>
+                        <button type="button" class="punktButton">5</button>
                     </div>
                     <div>
-                        <button type="button" class="punktButton" onclick="werfen(6)">6</button>
-                        <button type="button" class="punktButton" onclick="werfen(7)">7</button>
-                        <button type="button" class="punktButton" onclick="werfen(8)">8</button>
-                        <button type="button" class="punktButton" onclick="werfen(9)">9</button>
-                        <button type="button" class="punktButton" onclick="werfen(10)">10</button>
+                        <button type="button" class="punktButton">6</button>
+                        <button type="button" class="punktButton">7</button>
+                        <button type="button" class="punktButton">8</button>
+                        <button type="button" class="punktButton">9</button>
+                        <button type="button" class="punktButton">10</button>
                     </div>
                     <div>
-                        <button type="button" class="punktButton" onclick="werfen(11)">11</button>
-                        <button type="button" class="punktButton" onclick="werfen(12)">12</button>
-                        <button type="button" class="punktButton" onclick="werfen(13)">13</button>
-                        <button type="button" class="punktButton" onclick="werfen(14)">14</button>
-                        <button type="button" class="punktButton" onclick="werfen(15)">15</button>
+                        <button type="button" class="punktButton">11</button>
+                        <button type="button" class="punktButton">12</button>
+                        <button type="button" class="punktButton">13</button>
+                        <button type="button" class="punktButton">14</button>
+                        <button type="button" class="punktButton">15</button>
                     </div>
                     <div>
-                        <button type="button" class="punktButton" onclick="werfen(16)">16</button>
-                        <button type="button" class="punktButton" onclick="werfen(17)">17</button>
-                        <button type="button" class="punktButton" onclick="werfen(18)">18</button>
-                        <button type="button" class="punktButton" onclick="werfen(19)">19</button>
-                        <button type="button" class="punktButton" onclick="werfen(20)">20</button>
+                        <button type="button" class="punktButton">16</button>
+                        <button type="button" class="punktButton">17</button>
+                        <button type="button" class="punktButton">18</button>
+                        <button type="button" class="punktButton">19</button>
+                        <button type="button" class="punktButton">20</button>
                     </div>
                     <div>
-                        <button type="button" class="punktButton untereReihe" onclick="werfen(0)">0</button>
-                        <button type="button" class="punktButton untereReihe" onclick="werfen(25)">25</button>
-                        <button type="button" class="punktButton untereReihe" onclick="werfen(50)">50</button>
+                        <button type="button" class="punktButton untereReihe">0</button>
+                        <button type="button" class="punktButton untereReihe">25</button>
+                        <button type="button" class="punktButton untereReihe">50</button>
                     </div>
                 </div>
 
@@ -145,6 +145,10 @@
                     <button type="button" id="double" class="multiplierButton" onclick="selectMultiplier('double', 'D')">Double</button>
                     <button type="button" id="triple" class="multiplierButton" onclick="selectMultiplier('triple', 'T')">Triple</button>
                 </div>
+            </div>
+
+            <div id="spielAbschluss">
+                <span style="font-size: 50px; color: black;">Gewonnen!</span>
             </div>
         </div>
     </body>
