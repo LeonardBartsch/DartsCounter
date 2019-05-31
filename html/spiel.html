@@ -50,7 +50,7 @@
 
             <!--+++++++++++++++++++++++++++++++++++++++++++Zwischenstände der Spieler++++++++++++++++++++++++-->
 
-            <hr>
+            <!--<hr style="margin-left: 0px; margin-right: 40%;">-->
 
             <div class="divWrapper">
                 <div class="spielerkachel ausgewaehlt" id="spieler1">
@@ -140,15 +140,19 @@
 
                 <div class="vl"></div>
 
-                <div id="multiplierButtonsDiv">
-                    <button type="button" id="single" class="multiplierButton ausgewaehlt" onclick="selectMultiplier('single', '')">Single</button>
-                    <button type="button" id="double" class="multiplierButton" onclick="selectMultiplier('double', 'D')">Double</button>
-                    <button type="button" id="triple" class="multiplierButton" onclick="selectMultiplier('triple', 'T')">Triple</button>
+                <div id="extraButtons">
+                    <div id="multiplierButtonsDiv">
+                        <button type="button" id="single" class="multiplierButton ausgewaehlt" onclick="selectMultiplier('single', '')">Single</button>
+                        <button type="button" id="double" class="multiplierButton" onclick="selectMultiplier('double', 'D')">Double</button>
+                        <button type="button" id="triple" class="multiplierButton" onclick="selectMultiplier('triple', 'T')">Triple</button>
+                    </div>
+
+                    <button type="button" class="undoButton" onclick="undo()">Undo</button>
                 </div>
             </div>
 
             <div id="spielAbschluss">
-                <span style="font-size: 50px; color: black;">Gewonnen!</span>
+                <span class="gewonnen">Gewonnen!</span>
             </div>
         </div>
     </body>

@@ -4,7 +4,8 @@
 }
 
 hr {
-    margin: 0px;
+    margin-left: 35%;
+    margin-right: 35%;
 }
 
 .spielerkachel {
@@ -28,7 +29,7 @@ hr {
 }
 
 .wurfAnzeige {
-    padding: 20px;
+    padding: 0px;
     text-align: center;
 }
 
@@ -39,7 +40,8 @@ hr {
     border-style: hidden;
     border-radius: 50%;
     font-size: 1.5rem;
-    padding: 5px;
+    
+    padding: 6.5px 5px 5.5px 5px;
 }
 
 .wurf.ausgewaehlt {
@@ -52,6 +54,7 @@ hr {
     display: inline-block;
     width: 60%;
     text-align: center;
+    margin-top: 30px;
 }
 
 .punktButton {
@@ -80,6 +83,7 @@ button {
     color: black;
     text-align: center;
     padding: 5px;
+    border-radius: 4px;
 }
 
 .vl {
@@ -91,22 +95,21 @@ button {
     
 }
 
-#multiplierButtonsDiv {
+#extraButtons {
     margin-left: 10px;
     display: inline-block;
     width: 20%;
     position: relative;
-    bottom: 60px;
+    bottom: 15px;
 }
 
 .multiplierButton {
-    
     background-color: rgb(170, 169, 169);
     border-color: rgb(170, 169, 169);
     width: 60%;
     font-size: 1.3rem;
-    height: 50px;
-    margin: 10px;
+    height: 47px;
+    margin-bottom: 13px;
 }
 
 .multiplierButton.ausgewaehlt {
@@ -121,11 +124,35 @@ button {
     border-color: rgb(209, 208, 208);
 }
 
+.undoButton {
+    margin-top: 30px;
+    background-color: rgb(170, 169, 169);
+    border-color: rgb(170, 169, 169);
+    width: 60%;
+    font-size: 1.3rem;
+    height: 45px;
+}
+
+.undoButton:hover {
+    box-shadow: 0 0 10px rgb(117, 188, 230);
+    background-color: rgb(209, 208, 208);
+    border-color: rgb(209, 208, 208);
+}
+
 #spielAbschluss {
     position: absolute;
     top: 70%;
     left: 30%;
     width: 500px;
     display: none;
-    background-color: white;
+    background-color: rgba(54, 129, 127, 1.0);
+    border: 2px solid rgba(54, 129, 127, 1.0);
+    border-radius: 8px;
+}
+
+.gewonnen {
+    font-size: 50px; 
+    color: black;
+    text-align: center;
+    display: block;
 }
