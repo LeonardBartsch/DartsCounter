@@ -156,3 +156,7 @@ button {
     text-align: center;
     display: block;
 }
+
+.unsichtbar {
+    display: none;
+}

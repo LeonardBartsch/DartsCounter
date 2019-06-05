@@ -1,7 +1,7 @@
 'use strict';
 let aktuellerSpieler = 1, anzahlSpieler = 4, aktuellerWurf = 1, startPunktzahl = 501, punktZahlVorErstemWurf = 0;
-const platzhalter = -1, anzahlGespeicherteLetzteWuerfe = 3; 
-//let letzteWuerfe = [];
+const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0; 
+
 let spieler = [];
 let wurfElemente_, spielerElemente_;
 class Spieler {
@@ -11,6 +11,7 @@ class Spieler {
         this.punktzahl_ = startPunktzahl;
         this.anzahlWuerfe_ = 0;
         this.average_ = 0;
+        this.zurueckgesetzt_ = false;
     }
 
     wurfEintragen(punktzahl) {
@@ -22,7 +23,11 @@ class Spieler {
         this.anzahlWuerfe_++;
         this.average_ = (startPunktzahl - this.punktzahl_) / this.anzahlWuerfe_;
 
-        if(this.punktzahl_ < 0) rollback;
+        if(this.punktzahl_ < 0) {
+            this.rollBack();
+        }else if(this.zurueckgesetzt_ === true) {
+            this.zurueckgesetzt_ = false;
+        }
     }
 
     undoLastThrow() {
@@ -36,7 +41,16 @@ class Spieler {
         
         let index = i - 1;
         this.letzteWuerfe_[index] = platzhalter;
-        this.punktzahl_ += punktzahl;
+        if(this.zurueckgesetzt_) {
+            let punktzahlVorherigeWuerfe = 0;
+            for(i = 2; i > index; i--) {
+                punktzahlVorherigeWuerfe += this.letzteWuerfe_[i];
+            }
+            this.punktzahl_ -= (punktzahlVorherigeWuerfe);
+            this.zurueckgesetzt_ = false;
+        }else {
+            this.punktzahl_ += punktzahl;
+        }
         this.anzahlWuerfe_--;
         this.average_ = this.anzahlWuerfe_ > 0 ? (startPunktzahl - this.punktzahl_) / this.anzahlWuerfe_ : 0; 
 
@@ -46,14 +60,20 @@ class Spieler {
     }
 
     rollBack() {
-        for(let i = 0; i < 3; i++) {
-            let punktzahl = this.letzteWuerfe_[i];
-            if(punktzahl !== platzhalter) {
-                this.punktzahl_ += punktzahl;
+        for(let i = indexErsterWurf; i >= indexLetzterWurf; i--) {
+            if((indexErsterWurf - i) <= (aktuellerWurf - 1)) {
+                let punktzahl = this.letzteWuerfe_[i];
+                if(punktzahl !== platzhalter) {
+                    console.log(punktzahl);
+                    this.punktzahl_ += punktzahl;
+                }
+            }else {
+                this.letzteWuerfe_[i] = platzhalter;
             }
         }
 
         aktuellerWurf = 3;
+        this.zurueckgesetzt_ = true;
     }
 
     punktzahl() {
@@ -71,25 +91,31 @@ class Spieler {
     letzteWuerfe() {
         return this.letzteWuerfe_;
     }
+
+    name() {
+        return this.name_;
+    }
 }
+
 window.onload = function() {
+    
+    initialisieren();
+
     let punktButtons = document.querySelectorAll(".punktButton");
     punktButtons.forEach(x => x.addEventListener('click', function() {
-        werfen(x.innerHTML.match(/\d+/g)[0]);
+        werfen(Number(x.innerHTML.match(/\d+/g)[0]));
     }));
-
-    initialisieren();
 }
 
 function initialisieren() {
     wurfElemente_ = document.getElementsByClassName("wurf");
     spielerElemente_ = document.getElementsByClassName("spielerkachel");
-    /*for(let i = 1; i <= 5; i++) {
-        letzteWuerfe.push(platzhalter);
-    }*/
     for(let i = 1; i <= anzahlSpieler; i++) {
-        spieler.push(new Spieler("Spieler " + i)) 
+        spieler.push(new Spieler("Spieler " + i)); 
+        // Spieler-Kacheln sichtbar machen
+        spielerElemente_[i - 1].style.display = 'inline-block';
     }
+
 }
 
 
@@ -174,50 +200,12 @@ function getMultiplier() {
 
 function handleWurf(punktzahl) {
     
-    datenEintragen2(punktzahl);
+    datenEintragen(punktzahl);
 
     naechsterWurf();
 }
 
-/*function datenEintragen(punktzahl) {
-    wurfElemente_[aktuellerWurf - 1].innerHTML = punktzahl;
-    
-    //Letzte Würfe aktualisieren
-    letzteWuerfe.pop();
-    letzteWuerfe.unshift(punktzahl);
-
-    // Punktzahl aktualisieren 
-    let punkteSpan = document.getElementById("punkte" + aktuellerSpieler);
-    let punktzahlGesamtAlt = Number(punkteSpan.innerHTML);
-    if(aktuellerWurf === 1) {
-        punktZahlVorErstemWurf = punktzahlGesamtAlt;
-    }
-    let punktzahlGesamtNeu = punktzahlGesamtAlt - punktzahl;
-
-    if(punktzahlGesamtNeu >= 0) {
-        punkteSpan.innerHTML = punktzahlGesamtNeu.toString();
-    }else {
-        punkteSpan.innerHTML = punktZahlVorErstemWurf.toString();
-    }
-
-    // Anzahl Würfe aktualisieren 
-    let wurfSpan = document.getElementById("wuerfe" + aktuellerSpieler);
-    let wurfAnzahl = Number(wurfSpan.innerHTML) + 1;
-    wurfSpan.innerHTML = wurfAnzahl.toString();
-
-    // Average aktualisieren 
-    let averageSpan = document.getElementById("average" + aktuellerSpieler);
-    averageSpan.innerHTML = ((startPunktzahl - punktzahlGesamtNeu) / wurfAnzahl).toFixed(2);
-
-    // Zu viel geworfen oder gewonnen? 
-    if(punktzahlNeu < 0) {
-        aktuellerWurf = 3;
-    }else if(punktzahlGesamtNeu === 0) {
-        showSpielAbschluss();
-    }
-}*/
-
-function datenEintragen2(punktzahl) {
+function datenEintragen(punktzahl) {
     let spielerAktuell = spieler[aktuellerSpieler - 1];
     spielerAktuell.wurfEintragen(punktzahl);
 
@@ -231,12 +219,15 @@ function anzeigeAktualisieren(zuAktualisierenderSpieler, geworfenePunkte) {
     document.getElementById("average" + aktuellerSpieler).innerHTML = zuAktualisierenderSpieler.average().toFixed(2);
 
     if(zuAktualisierenderSpieler.punktzahl() === 0) {
-        showSpielAbschluss();
+        showSpielAbschluss(zuAktualisierenderSpieler);
     }
 }
 
-function showSpielAbschluss() {
-    document.getElementById("spielAbschluss").style.display = "block";
+function showSpielAbschluss(sieger) {
+    let spielAbschlussElement = document.getElementById("spielAbschluss");
+
+    spielAbschlussElement.innerHTML = sieger.name() + " hat gewonnen!";
+    spielAbschlussElement.style.display = "block";
 }
 
 function naechsterWurf() {
@@ -264,7 +255,7 @@ function naechsterSpieler() {
 }
 
 function undo() {
-    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? aktuellerSpieler - 1 : aktuellerSpieler;
+    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? aktuellerSpieler === 1 ? anzahlSpieler : aktuellerSpieler - 1 : aktuellerSpieler;
     let spielerLetzterWurf = spieler[spielerLetzterWurfNummer - 1];
     if(spielerLetzterWurf.undoLastThrow()) {
         switchSelectedElement(wurfElemente_[aktuellerWurf - 1].id, "wurf", "ausgewaehlt");
