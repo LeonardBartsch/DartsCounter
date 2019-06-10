@@ -2,25 +2,23 @@
   width: 165px;
   font-size: 1.15em;
   margin: 10px;
-  background: white;
+  background-color: white;
   padding: 10px;
   border: 2px solid ;
   border-radius: 6px;
   display: inline-block;
   text-decoration: none;
-  text-align: center
-  }
+  text-align: center;
+  color: #ee9e09;
+  border-color: #ee9e09;
+}
 
-  .button{
-    color: #ee9e09;
-    border-color: #ee9e09;
-  }
-  .button:hover{
-    color: #fff;
-    transition: all 0.4s ease 0s;
-    background: #ee9e09;
-    border-color: #ee9e09;
-    }
+.button:hover{
+  color: #fff;
+  transition: all 0.4s ease 0s;
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+}
 
 /* muss noch other Farbe ändern
     .placeholder{
@@ -30,26 +28,34 @@
 
 
 /* visuell Vorausgewählte */
-    .auswahl{
-      width: 165px;
-      font-size: 1.15em;
-      margin: 10px;
-      background: #ee9e09;
-      padding: 10px;
-      border: 2px solid ;
-      border-radius: 6px;
-      display: inline-block;
-      text-decoration: none;
-      text-align: center
-      }
+.button.auswahl{
+  background: #ee9e09;
+  border: 2px solid #ee9e09;
+  color: white;
+}
 
-      .auswahl{
-        color: black;
-        border-color: black;
-      }
-      .auswahl:hover{
-        color: #fff;
-        transition: all 0.4s ease 0s;
-        background: #ee9e09;
-        border-color: #ee9e09;
-        }
+.auswahl:hover{
+  color: #fff;
+  transition: all 0.4s ease 0s;
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+}
+
+.spielenButton {
+  width: 200px;
+  font-size: 1.5em;
+  margin: 10px;
+  background-color: #559ef1;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border-color: #559ef1;
+}
+
+.spielenButton:hover{
+  transform: scale(1.1);
+}

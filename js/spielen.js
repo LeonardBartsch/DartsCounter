@@ -1,27 +1,64 @@
 'use strict';
-let aktuellerSpieler = 1, anzahlSpieler = 4, aktuellerWurf = 1, startPunktzahl = 501, punktZahlVorErstemWurf = 0;
-const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0; 
 
-let spieler = [];
+const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0; 
+const inOut = {
+    single: 1,
+    double: 2,
+    master: 3
+}
+
+const spielerParam = 'spieler', legsParam = 'legs', setsParam = 'sets', punkteParam = 'punktzahl', 
+      inParam = 'in', outParam = 'out';
+
+// Variablen für den Ablauf des Spiels
+let aktuellerSpieler = 1, aktuellerWurf = 1, aktuellesLeg = 1, aktuellesSet = 1;
+
+// Spiel-Einstellungen
+let einstellungen = {
+    spielerzahl : {key: spielerParam, value: 2},
+    legs : {key: legsParam, value: 1},
+    sets : {key: setsParam, value: 1},
+    punkte : {key: punkteParam, value: 501},
+    wurfIn : {key: inParam, value: inOut.single},
+    wurfOut : {key: outParam, value: inOut.double}
+}
+
+let spieler_ = [], sieger_ = [];
 let wurfElemente_, spielerElemente_;
 class Spieler {
     constructor(name) {
         this.name_ = name;
         this.letzteWuerfe_ = [platzhalter, platzhalter, platzhalter];
-        this.punktzahl_ = startPunktzahl;
+        this.punktzahl_ = einstellungen.punkte.value;
         this.anzahlWuerfe_ = 0;
         this.average_ = 0;
         this.zurueckgesetzt_ = false;
     }
 
     wurfEintragen(punktzahl) {
-        /*this.letzteWuerfe_.unshift(punktzahl);
-        this.letzteWuerfe_.pop();*/
+
+        if(einstellungen.wurfIn.value !== inOut.single && this.anzahlWuerfe_ === 0) {
+            let wurrfKorrekt = true;
+            let multiplier = getMultiplier();
+            
+            if(multiplier === 1 && punktzahl !== 50) {
+                wurrfKorrekt = false;
+            }else{
+                if(multiplier !== 3 && einstellungen.wurfIn.value === inOut.master) {
+                    wurrfKorrekt = false;
+                }
+            }
+            
+            if(!wurrfKorrekt) {
+                aktuellerWurf = 3;
+                return;
+            }
+        }
 
         this.punktzahl_ -= punktzahl;
         this.letzteWuerfe_[3 - aktuellerWurf] = punktzahl;
         this.anzahlWuerfe_++;
-        this.average_ = (startPunktzahl - this.punktzahl_) / this.anzahlWuerfe_;
+        this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_;
 
         if(this.punktzahl_ < 0) {
             this.rollBack();
@@ -52,7 +89,7 @@ class Spieler {
             this.punktzahl_ += punktzahl;
         }
         this.anzahlWuerfe_--;
-        this.average_ = this.anzahlWuerfe_ > 0 ? (startPunktzahl - this.punktzahl_) / this.anzahlWuerfe_ : 0; 
+        this.average_ = this.anzahlWuerfe_ > 0 ? (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ : 0; 
 
         aktuellerWurf = 3 - index;
         
@@ -98,7 +135,8 @@ class Spieler {
 }
 
 window.onload = function() {
-    
+    spielEinstellungen();
+
     initialisieren();
 
     let punktButtons = document.querySelectorAll(".punktButton");
@@ -110,31 +148,38 @@ window.onload = function() {
 function initialisieren() {
     wurfElemente_ = document.getElementsByClassName("wurf");
     spielerElemente_ = document.getElementsByClassName("spielerkachel");
-    for(let i = 1; i <= anzahlSpieler; i++) {
-        spieler.push(new Spieler("Spieler " + i)); 
+    for(let i = 1; i <= einstellungen.spielerzahl.value; i++) {
+        spieler_.push(new Spieler("Spieler " + i)); 
         // Spieler-Kacheln sichtbar machen
         spielerElemente_[i - 1].style.display = 'inline-block';
+
+        anzeigeAktualisieren(i, 0);
     }
 
 }
 
-
-
-/*function spielEinstellungen() {
+function spielEinstellungen() {
     let querystring = location.search;
     if (querystring == '') return;
     let wertestring = querystring.slice(1);
-    let paare = wertestring.split("&");
-    let paar, name, wert;
+    let paare = wertestring.split(";");
+    let paar, key, value;
     for (var i = 0; i < paare.length; i++) {
         paar = paare[i].split("=");
-        name = paar[0];
-        wert = paar[1];
-        name = unescape(name).replace("+", " ");
-        wert = unescape(wert).replace("+", " ");
-        spieler[name] = wert;
+        key = paar[0];
+        value = Number(paar[1]);
+
+        //name = unescape(name).replace("+", " ");
+        //wert = unescape(wert).replace("+", " ");
+        
+        for(let prop in einstellungen){
+            if(einstellungen[prop].key == key && einstellungen.hasOwnProperty(prop)){
+                einstellungen[prop].value = value;
+                break;
+            }
+        }
     }
-}*/
+}
 
 function selectMultiplier(id, buchstabeFuerPunktButton) {
     if(switchSelectedElement(id, "multiplierButton", "ausgewaehlt")){
@@ -206,13 +251,13 @@ function handleWurf(punktzahl) {
 }
 
 function datenEintragen(punktzahl) {
-    let spielerAktuell = spieler[aktuellerSpieler - 1];
+    let spielerAktuell = spieler_[aktuellerSpieler - 1];
     spielerAktuell.wurfEintragen(punktzahl);
 
-    anzeigeAktualisieren(spielerAktuell, punktzahl);
+    anzeigeAktualisieren(aktuellerSpieler, punktzahl);
 }
 
-function anzeigeAktualisieren(zuAktualisierenderSpieler, geworfenePunkte) {
+/*function anzeigeAktualisieren(zuAktualisierenderSpieler, geworfenePunkte) {
     wurfElemente_[aktuellerWurf - 1].innerHTML = geworfenePunkte.toString();
     document.getElementById("punkte" + aktuellerSpieler).innerHTML = zuAktualisierenderSpieler.punktzahl().toString();
     document.getElementById("wuerfe" + aktuellerSpieler).innerHTML = zuAktualisierenderSpieler.anzahlWuerfe().toString();
@@ -221,13 +266,36 @@ function anzeigeAktualisieren(zuAktualisierenderSpieler, geworfenePunkte) {
     if(zuAktualisierenderSpieler.punktzahl() === 0) {
         showSpielAbschluss(zuAktualisierenderSpieler);
     }
+}*/
+
+function anzeigeAktualisieren(zuAktualisierenderSpielerNr, geworfenePunkte) {
+    wurfElemente_[aktuellerWurf - 1].innerHTML = geworfenePunkte.toString();
+
+    let zuAktualisierenderSpieler = spieler_[zuAktualisierenderSpielerNr - 1];
+    document.getElementById("punkte" + zuAktualisierenderSpielerNr).innerHTML = zuAktualisierenderSpieler.punktzahl().toString();
+    document.getElementById("wuerfe" + zuAktualisierenderSpielerNr).innerHTML = zuAktualisierenderSpieler.anzahlWuerfe().toString();
+    document.getElementById("average" + zuAktualisierenderSpielerNr).innerHTML = zuAktualisierenderSpieler.average().toFixed(2);
+
+    if(zuAktualisierenderSpieler.punktzahl() === 0) {
+        showSpielAbschluss(zuAktualisierenderSpieler);
+    }
 }
 
 function showSpielAbschluss(sieger) {
-    let spielAbschlussElement = document.getElementById("spielAbschluss");
+    document.getElementById("spielAbschluss").style.display = "block";
 
-    spielAbschlussElement.innerHTML = sieger.name() + " hat gewonnen!";
-    spielAbschlussElement.style.display = "block";
+    let text = sieger.name() + " gewinnt ";
+    if(einstellungen.legs.value > 1){
+        if(einstellungen.sets.value > 1){
+
+        }
+    }else if(einstellungen.sets.value > 1) {
+
+    }else {
+        text += "das Spiel!";
+    }
+
+    document.getElementById("spielAbschlussText").innerHTML = text;
 }
 
 function naechsterWurf() {
@@ -249,14 +317,15 @@ function wuerfeNullen() {
 }
 
 function naechsterSpieler() {
-    aktuellerSpieler = aktuellerSpieler === anzahlSpieler ? 1 : aktuellerSpieler + 1;
+    aktuellerSpieler = aktuellerSpieler === einstellungen.spielerzahl.value ? 1 : aktuellerSpieler + 1;
 
     switchSelectedElement(spielerElemente_[aktuellerSpieler - 1].id, "spielerkachel", "ausgewaehlt");
 }
 
 function undo() {
-    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? aktuellerSpieler === 1 ? anzahlSpieler : aktuellerSpieler - 1 : aktuellerSpieler;
-    let spielerLetzterWurf = spieler[spielerLetzterWurfNummer - 1];
+    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spielerzahl.value : aktuellerSpieler - 1) : 
+                                   aktuellerSpieler;
+    let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
     if(spielerLetzterWurf.undoLastThrow()) {
         switchSelectedElement(wurfElemente_[aktuellerWurf - 1].id, "wurf", "ausgewaehlt");
         if(spielerLetzterWurfNummer !== aktuellerSpieler) {
@@ -268,7 +337,7 @@ function undo() {
             let punktzahl = letzteWuerfe[2-i];
             wurfElemente_[i].innerHTML = punktzahl !== platzhalter ? punktzahl : 0;
         }
-
-        anzeigeAktualisieren(spielerLetzterWurf, 0);
+        
+        anzeigeAktualisieren(spielerLetzterWurfNummer, 0);
     }
 }

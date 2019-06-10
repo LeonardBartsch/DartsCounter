@@ -5,6 +5,7 @@
     <title>Spielkonfiguration</title>
     <link rel="stylesheet" href="../css/stylesheet_main.css">
     <link rel="stylesheet" href="../css/stylesheet_spielkonfiguration.css">
+    <script src="../js/spielkonfiguration.js"></script>
   </head>
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -48,46 +49,46 @@
         <h2>Spieleinstellungen</h2>
       <div class="Spieler">
         <h3>Spieler</h3>
-        <input class="button" type="button" name="Spieler" value="1">
-        <input class="auswahl" type="button" name="Spieler" value="2" checked>
-        <input class="button" type="number" name="Spieler" value="other" placeholder="other" min="3" max="8">
+        <input class="button" type="button" id="1spieler" value="1" onclick="spielerClick('1spieler')">
+        <input class="button auswahl" type="button" id="2spieler" value="2" onclick="spielerClick('2spieler')">
+        <input class="button" type="number" id="mehrSpieler" value="3" placeholder="other" min="3" max="8" onclick="spielerClick('mehrSpieler')">
       </div>
       <div class="Dauer">
         <h3>Dauer</h3>
         <div class="Sets">
           <h4>Sets</h4>
-          <input class="auswahl" type="button" name="Set" value="1" checked>
-          <input class="button" type="button" name="Set" value="2">
-          <input class="button" type="number" name="Set" value="other" placeholder="other" min="3">
+          <input class="button auswahl" type="button" id="1set" value="1" onclick="setsClick('1set')">
+          <input class="button" type="button" id="2set" value="2" onclick="setsClick('2set')">
+          <input class="button" type="number" id="mehrSet" value="other" placeholder="other" min="3" onclick="setsClick('mehrSet')">
         </div>
         <div class="Legs">
           <h4>Legs</h4>
-          <input class="auswahl" type="button" name="Leg" value="1" checked>
-          <input class="button" type="button" name="Leg" value="2">
-          <input class="button" type="button" name="Leg" value="3">
-          <input class="button" type="button" name="Leg" value="4">
-          <input class="button" type="number" name="Leg" value="other" placeholder="other" min="5" max="14">
+          <input class="button auswahl" type="button" id="1leg" value="1" onclick="legsClick('1leg')">
+          <input class="button" type="button" id="2leg" value="2" onclick="legsClick('2leg')">
+          <input class="button" type="button" id="3leg" value="3" onclick="legsClick('3leg')">
+          <input class="button" type="button" id="4leg" value="4" onclick="legsClick('4leg')">
+          <input class="button" type="number" id="mehrLeg" placeholder="other" min="5" max="14" onclick="legsClick('mehrLeg')">
         </div>
       </div>
       <div class="Punktanzahl">
         <h3>Punktanzahl</h3>
-        <input class="button"type="button" name="Punkte" value="301">
-        <input class="auswahl" type="button" name="Punkte" value="501" checked>
-        <input class="button" type="button" name="Punkte" value="701">
+        <input class="button"type="button" id="301Punkte" value="301" onclick="punktzahlClick('301Punkte')">
+        <input class="button auswahl" type="button" id="501Punkte" value="501" onclick="punktzahlClick('501Punkte')">
+        <input class="button" type="button" id="701Punkte" value="701" onclick="punktzahlClick('701Punkte')">
       </div>
       <div class="In/Out">
         <h3>In/Out</h3>
         <h4>In Out</h4>
-        <input class="auswahl" type="button" name="Single In" value="Single" checked>
+        <input class="button auswahl" type="button" name="Single In" value="Single" onclick="inclick(1)">
         <input class="button" type="button" name="Single Out" value="Single"><br>
-        <input class="button" type="button" name="Double In" value="Double">
-        <input class="auswahl" type="button" name="Double Out" value="Double" checked><br>
-        <input class="button" type="button" name="Master In" value="Master">
+        <input class="button" type="button" name="Double In" value="Double" onclick="inclick(2)">
+        <input class="button auswahl" type="button" name="Double Out" value="Double" checked><br>
+        <input class="button" type="button" name="Master In" value="Master" onclick="inclick(3)">
         <input class="button" type="button" name="Master Out" value="Master"><br>
       </div>
       <div>
         <h3></h3>
-        <input class="auswahl" type="submit" value="Spielen!">
+        <input class="spielenButton" type="button" value="Spielen!" onclick="urlMitParams()">
       </div>
     </form>
   </table>

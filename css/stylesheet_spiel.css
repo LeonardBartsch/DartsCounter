@@ -144,6 +144,7 @@ button {
     top: 70%;
     left: 30%;
     width: 500px;
+    height: 500px;
     display: none;
     background-color: rgba(54, 129, 127, 1.0);
     border: 2px solid rgba(54, 129, 127, 1.0);
@@ -159,4 +160,16 @@ button {
 
 .unsichtbar {
     display: none;
+}
+
+.continueButton {
+    margin: 20px;
+    width: 150px;
+    font-size: 1.2em;
+    color: black;
+    background-color: rgba(54, 129, 127, 1.0);
+}
+
+.continueButton:hover {
+    box-shadow: 0 0 5px grey;
 }
