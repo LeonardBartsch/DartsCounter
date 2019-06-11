@@ -37,20 +37,12 @@ class Spieler {
 
     wurfEintragen(punktzahl) {
 
-        if(einstellungen.wurfIn.value !== inOut.single && this.anzahlWuerfe_ === 0) {
-            let wurrfKorrekt = true;
-            let multiplier = getMultiplier();
-            
-            if(multiplier === 1 && punktzahl !== 50) {
-                wurrfKorrekt = false;
-            }else{
-                if(multiplier !== 3 && einstellungen.wurfIn.value === inOut.master) {
-                    wurrfKorrekt = false;
-                }
-            }
-            
-            if(!wurrfKorrekt) {
+        // checken, ob der erste Wurf richtig gemacht wurde
+        if(this.anzahlWuerfe_ === 0) {
+            if(!inOutKorrekt(true, punktzahl)) {
                 aktuellerWurf = 3;
+                // damit undo noch klappt
+                this.letzteWuerfe_[indexErsterWurf] = 0;
                 return;
             }
         }
@@ -62,8 +54,17 @@ class Spieler {
 
         if(this.punktzahl_ < 0) {
             this.rollBack();
-        }else if(this.zurueckgesetzt_ === true) {
+        }else {
+            if(this.zurueckgesetzt_ === true) {
             this.zurueckgesetzt_ = false;
+            }
+
+            // checken, ob der letzte Wurf richtig gemacht wurde
+            if(this.punktzahl_ === 0) {
+                if(!inOutKorrekt(false, punktzahl)){
+                    this.rollBack();
+                }
+            }
         }
     }
 
@@ -88,7 +89,10 @@ class Spieler {
         }else {
             this.punktzahl_ += punktzahl;
         }
-        this.anzahlWuerfe_--;
+        // damit undo beim ersten Wurf funktioniert, Abfrage, ob Anzahl Würfe größer 0   
+        if(this.anzahlWuerfe_ > 0){
+            this.anzahlWuerfe_--;
+        }
         this.average_ = this.anzahlWuerfe_ > 0 ? (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ : 0; 
 
         aktuellerWurf = 3 - index;
@@ -179,6 +183,25 @@ function spielEinstellungen() {
             }
         }
     }
+}
+
+function inOutKorrekt(inWurf, punktzahl){
+    let multiplier = getMultiplier(), wurfKorrekt = true;
+    let einstellung = inWurf ? einstellungen.wurfIn.value : einstellungen.wurfOut.value;
+
+    if(einstellung === inOut.single){
+
+    }else if(einstellung === inOut.double){
+        if(!((multiplier === 2 && ![0, 25].includes(punktzahl)) || punktzahl === 50)){
+            wurfKorrekt = false;
+        }
+    }else {
+        if((multiplier === 1 && punktzahl !== 50) || [0, 25].includes(punktzahl)){
+            wurfKorrekt = false;
+        }
+    }
+
+    return wurfKorrekt;
 }
 
 function selectMultiplier(id, buchstabeFuerPunktButton) {

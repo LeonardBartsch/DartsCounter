@@ -50,13 +50,12 @@ function inClick(zahl, id) {
     switchButton(id);
 }
 
-function outClick(zahl) {
+function outClick(zahl, id) {
     einstellungen.wurfOut.value = getInOut(zahl);
     switchButton(id);
 }
 
 function getButtonZahl(id) {
-    console.log(id);
     let button = document.getElementById(id);
     let value = button.value;
     console.log(value);
@@ -71,6 +70,7 @@ function getButtonZahl(id) {
 }
 
 function getInOut(zahl) {
+    console.log(zahl);
     switch(zahl){
         case 1: 
             return inOut.single;
@@ -108,14 +108,27 @@ function switchSelectedButton(idButton,  basicClass, ausgewaehltClass) {
         
 }
 
-function urlMitParams() {
+function weiterleiten() {
     let url = '../html/spiel.html?';
-    //let url = "C:/Users/Leo/OneDrive/Studium/2.%20Semester/Web-Techniken/Git/DartsCounter/html/spiel.html?"
     for (let property in einstellungen){
         if(einstellungen.hasOwnProperty(property)){
+            if(einstellungen[property].value === 0){
+                alert('Eine Einstellung wurde nicht richtig getroffen!');
+                return;
+            }
             url += einstellungen[property].key + '=' + einstellungen[property].value + ';'; 
         }
     }
     
     window.location.href = url.slice(0, url.length - 1);
 }
+
+const modi = {
+    normal : 1,
+    cricket: 2,
+    bob: 3
+}
+
+const modusParam = 'modus';
+
+// TODO: Modus behandeln

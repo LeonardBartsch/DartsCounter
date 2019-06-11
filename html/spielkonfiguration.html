@@ -51,7 +51,7 @@
         <h3>Spieler</h3>
         <input class="button" type="button" id="1spieler" value="1" onclick="spielerClick('1spieler')">
         <input class="button auswahl" type="button" id="2spieler" value="2" onclick="spielerClick('2spieler')">
-        <input class="button" type="number" id="mehrSpieler" value="3" placeholder="other" min="3" max="8" onclick="spielerClick('mehrSpieler')">
+        <input class="button" type="number" id="mehrSpieler" value="other" placeholder="other" min="3" max="8" onclick="spielerClick('mehrSpieler')">
       </div>
       <div class="Dauer">
         <h3>Dauer</h3>
@@ -78,17 +78,24 @@
       </div>
       <div class="In/Out">
         <h3>In/Out</h3>
-        <h4>In Out</h4>
-        <input class="button auswahl" type="button" name="Single In" value="Single" onclick="inclick(1)">
-        <input class="button" type="button" name="Single Out" value="Single"><br>
-        <input class="button" type="button" name="Double In" value="Double" onclick="inclick(2)">
-        <input class="button auswahl" type="button" name="Double Out" value="Double" checked><br>
-        <input class="button" type="button" name="Master In" value="Master" onclick="inclick(3)">
-        <input class="button" type="button" name="Master Out" value="Master"><br>
+        <div class="grid">
+          <span class="inOutSpan">In:</span>
+          <div>
+            <input class="button auswahl" type="button" id="singleIn" value="Single" onclick="inClick(1, 'singleIn')">
+            <input class="button" type="button" id="doubleIn" value="Double" onclick="inClick(2, 'doubleIn')">
+            <input class="button" type="button" id="masterIn" value="Master" onclick="inClick(3, 'masterIn')">
+          </div>
+          <span class="inOutSpan">Out:</span>
+          <div>
+            <input class="button" type="button" id="singleOut" value="Single" onclick="outClick(1, 'singleOut')">        
+            <input class="button auswahl" type="button" id="doubleOut" value="Double" onclick="outClick(2, 'doubleOut')">        
+            <input class="button" type="button" id="masterOut" value="Master" onclick="outClick(3, 'masterOut')">
+          </div>
+        </div>
       </div>
       <div>
         <h3></h3>
-        <input class="spielenButton" type="button" value="Spielen!" onclick="urlMitParams()">
+        <input class="spielenButton" type="button" value="Spielen!" onclick="weiterleiten()">
       </div>
     </form>
   </table>

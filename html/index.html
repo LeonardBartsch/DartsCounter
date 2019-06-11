@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/stylesheet_main.css">
     <link rel="stylesheet" href="../css/stylesheet_start.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="../js/start.js"></script>
   </head>
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -45,8 +46,8 @@
       <tr>
         <td>
           <div class="spielenButtonsDiv">
-            <a class="spielenButton orange" href="#">Spielen mit Account</a>
-            <a class="spielenButton grey" href="#">Spielen ohne Account</a>
+            <a class="spielenButton orange" onclick="weiterleiten(true)">Spielen mit Account</a>
+            <a class="spielenButton grey" onclick="weiterleiten(false)">Spielen ohne Account</a>
           </div>
         </td>
         <td>

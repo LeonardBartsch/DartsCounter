@@ -13,6 +13,7 @@
     border-left: 5px;
     border-color: #ee9e09;
     border-style: solid;
+    cursor: pointer;
 }
 
 .spielModiButton.trenner {
