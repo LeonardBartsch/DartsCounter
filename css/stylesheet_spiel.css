@@ -144,7 +144,6 @@ button {
     top: 40%;
     left: 30%;
     width: 500px;
-    display: none;
     background-color: rgba(54, 129, 127, 1.0);
     border: 2px solid rgba(54, 129, 127, 1.0);
     border-radius: 8px;
@@ -167,11 +166,10 @@ button {
     font-size: 1.2em;
     color: black;
     background-color: rgba(54, 129, 127, 1.0);
-    border: 1px solid rgba(54, 129, 127, 1.0);
     text-decoration: none;
-    border-radius: 10px;
+    border: none;
 }
 
 .continueButton:hover {
-    box-shadow: 0 0 10px white;
+    text-shadow: 0 0 10px white;
 }

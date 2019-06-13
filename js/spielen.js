@@ -1,6 +1,6 @@
 'use strict';
 
-const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0; 
+const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0, unsichtbarClass_ = 'unsichtbar'; 
 const inOut = {
     single: 1,
     double: 2,
@@ -23,7 +23,7 @@ let einstellungen = {
     wurfOut : {key: outParam, value: inOut.double}
 }
 
-let spieler_ = [], sieger_ = [];
+let spieler_ = [], sets_ = [];
 let wurfElemente_, spielerElemente_;
 class Spieler {
     constructor(name) {
@@ -65,23 +65,28 @@ class Spieler {
                     this.rollBack();
                 }
             }
+
+            if(this.punktzahl_ === 1 && einstellungen.wurfOut.value !== inOut.single) {
+                this.rollBack();
+            }
         }
     }
 
     undoLastThrow() {
-        let punktzahl, i = 0;
+        let punktzahl, i = wurfDavor(indexErsterWurf - (aktuellerWurf - 1));
+        let i_start = i;
         do {
             punktzahl = this.letzteWuerfe_[i];
-            i++;
-        }while(punktzahl === platzhalter && !(i === this.letzteWuerfe_.length))
+            i = wurfDavor(i);
+        }while(punktzahl === platzhalter && !(i === i_start))
 
         if(punktzahl === platzhalter) return false;
         
-        let index = i - 1;
+        let index = wurfDanach(i);
         this.letzteWuerfe_[index] = platzhalter;
         if(this.zurueckgesetzt_) {
             let punktzahlVorherigeWuerfe = 0;
-            for(i = 2; i > index; i--) {
+            for(i = indexErsterWurf; i > index; i--) {
                 punktzahlVorherigeWuerfe += this.letzteWuerfe_[i];
             }
             this.punktzahl_ -= (punktzahlVorherigeWuerfe);
@@ -117,6 +122,14 @@ class Spieler {
         this.zurueckgesetzt_ = true;
     }
 
+    werteZurueckSetzen() {
+        this.anzahlWuerfe_ = 0;
+        this.average_ = 0;
+        this.letzteWuerfe_ = [platzhalter, platzhalter, platzhalter];
+        this.punktzahl_ = einstellungen.punkte.value;
+        this.zurueckgesetzt_ = false;
+    }
+
     punktzahl() {
         return this.punktzahl_;
     }
@@ -135,6 +148,39 @@ class Spieler {
 
     name() {
         return this.name_;
+    }
+}
+
+class Set {
+    constructor() {
+        //this.setNr_ = nr;
+        this.siegerLegs_ = [];
+        this.sieger_ = platzhalter;
+    }
+
+    neuerSieger(spielerIndex) {
+        if(this.siegerLegs_.length === einstellungen.legs.value || this.sieger_ !== platzhalter) {
+            console.log('Zu viele Sieger bzw. Sieger des Sets schon gefunden');
+            return;
+        }
+
+        this.siegerLegs_.push(spielerIndex);
+        if(this.anzahlSiege(spielerIndex) > einstellungen.legs.value / 2){
+            this.sieger_ = spielerIndex;
+        }
+    }
+
+    anzahlSiege(spielerIndex) {
+        let result = 0;
+        for(let i = 0; i < this.siegerLegs_.length; i++){
+            if(this.siegerLegs_[i] === spielerIndex) result++;
+        }
+
+        return result;
+    }
+
+    sieger() {
+        return this.sieger_;
     }
 }
 
@@ -159,6 +205,8 @@ function initialisieren() {
 
         anzeigeAktualisieren(i, 0);
     }
+
+    sets_.push(new Set())
 
 }
 
@@ -227,6 +275,14 @@ function switchSelectedElement(id, basicClass, ausgewaehltClass) {
     document.getElementById(id).className = basicClass + " " + ausgewaehltClass;
 
     return true;
+}
+
+function wurfDavor(index) {
+    return index === indexErsterWurf ? indexLetzterWurf : index + 1;
+}
+
+function wurfDanach(index) {
+    return index === indexLetzterWurf ? indexErsterWurf : index - 1;
 }
 
 function buchstabeVorPunkteSchreiben(buchstabe, className) {
@@ -300,31 +356,72 @@ function anzeigeAktualisieren(zuAktualisierenderSpielerNr, geworfenePunkte) {
     document.getElementById("average" + zuAktualisierenderSpielerNr).innerHTML = zuAktualisierenderSpieler.average().toFixed(2);
 
     if(zuAktualisierenderSpieler.punktzahl() === 0) {
-        showSpielAbschluss(zuAktualisierenderSpieler);
+        showSpielAbschluss(zuAktualisierenderSpielerNr - 1);
     }
 }
 
-function showSpielAbschluss(sieger) {
-    document.getElementById("spielAbschluss").style.display = "block";
+const Gewinn = {
+    Leg: 0,
+    Set: 1,
+    Match: 2
+}
 
-    let text = sieger.name() + " gewinnt ";
-    if(einstellungen.legs.value > 1){
-        if(einstellungen.sets.value > 1){
-
+function gewinnErmitteln(spielerIndex) {
+    let gewonneneSets = 0;
+    for(let i = 0; i < sets_.length; i++) {
+        if(sets_[i].sieger() === spielerIndex) {
+            gewonneneSets++;
         }
-    }else if(einstellungen.sets.value > 1) {
-
-    }else {
-        text += "das Spiel!";
     }
+    console.log('gewonnene Sets: ' + gewonneneSets);
+    if(sets_[aktuellesSet - 1].sieger() === spielerIndex){
+        if(gewonneneSets >= einstellungen.sets.value / 2){
+            return Gewinn.Match;
+        }else {
+            return Gewinn.Set;
+        }
+    }else {
+        return Gewinn.Leg;
+    }
+}
+
+function showSpielAbschluss(siegerIndex) {
+    
+    sets_[aktuellesSet - 1].neuerSieger(siegerIndex);
+    
+    let gewinn = gewinnErmitteln(siegerIndex);
+    
+    let sieger = spieler_[siegerIndex];
+    let text = sieger.name() + " gewinnt ";
+    text += gewinn === Gewinn.Match ? 'das Spiel!' : gewinn === Gewinn.Set ? 'das Set!' : 'das Leg!';
 
     document.getElementById("spielAbschlussText").innerHTML = text;
+
+    const ids = ["gifLeg", "gifSet", "gifMatch"];
+    let anzeigeGif = gewinn === Gewinn.Match ? 'gifMatch' : gewinn === Gewinn.Set ? 'gifSet' : 'gifLeg';
+    ids.forEach(function(x) {
+                    if(x === anzeigeGif){
+                        document.getElementById(x).classList.remove(unsichtbarClass_);
+                    }else {
+                        document.getElementById(x).classList.add(unsichtbarClass_);
+                    }
+                })
+
+    document.getElementById("spielAbschluss").classList.remove(unsichtbarClass_);
+}
+
+function changeWurfElement(wurfNr) {
+    switchSelectedElement(wurfElemente_[wurfNr - 1].id, "wurf", "ausgewaehlt");
+}
+
+function changeSpielerElement(spielerNr) {
+    switchSelectedElement(spielerElemente_[spielerNr - 1].id, "spielerkachel", "ausgewaehlt");
 }
 
 function naechsterWurf() {
     aktuellerWurf = aktuellerWurf === 3 ? 1 : aktuellerWurf + 1;
 
-    switchSelectedElement(wurfElemente_[aktuellerWurf - 1].id, "wurf", "ausgewaehlt");
+    changeWurfElement(aktuellerWurf);
 
     if(aktuellerWurf === 1){
         // Punktzahlen der Würfe nullen 
@@ -342,7 +439,7 @@ function wuerfeNullen() {
 function naechsterSpieler() {
     aktuellerSpieler = aktuellerSpieler === einstellungen.spielerzahl.value ? 1 : aktuellerSpieler + 1;
 
-    switchSelectedElement(spielerElemente_[aktuellerSpieler - 1].id, "spielerkachel", "ausgewaehlt");
+    changeSpielerElement(aktuellerSpieler);
 }
 
 function undo() {
@@ -350,10 +447,10 @@ function undo() {
                                    aktuellerSpieler;
     let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
     if(spielerLetzterWurf.undoLastThrow()) {
-        switchSelectedElement(wurfElemente_[aktuellerWurf - 1].id, "wurf", "ausgewaehlt");
+        changeWurfElement(aktuellerWurf);
         if(spielerLetzterWurfNummer !== aktuellerSpieler) {
             aktuellerSpieler = spielerLetzterWurfNummer;
-            switchSelectedElement(spielerElemente_[aktuellerSpieler - 1].id, "spielerkachel", "ausgewaehlt");
+            changeSpielerElement(aktuellerSpieler);
         }
         let letzteWuerfe = spielerLetzterWurf.letzteWuerfe();
         for(let i = 0; i < letzteWuerfe.length; i++) {
@@ -362,5 +459,38 @@ function undo() {
         }
         
         anzeigeAktualisieren(spielerLetzterWurfNummer, 0);
+    }
+}
+
+function neuesLeg() {
+    // Würfe zurücksetzen
+    wuerfeNullen();
+    aktuellerWurf = 1;
+    changeWurfElement(1);
+
+    // Spieler zurücksetzen
+    aktuellerSpieler = 1;
+    spieler_.forEach(x => x.werteZurueckSetzen());
+    for(let i = 0; i < spieler_.length; i++) {
+        anzeigeAktualisieren(i + 1, 0);
+    }
+    changeSpielerElement(1);
+}
+
+function handleContinue() {
+    let siegerIndex = sets_[aktuellesSet - 1].siegerLegs_[sets_[aktuellesSet - 1].siegerLegs_.length - 1];
+    let gewinn = gewinnErmitteln(siegerIndex);
+
+    console.log(siegerIndex);
+    if(gewinn === Gewinn.Match) {
+        window.location.href = '../html/index.html'
+    }else {
+        neuesLeg();
+        document.getElementById('spielAbschluss').classList.add(unsichtbarClass_);
+        if(gewinn === Gewinn.Set){
+            aktuellesSet++;
+            sets_.push(new Set())
+            console.log('Neues Set');
+        }
     }
 }
