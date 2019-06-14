@@ -20,13 +20,6 @@
   border-color: #ee9e09;
 }
 
-/* muss noch other Farbe ändern
-    .placeholder{
-      color: #ee9e09;
-    }
-    */
-
-
 /* visuell Vorausgewählte */
 .button.auswahl{
   background: #ee9e09;
@@ -72,4 +65,8 @@
   font-size: 1.3em;
   margin-top: 20px;
   text-align: left;
+}
+
+::placeholder {
+  color: #ee9e09;
 }

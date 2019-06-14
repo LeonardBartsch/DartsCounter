@@ -51,9 +51,26 @@
         <h3>Spieler</h3>
         <input class="button" type="button" id="1spieler" value="1" onclick="spielerClick('1spieler')">
         <input class="button auswahl" type="button" id="2spieler" value="2" onclick="spielerClick('2spieler')">
-        <input class="button" type="number" id="mehrSpieler" value="other" placeholder="other" min="3" max="8" 
+        <input class="button" type="number" id="mehrSpieler" value="other" placeholder="other" min="3" max="8"
                onclick="spielerClick('mehrSpieler')" oninput="spielerClick('mehrSpieler')">
       </div>
+      <div class="Spielernamen">
+        <h3>Namen</h3>
+        <table class="Namen">
+          <tr>
+            <td><input class="button" type="text" id="1name" placeholder="Name Spieler 1" onclick="spielerClick('1spieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="2name" placeholder="Name Spieler 2" onclick="spielerClick('2spieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="3name" placeholder="Name Spieler 3" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="4name" placeholder="Name Spieler 4" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+          </tr>
+          <tr>
+            <td><input class="button" type="text" id="5name" placeholder="Name Spieler 5" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="6name" placeholder="Name Spieler 6" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="7name" placeholder="Name Spieler 7" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+            <td><input class="button" type="text" id="8name" placeholder="Name Spieler 8" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
+          </tr>
+        </table>
+
       <div class="Dauer">
         <h3>Dauer</h3>
         <div class="Sets">
@@ -90,8 +107,8 @@
           </div>
           <span class="inOutSpan">Out:</span>
           <div>
-            <input class="button" type="button" id="singleOut" value="Single" onclick="outClick(1, 'singleOut')">        
-            <input class="button auswahl" type="button" id="doubleOut" value="Double" onclick="outClick(2, 'doubleOut')">        
+            <input class="button" type="button" id="singleOut" value="Single" onclick="outClick(1, 'singleOut')">
+            <input class="button auswahl" type="button" id="doubleOut" value="Double" onclick="outClick(2, 'doubleOut')">
             <input class="button" type="button" id="masterOut" value="Master" onclick="outClick(3, 'masterOut')">
           </div>
         </div>
