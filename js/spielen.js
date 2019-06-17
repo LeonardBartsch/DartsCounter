@@ -15,12 +15,12 @@ let aktuellerSpieler = 1, aktuellerWurf = 1, aktuellesLeg = 1, aktuellesSet = 1;
 
 // Spiel-Einstellungen
 let einstellungen = {
-    spielerzahl : {key: spielerParam, value: 2},
-    legs : {key: legsParam, value: 1},
-    sets : {key: setsParam, value: 1},
-    punkte : {key: punkteParam, value: 501},
-    wurfIn : {key: inParam, value: inOut.single},
-    wurfOut : {key: outParam, value: inOut.double}
+    spieler: {key: spielerParam, value: []},
+    legs: {key: legsParam, value: 1},
+    sets: {key: setsParam, value: 1},
+    punkte: {key: punkteParam, value: 501},
+    wurfIn: {key: inParam, value: inOut.single},
+    wurfOut: {key: outParam, value: inOut.double}
 }
 
 let spieler_ = [], sets_ = [];
@@ -198,12 +198,15 @@ window.onload = function() {
 function initialisieren() {
     wurfElemente_ = document.getElementsByClassName("wurf");
     spielerElemente_ = document.getElementsByClassName("spielerkachel");
-    for(let i = 1; i <= einstellungen.spielerzahl.value; i++) {
-        spieler_.push(new Spieler("Spieler " + i)); 
+    for(let i = 1; i <= einstellungen.spieler.value.length; i++) {
+        let name = einstellungen.spieler.value[i - 1];
+        spieler_.push(new Spieler(name)); 
         // Spieler-Kacheln sichtbar machen
-        spielerElemente_[i - 1].style.display = 'inline-block';
-
+        document.getElementById('name' + i).innerHTML = name;
         anzeigeAktualisieren(i, 0);
+
+        spielerElemente_[i - 1].style.display = 'inline-block';
+              
     }
 
     sets_.push(new Set())
@@ -216,18 +219,24 @@ function spielEinstellungen() {
     let wertestring = querystring.slice(1);
     let paare = wertestring.split(";");
     let paar, key, value;
-    for (var i = 0; i < paare.length; i++) {
+    for (let i = 0; i < paare.length; i++) {
         paar = paare[i].split("=");
         key = paar[0];
-        value = Number(paar[1]);
-
-        //name = unescape(name).replace("+", " ");
-        //wert = unescape(wert).replace("+", " ");
+        value = paar[1];
         
-        for(let prop in einstellungen){
-            if(einstellungen[prop].key == key && einstellungen.hasOwnProperty(prop)){
-                einstellungen[prop].value = value;
-                break;
+        if(key === spielerParam) {
+            let namen = value.split(',');
+            for(let j = 0; j < namen.length; j++) {
+                name = decodeURIComponent(namen[j]);
+                einstellungen.spieler.value.push(name.trim())
+            }
+        }else {
+            value = Number(value);
+            for(let prop in einstellungen){
+                if(einstellungen[prop].key == key && einstellungen.hasOwnProperty(prop)){
+                    einstellungen[prop].value = value;
+                    break;
+                }
             }
         }
     }
@@ -259,7 +268,7 @@ function selectMultiplier(id, buchstabeFuerPunktButton) {
 }
 
 function switchSelectedElement(id, basicClass, ausgewaehltClass) {
-    if(document.getElementById(id).className.includes(ausgewaehltClass)) return false; 
+    if(document.getElementById(id).classList.contains(ausgewaehltClass)) return false; 
 
     let elemente = document.getElementsByClassName(basicClass + " " + ausgewaehltClass);
 
@@ -269,10 +278,10 @@ function switchSelectedElement(id, basicClass, ausgewaehltClass) {
     }
 
     if(elemente.length > 0) {
-        elemente.item(0).className = basicClass;
+        elemente.item(0).classList.remove(ausgewaehltClass);
     }
 
-    document.getElementById(id).className = basicClass + " " + ausgewaehltClass;
+    document.getElementById(id).classList.add(ausgewaehltClass);
 
     return true;
 }
@@ -437,13 +446,13 @@ function wuerfeNullen() {
 }
 
 function naechsterSpieler() {
-    aktuellerSpieler = aktuellerSpieler === einstellungen.spielerzahl.value ? 1 : aktuellerSpieler + 1;
+    aktuellerSpieler = aktuellerSpieler === einstellungen.spieler.value.length ? 1 : aktuellerSpieler + 1;
 
     changeSpielerElement(aktuellerSpieler);
 }
 
 function undo() {
-    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spielerzahl.value : aktuellerSpieler - 1) : 
+    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spieler.value.length : aktuellerSpieler - 1) : 
                                    aktuellerSpieler;
     let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
     if(spielerLetzterWurf.undoLastThrow()) {

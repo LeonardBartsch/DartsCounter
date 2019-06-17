@@ -20,6 +20,31 @@
   border-color: #ee9e09;
 }
 
+.button.plusMinus {
+  width: 130px;
+  font-size: 1em;
+}
+
+.namen {
+  margin: 10px;
+}
+
+.spName {
+  margin: 5px;
+  border: 2px solid rgba(54, 129, 127, 1.0);
+  border-radius: 3px;
+  font-size: 1.15em;
+  width: 300px;
+  padding: 7px 3px 7px 3px;
+  color: white;
+  background-color: rgba(54, 129, 127, 1.0);
+  caret-color: white !important;
+}
+
+.spName::placeholder {
+  color: white;
+}
+
 /* visuell Vorausgewählte */
 .button.auswahl{
   background: #ee9e09;
@@ -69,4 +94,8 @@
 
 ::placeholder {
   color: #ee9e09;
+}
+
+.unsichtbar {
+  display: none;
 }

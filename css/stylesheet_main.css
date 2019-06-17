@@ -81,6 +81,10 @@ display: table;
   width: 200px;
 }
 
+.inputBreite::placeholder {
+  color: black !important;
+}
+
 .accountButton{
   border-radius: 6px;
   border: 1px solid;
@@ -90,10 +94,11 @@ display: table;
 .accountButton.orange{
   background-color: #ee9e09;
   width: 110px;
-
+  border-color: #ee9e09;
 }
 .accountButton.grey{
   background-color: #a9aaa9;
+  border-color: #a9aaa9;
 }
 
 .accountButton:hover{

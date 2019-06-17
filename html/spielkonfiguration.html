@@ -49,28 +49,19 @@
         <h2>Spieleinstellungen</h2>
       <div class="Spieler">
         <h3>Spieler</h3>
-        <input class="button" type="button" id="1spieler" value="1" onclick="spielerClick('1spieler')">
-        <input class="button auswahl" type="button" id="2spieler" value="2" onclick="spielerClick('2spieler')">
-        <input class="button" type="number" id="mehrSpieler" value="other" placeholder="other" min="3" max="8"
-               onclick="spielerClick('mehrSpieler')" oninput="spielerClick('mehrSpieler')">
+        <input class="button plusMinus" type="button" id="1spieler" value="+" onclick="plusClick()">
+        <input class="button plusMinus" type="button" id="2spieler" value="-" onclick="minusClick()">
+        <div class="namen">
+          <input class="spName" type="text" id="name1" placeholder="Spieler 1"><br id="1name">
+          <input class="spName" type="text" id="name2" placeholder="Spieler 2"><br id="2name">
+          <input class="spName unsichtbar" type="text" id="name3" placeholder="Spieler 3"><br id="name3" class="unsichtbar">
+          <input class="spName unsichtbar" type="text" id="name4" placeholder="Spieler 4"><br id="name4" class="unsichtbar">              
+          <input class="spName unsichtbar" type="text" id="name5" placeholder="Spieler 5"><br id="name5" class="unsichtbar">
+          <input class="spName unsichtbar" type="text" id="name6" placeholder="Spieler 6"><br id="name6" class="unsichtbar">
+          <input class="spName unsichtbar" type="text" id="name7" placeholder="Spieler 7"><br id="name7" class="unsichtbar">
+          <input class="spName unsichtbar" type="text" id="name8" placeholder="Spieler 8"><br id="name8" class="unsichtbar">        
+        </div>
       </div>
-      <div class="Spielernamen">
-        <h3>Namen</h3>
-        <table class="Namen">
-          <tr>
-            <td><input class="button" type="text" id="1name" placeholder="Name Spieler 1" onclick="spielerClick('1spieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="2name" placeholder="Name Spieler 2" onclick="spielerClick('2spieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="3name" placeholder="Name Spieler 3" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="4name" placeholder="Name Spieler 4" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-          </tr>
-          <tr>
-            <td><input class="button" type="text" id="5name" placeholder="Name Spieler 5" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="6name" placeholder="Name Spieler 6" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="7name" placeholder="Name Spieler 7" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-            <td><input class="button" type="text" id="8name" placeholder="Name Spieler 8" onclick="spielerClick('mehrSpieler')" maxlength="18"></td>
-          </tr>
-        </table>
-
       <div class="Dauer">
         <h3>Dauer</h3>
         <div class="Sets">

@@ -16,13 +16,15 @@ function keyValuePair(key, value) {
     this.value = value;
 }
 
+let anzahlSpieler_ = 2;
+
 let einstellungen = {
-    spielerzahl : {key: spielerParam, value: 2},
-    legs : {key: legsParam, value: 1},
-    sets : {key: setsParam, value: 1},
-    punkte : {key: punkteParam, value: 501},
-    wurfIn : {key: inParam, value: inOut.single},
-    wurfOut : {key: outParam, value: inOut.double}
+    spieler: {key: spielerParam, value: []},
+    legs: {key: legsParam, value: 1},
+    sets: {key: setsParam, value: 1},
+    punkte: {key: punkteParam, value: 501},
+    wurfIn: {key: inParam, value: inOut.single},
+    wurfOut: {key: outParam, value: inOut.double}
 }
 
 function spielerClick(id) {
@@ -108,7 +110,34 @@ function switchSelectedButton(idButton,  basicClass, ausgewaehltClass) {
         
 }
 
+const unsichtbarClass = 'unsichtbar', spielerInputId = 'name';
+function plusClick() {
+    if(anzahlSpieler_ === 8) return;
+
+    anzahlSpieler_++;
+    let elemente = document.querySelectorAll('#' + spielerInputId + anzahlSpieler_)
+    elemente.forEach(x => x.classList.remove(unsichtbarClass));
+}
+
+function minusClick() {
+    if(anzahlSpieler_ === 1) return;
+        
+    let elemente = document.querySelectorAll('#' + spielerInputId + anzahlSpieler_)
+    elemente.forEach(x => x.classList.add(unsichtbarClass));
+    anzahlSpieler_--;
+}
+
 function weiterleiten() {
+    // Spieler-Einstellungen ermitteln
+    for(let i = 1; i <= anzahlSpieler_; i++) {
+        let name = document.querySelector('#' + spielerInputId + i + '.spName').value
+        if(name === ''){
+            name = 'Spieler ' + i;
+        }
+        console.log(name);
+        einstellungen.spieler.value.push(name);
+    }
+
     let url = '../html/spiel.html?';
     for (let property in einstellungen){
         if(einstellungen.hasOwnProperty(property)){
