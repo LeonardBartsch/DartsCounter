@@ -126,17 +126,17 @@ button {
 
 .undoButton {
     margin-top: 30px;
-    background-color: rgb(170, 169, 169);
-    border-color: rgb(170, 169, 169);
+    background-color: rgb(54, 129, 127);
+    border-color: rgb(54, 129, 127);
     width: 60%;
     font-size: 1.3rem;
     height: 45px;
 }
 
 .undoButton:hover {
-    box-shadow: 0 0 10px rgb(117, 188, 230);
-    background-color: rgb(209, 208, 208);
-    border-color: rgb(209, 208, 208);
+    box-shadow: 0 0 10px rgb(124, 236, 233);
+    background-color: rgb(87, 177, 174);
+    border-color: rgb(87, 177, 174);
 }
 
 #spielAbschluss {
