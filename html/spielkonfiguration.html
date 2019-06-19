@@ -10,36 +10,32 @@
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <div title="Upperpart">
-      <a href="index.html" class="center"><img src="../pics/Logo.jpg" alt="Logo" id="logo"></a>
-      <div class="intro-container" >
-        <div class="left rotate">
-          <span class="fontfuersowas">Dein Darts-Counter!</span>
-        </div>
-        <img src="../pics/Breitgezogen.png" alt="Breitgezogen" class="intropic">
-        <div class="right">
-          <form action="index.html" method="post">
-            <table class="marginrate">
-              <tr>
-                <td><span class="loginfont">Username:</span> </td>
-                <td><input type="text" class="inputBreite" name="Username" placeholder="Username"></td>
-              </tr>
-              <tr>
-                <td><span class="loginfont">Password:</span> </td>
-                <td><input type="text" class="inputBreite" name="Password" placeholder="Password"></td>
-              </tr>
-              <tr>
-                <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
-                <td><input type="submit" class="accountButton grey inputBreite" name="Registrieren" value="Registrieren"></td>
-              </tr>
-            </table>
-
-          </form>
-
-        </div>
-      </div>
-
+<header title="Upperpart" class="gridcontainer upperpart">
+  <div class="grid1">
+    <span class="adtext">Dein Darts-Counter!</span>
+    <div class="right">
+      <form action="index.html" method="post">
+        <table>
+          <tr>
+            <td><span class="loginfont">Username:</span> </td>
+            <td><input type="text" style="width: 200px" name="Username" placeholder="Username"></td>
+          </tr>
+          <tr>
+            <td><span class="loginfont">Password:</span> </td>
+            <td><input type="text" style="width: 200px;" name="Password" placeholder="Password"></td>
+          </tr>
+          <tr>
+            <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
+            <td><input type="submit" class="accountButton grey" style="width: 200px;" name="Registrieren" value="Registrieren"></td>
+          </tr>
+        </table>
+      </form>
     </div>
+  </div>
+  <div class="grid2">
+    <img src="../pics/Logo.jpg" class="logo" alt="">
+  </div>
+</header>
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SpielenAuswahl+++++++++++++++++++++++++++++++++++++++++++-->
 
@@ -55,11 +51,11 @@
           <input class="spName" type="text" id="name1" placeholder="Spieler 1"><br id="1name">
           <input class="spName" type="text" id="name2" placeholder="Spieler 2"><br id="2name">
           <input class="spName unsichtbar" type="text" id="name3" placeholder="Spieler 3"><br id="name3" class="unsichtbar">
-          <input class="spName unsichtbar" type="text" id="name4" placeholder="Spieler 4"><br id="name4" class="unsichtbar">              
+          <input class="spName unsichtbar" type="text" id="name4" placeholder="Spieler 4"><br id="name4" class="unsichtbar">
           <input class="spName unsichtbar" type="text" id="name5" placeholder="Spieler 5"><br id="name5" class="unsichtbar">
           <input class="spName unsichtbar" type="text" id="name6" placeholder="Spieler 6"><br id="name6" class="unsichtbar">
           <input class="spName unsichtbar" type="text" id="name7" placeholder="Spieler 7"><br id="name7" class="unsichtbar">
-          <input class="spName unsichtbar" type="text" id="name8" placeholder="Spieler 8"><br id="name8" class="unsichtbar">        
+          <input class="spName unsichtbar" type="text" id="name8" placeholder="Spieler 8"><br id="name8" class="unsichtbar">
         </div>
       </div>
       <div class="Dauer">

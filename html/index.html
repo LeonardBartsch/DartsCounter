@@ -11,87 +11,76 @@
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <div title="Upperpart">
-      <a href="index.html" class="center"><img src="../pics/Logo.jpg" alt="Logo" id="logo"></a>
-      <div class="intro-container" >
-        <div class="left rotate">
-          <span class="fontfuersowas">Dein Darts-Counter!</span>
-        </div>
-        <img src="../pics/Breitgezogen.png" alt="Breitgezogen" class="intropic">
-        <div class="right">
-          <form action="index.html" method="post">
-            <table class="marginrate">
-              <tr>
-                <td><span class="loginfont">Username:</span> </td>
-                <td><input type="text" class="inputBreite" name="Username" placeholder="Username"></td>
-              </tr>
-              <tr>
-                <td><span class="loginfont">Password:</span> </td>
-                <td><input type="text" class="inputBreite" name="Password" placeholder="Password"></td>
-              </tr>
-              <tr>
-                <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
-                <td><input type="submit" class="accountButton grey inputBreite" name="Registrieren" value="Registrieren"></td>
-              </tr>
-            </table>
-          </form>
-        </div>
-      </div>
-</div>
+<header title="Upperpart" class="gridcontainer upperpart">
+  <div class="grid1">
+    <span class="adtext">Dein Darts-Counter!</span>
+    <div class="right">
+      <form action="index.html" method="post">
+        <table>
+          <tr>
+            <td><span class="loginfont">Username:</span> </td>
+            <td><input type="text" style="width: 200px" name="Username" placeholder="Username"></td>
+          </tr>
+          <tr>
+            <td><span class="loginfont">Password:</span> </td>
+            <td><input type="text" style="width: 200px;" name="Password" placeholder="Password"></td>
+          </tr>
+          <tr>
+            <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
+            <td><input type="submit" class="accountButton grey" style="width: 200px;" name="Registrieren" value="Registrieren"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+  <div class="grid2">
+    <img src="../pics/Logo.jpg" class="logo" alt="">
+  </div>
+</header>
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SpielenAuswahl+++++++++++++++++++++++++++++++++++++++++++-->
 
-    <div class="spielenDiv">
-    <table>
-      <tr>
-        <td>
-          <div class="spielenButtonsDiv">
-            <a class="spielenButton orange" onclick="weiterleiten(true)">Spielen mit Account</a>
-            <a class="spielenButton grey" onclick="weiterleiten(false)">Spielen ohne Account</a>
-          </div>
-        </td>
-        <td>
-          <div class="spielenTextDiv">
-            <h2>Deine Vorteile als registrierter Spieler</h2>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing
-               elitr, sed diam nonumy eirmod tempor invidunt ut labore
-               et dolore magna aliquyam erat, sed diam voluptua. At vero
-               eos et accusam et justo duo dolores et ea rebum. Stet clita
-               kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor
-               sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-               elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-               magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-               justo duo dolores et ea rebum. Stet clita kasd gubergren,
-               no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-          </div>
-        </td>
-    </tr>
-    </table>
+<nav class="gridcontainer spielenDiv">
+    <div class="spielen1">
+        <a class="spielenButton orange" onclick="weiterleiten(true)">Spielen mit <br /> Account</a>
+        <a class="spielenButton grey" onclick="weiterleiten(false)">Spielen ohne <br />Account</a>
     </div>
+    <div class="spielen2">
+      <div class="textdiv">
+        <h2><u>Deine Vorteile als registrierter Spieler</u></h2>
+        <div class="vorteilediv">
+        <ul style="margin-left:0px;">
+          <li> FEATURE 1 blablablablablablaekuhfesefsfes</li>
+          <li>FEATURE 2 fbeisfbesofhoeshfeioshfiosh</li>
+          <li>FEATURE 3 fuehosehfuehoifseuifheoi</li>
+        </ul>
+        </div>
+
+      </div>
+  </div>
+</nav>
 
     <hr title="Platzhalter erstmal">
 
 
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ NEWSABTEILUNG +++++++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="newscontainer" title="Newsabteilung">
-    <h1>Dart-News</h1>
-  <div class="news-slideshow">
-    <table style="margin-bottom:50px;">
-      <tr>
-        <td> <img src="../pics/Pfeil links.jpg" alt="Platzhalter" class="pfeil links"> </td>
-        <td> <div class="news-pics">
+<div class="newscontainer" title="Newsabteilung">
+  <div class="headline">
+    <h1>News</h1>
+  </div>
+  <div class="pfeil-links">
 
-          </div>
-       </td>
-        <td> <img src="../pics/Pfeil rechts.jpg" alt="Platzhalter" class="pfeil rechts"> </td>
-      </tr>
-    </table>
   </div>
+  <div class="newspics">
+
   </div>
-  </body>
-</html>
+  <div class="pfeil-rechts">
+
+  </div>
+</div>
+
+
 
 
   <hr title="Platzhalter erstmal">
@@ -113,3 +102,5 @@
     </table>
   </div>
 </div>
+</body>
+</html>

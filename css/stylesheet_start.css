@@ -5,22 +5,39 @@ h2{
   }
 
 h1 {
+  margin: 0px;
   margin-left: 20px;
+
 }
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
-.spielenDiv{
-  margin-top: 20px;
+
+.spielenDiv {
+  grid-template-columns: 1.3fr 7fr;
+  grid-template-rows: 1fr 3fr;
+  grid-template-areas: "buttons text"
+                       "buttons text";
+  grid-column-gap: 2%;
+  height: auto;
+  width: auto;
   margin-left: 10%;
   margin-right: 10%;
-  margin-bottom: 25px;
-  border: solid;
-  border-radius: 50px;
-  min-width: 1000px;
+  margin-top: 30px;
+  min-width: 446px;
 }
 
-.spielenButtonsDiv{
-  width: 250px;
+
+.spielen1 {
+  grid-area: buttons;
 }
+
+.spielen2 {
+  grid-area: text;
+}
+
+.vorteilediv {
+  font-size: 1.4em;
+}
+
 
 .spielenButton{
   width: 165px;
@@ -61,47 +78,52 @@ h1 {
     border-color: #ee9e09;
     }
 
+
+    /* Neue Grid-Andordnung bei 780px */
+    @media (max-width: 780px) {
+      .spielenDiv {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "buttons"
+                             "text";
+      }
+     }
+
+
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
   .newscontainer {
-    position: relative;
-    margin-top: 30px;
+    height: 500px;
+    width: auto;
     margin-left: 10%;
     margin-right: 10%;
-    margin-bottom: 25px;
-    border: solid;
-    border-radius: 50px;
-    min-width: 1000px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: auto 8fr;
+    grid-template-areas: "header header header"
+                         "links mitte rechts";
+
   }
 
-  .news-slideshow {
-    margin-left: 70px;
+  .headline {
+    grid-area: header;
   }
 
-  .news-pics {
+  .pfeil-links {
+    grid-area: links;
+    background-color: red;
+  }
+
+  .pfeil-rechts {
+    grid-area: rechts;
+    background-color: red;
+  }
+
+  .newspics {
+    grid-area: mitte;
     background-color: black;
-    width: 700px;
-    height: 400px;
   }
 
-  .pfeil {
-    width: 60px;
-    height:50px;
-  }
-  .pfeil.links {
-  margin-right: 30px;
-  }
-
-  .pfeil.links:hover {
-    opacity: 0.5;
-  }
-
-  .pfeil.rechts {
-    margin-left: 30px;
-  }
-
-  .pfeil.rechts:hover{
-    opacity: 0.5;
-  }
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEAMABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++*/
