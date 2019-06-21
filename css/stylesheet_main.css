@@ -5,10 +5,11 @@ td {
 }
 
 body {
-  background-color: #464545;
   color: white;
   font-family: 'Open Sans', sans-serif;
 }
+
+
 
 
 hr {
@@ -17,6 +18,7 @@ hr {
   margin-right: 10%;
   margin-left: 10%;
   margin-top: 20px;
+  min-width: 446px;
 
 }
 
@@ -36,12 +38,14 @@ hr {
                        "intro intro intro";
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 0px;
+  min-width: 626px;
 }
 
 .grid1 {
   grid-area: intro;
   position: relative;
-  background-color: white;
+  background-color: #464545;
   border-radius: 15px;
 }
 
@@ -84,8 +88,8 @@ hr {
 
 .accountButton.orange{
   background-color: #ee9e09;
-  width: 110px;
   border-color: #ee9e09;
+  width: 110px;
 }
 .accountButton.grey{
   background-color: #a9aaa9;
@@ -94,6 +98,10 @@ hr {
 
 .accountButton:hover{
   transform: scale(1.05);
+}
+
+.fixedwidth {
+  width: 200px;
 }
 
 input::placeholder {
@@ -121,6 +129,12 @@ input::placeholder {
   .grid2 {
     grid-area: 2 / 1 / 4 / 2;
   }
+
+@media (max-width: 590px) {
+  .fixedwidth {
+    width: 170px;
+  }
+}
 
   .logo {
     display: inline;

@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="../css/stylesheet_main.css">
     <link rel="stylesheet" href="../css/stylesheet_start.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="../js/start.js"></script>
   </head>
   <body>
@@ -19,15 +23,15 @@
         <table>
           <tr>
             <td><span class="loginfont">Username:</span> </td>
-            <td><input type="text" style="width: 200px" name="Username" placeholder="Username"></td>
+            <td><input type="text" class="fixedwidth" name="Username" placeholder="Username"></td>
           </tr>
           <tr>
             <td><span class="loginfont">Password:</span> </td>
-            <td><input type="text" style="width: 200px;" name="Password" placeholder="Password"></td>
+            <td><input type="text" class="fixedwidth" name="Password" placeholder="Password"></td>
           </tr>
           <tr>
-            <td><input type="submit" class="accountButton orange" name="Login" value="Login"></td>
-            <td><input type="submit" class="accountButton grey" style="width: 200px;" name="Registrieren" value="Registrieren"></td>
+            <td><input type="submit" class="accountButton orange fixedwidth" name="Login" value="Login"></td>
+            <td><input type="submit" class="accountButton grey fixedwidth" name="Registrieren" value="Registrieren"></td>
           </tr>
         </table>
       </form>
@@ -38,9 +42,10 @@
   </div>
 </header>
 
+<div class="maincontainer">
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SpielenAuswahl+++++++++++++++++++++++++++++++++++++++++++-->
-
-<nav class="gridcontainer spielenDiv">
+<br><br>
+<div class="gridcontainer spielenDiv">
     <div class="spielen1">
         <a class="spielenButton orange" onclick="weiterleiten(true)">Spielen mit <br /> Account</a>
         <a class="spielenButton grey" onclick="weiterleiten(false)">Spielen ohne <br />Account</a>
@@ -58,7 +63,7 @@
 
       </div>
   </div>
-</nav>
+</div>
 
     <hr title="Platzhalter erstmal">
 
@@ -66,41 +71,112 @@
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ NEWSABTEILUNG +++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="newscontainer" title="Newsabteilung">
-  <div class="headline">
-    <h1>News</h1>
-  </div>
-  <div class="pfeil-links">
+  <h2 style="margin-bottom:20px;">Dart-News</h2>
+  <div id="carousel-example-2" class="carousel slide" data-ride="carousel">
+  <!--Indicators-->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+  </ol>
+  <!--/.Indicators-->
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <div class="view">
+        <div class="crop">
+          <img class="d-block w-100" src="../pics/MvG.jpg" />
+        </div>
+        <div class="mask rgba-black-light"></div>
+      </div>
+      <div class="carousel-caption">
+        <h4 class="h3-responsive">Michael van Gerwen ist Darts Premier League Sieger!</h4>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        <div class="crop">
+        <img class="d-block w-100" src="../pics/HoppUndSchindler.jpg" />
+      </div>
+        <div class="mask rgba-black-strong"></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">Deutschland im Achtelfinale gescheitert!</h3>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        <div class="crop">
+        <img class="d-block w-100" src="../pics/Scotland.jpg" />
+      </div>
+        <div class="mask rgba-black-slight"></div>
+      </div>
+      <div class="carousel-caption">
+        <h3 class="h3-responsive">World Cup: Triumph für Schottland <br /></h3>
 
+      </div>
+    </div>
   </div>
-  <div class="newspics">
-
-  </div>
-  <div class="pfeil-rechts">
-
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  <!--/.Controls-->
   </div>
 </div>
 
-
-
-
-  <hr title="Platzhalter erstmal">
-
+<hr title="Platzhalter erstmal">
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEAMABTEILUNG++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="teamcontainer" tilte="Teamabteilung">
-  <h1>Das Team</h1>
-  <div class="" title="">
-    <table style="margin-bottom: 25px;">
-      <tr>
-        <td class="teammemberdiv"></td>
-        <td class="teammemberdiv"></td>
-      </tr>
-      <tr>
-        <td class="teammemberdiv"></td>
-        <td class="teammemberdiv"></td>
-      </tr>
-    </table>
+<div class="gridcontainer teamcontainer" tilte="Teamabteilung">
+  <div class="headline">
+    <h2 style="margin-left:10px; margin-top: 2%;">Das Team</h2>
   </div>
+  <div class="leo gridcontainer profilegrid">
+    <div class="">
+      <img src="../pics/profilepic.png" class="profilepic" alt="">
+    </div>
+    <div class="">
+      <h2 class="nameheadline">Leo BARTSCH</h2>
+      <p class ="profiledescription">Der stinkt</p>
+    </div>
+  </div>
+  <div class="moritz gridcontainer profilegrid">
+    <div class="">
+      <img src="../pics/profilepic.png" class="profilepic" alt="">
+    </div>
+    <div class="">
+      <h2 class="nameheadline">Moritz Weinrich</h2>
+      <p class="profiledescription">Der stinkt</p>
+    </div>
+  </div>
+  <div class="fabian gridcontainer profilegrid">
+    <div class="">
+      <img src="../pics/profilepic.png" class="profilepic" alt="">
+    </div>
+    <div class="">
+      <h2 class="nameheadline">Fabian Liebing</h2>
+      <p class="profiledescription">Ganz okay</p>
+    </div>
+  </div>
+  <div class="phillip gridcontainer profilegrid">
+    <div class="">
+      <img src="../pics/profilepic.png" class="profilepic" alt="">
+    </div>
+    <div class="">
+      <h2 class ="nameheadline">Phillip Raumanns</h2>
+      <p class="profiledescription">Der stinkt</p>
+    </div>
+  </div>
+</div>
 </div>
 </body>
 </html>
