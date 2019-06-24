@@ -51,8 +51,8 @@ class Spieler {
         this.punktzahl_ -= punktzahl;
         this.letzteWuerfe_[this.aktuellesWurfSet()][3 - aktuellerWurf] = punktzahl;
         this.anzahlWuerfe_++;
-        this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_;
-
+        //this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3;
+        
         if(this.punktzahl_ < 0) {
             this.rollBack();
         }else {
@@ -71,6 +71,8 @@ class Spieler {
                 this.rollBack();
             }
         }
+
+        this.setAverage();
 
         if(aktuellerWurf === 3){
             this.letzteWuerfe_.push(neuesWurfSet())
@@ -120,9 +122,11 @@ class Spieler {
         if(this.anzahlWuerfe_ > 0){
             this.anzahlWuerfe_--;
         }
-        this.average_ = this.anzahlWuerfe_ > 0 ? (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ : 0; 
+        //this.average_ = this.anzahlWuerfe_ > 0 ? (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3 : 0; 
 
         aktuellerWurf = 3 - i;
+
+        this.setAverage();
         
         for(let j = this.aktuellesWurfSet(); j > indexWurfSet; j--){
             this.letzteWuerfe_.pop();
@@ -143,6 +147,7 @@ class Spieler {
             }
         }
 
+        this.anzahlWuerfe_ += 3 - aktuellerWurf;
         aktuellerWurf = 3;
         this.zurueckgesetzt_ = true;
     }
@@ -153,6 +158,13 @@ class Spieler {
         this.letzteWuerfe_ = [neuesWurfSet()];
         this.punktzahl_ = einstellungen.punkte.value;
         this.zurueckgesetzt_ = false;
+    }
+
+    setAverage() {
+        if(aktuellerWurf === 3 && this.anzahlWuerfe_ > 0) {
+            this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3;
+            //this.average_ = arr.reduce((a,b) => a + b, 0) / arr.length
+        }
     }
 
     aktuellesWurfSet() {
@@ -206,6 +218,10 @@ class Set {
         }
 
         return result;
+    }
+
+    anzahlAbgeschlosseneLegs() {
+        return this.siegerLegs_.length;
     }
 
     sieger() {
@@ -523,5 +539,6 @@ function handleContinue() {
             sets_.push(new Set())
             console.log('Neues Set');
         }
+        document.getElementById('legAnzeige').innerHTML = 'Set ' + aktuellesSet + ', Leg ' + (sets_[aktuellesSet - 1].anzahlAbgeschlosseneLegs() + 1);
     }
 }

@@ -29,6 +29,11 @@
   margin: 10px;
 }
 
+.spielerSpan {
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+
 .spName {
   margin: 5px;
   border: 2px solid rgba(54, 129, 127, 1.0);

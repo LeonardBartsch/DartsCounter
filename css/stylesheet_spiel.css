@@ -1,11 +1,27 @@
 .wrapper {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
-hr {
-    margin-left: 35%;
-    margin-right: 35%;
+#legAnzeige {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.linie {
+    width: 30%;
+    margin: 0 auto;
+    height: 1px;
+    background-color: rgb(0,0,0);
+    min-width: 300px;
+}
+
+.linie.obere {
+    margin-top: 30px;
+}
+
+.spielartDiv {
+    margin-left: 1%;
 }
 
 .spielerkachel {
