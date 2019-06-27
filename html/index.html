@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="../css/stylesheet_start.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="../js/start.js"></script>
   </head>
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -38,21 +34,26 @@
     </div>
   </div>
   <div class="grid2">
-    <img src="../pics/Logo.jpg" class="logo" alt="">
+    <a href="index.html"><img src="../pics/Logo.jpg" class="logo" alt=""></a>
   </div>
 </header>
 
-<div class="maincontainer">
+<main class="maincontainer">
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++SpielenAuswahl+++++++++++++++++++++++++++++++++++++++++++-->
 <br><br>
 <div class="gridcontainer spielenDiv">
-    <div class="spielen1">
+  <div class="spielen1 whitec">
+    <h2>Spielen</h2>
+  </div>
+    <div class="spielen2">
+
         <a class="spielenButton orange" onclick="weiterleiten(true)">Spielen mit <br /> Account</a>
         <a class="spielenButton grey" onclick="weiterleiten(false)">Spielen ohne <br />Account</a>
+
     </div>
-    <div class="spielen2">
+    <div class="spielen3 whitec">
       <div class="textdiv">
-        <h2><u>Deine Vorteile als registrierter Spieler</u></h2>
+        <h4 class="advantageheadline"><u>Deine Vorteile als registrierter Spieler</u></h4>
         <div class="vorteilediv">
         <ul style="margin-left:0px;">
           <li> FEATURE 1 blablablablablablaekuhfesefsfes</li>
@@ -70,14 +71,14 @@
 
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ NEWSABTEILUNG +++++++++++++++++++++++++++++++++++++++++++++++-->
-<div class="newscontainer" title="Newsabteilung">
+<div class="newscontainer whitec" title="Newsabteilung">
   <h2 style="margin-bottom:20px;">Dart-News</h2>
-  <div id="carousel-example-2" class="carousel slide" data-ride="carousel">
+  <div id="newscarousel" class="carousel slide" data-ride="carousel">
   <!--Indicators-->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-2" data-slide-to="1"></li>
-    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    <li data-target="#newscarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#newscarousel" data-slide-to="1"></li>
+    <li data-target="#newscarousel" data-slide-to="2"></li>
   </ol>
   <!--/.Indicators-->
   <!--Slides-->
@@ -85,7 +86,7 @@
     <div class="carousel-item active">
       <div class="view">
         <div class="crop">
-          <img class="d-block w-100" src="../pics/MvG.jpg" />
+          <a href="news.html"><img class="d-block w-100" src="../pics/MvG.jpg" /></a>
         </div>
         <div class="mask rgba-black-light"></div>
       </div>
@@ -94,10 +95,9 @@
       </div>
     </div>
     <div class="carousel-item">
-      <!--Mask color-->
       <div class="view">
         <div class="crop">
-        <img class="d-block w-100" src="../pics/HoppUndSchindler.jpg" />
+        <a href="news2.html"><img class="d-block w-100" src="../pics/HoppUndSchindler.jpg" /></a>
       </div>
         <div class="mask rgba-black-strong"></div>
       </div>
@@ -106,26 +106,65 @@
       </div>
     </div>
     <div class="carousel-item">
-      <!--Mask color-->
       <div class="view">
         <div class="crop">
-        <img class="d-block w-100" src="../pics/Scotland.jpg" />
+      <a href="news3.html"><img class="d-block w-100" src="../pics/Scotland.jpg" /></a>
       </div>
         <div class="mask rgba-black-slight"></div>
       </div>
       <div class="carousel-caption">
-        <h3 class="h3-responsive">World Cup: Triumph für Schottland <br /></h3>
+        <h3 class="h3-responsive">World Cup: Triumph für Schottland</h3>
 
       </div>
     </div>
   </div>
   <!--/.Slides-->
   <!--Controls-->
-  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#newscarousel" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#newscarousel" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  <!--/.Controls-->
+  </div>
+</div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSCONTAINER2++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div class="newscontainer2 whitec" title="Newsabteilung">
+  <h2 style="margin-bottom:20px;">Dart-News</h2>
+  <div id="newscarousel2" class="carousel slide" data-ride="carousel">
+  <!--Slides-->
+  <div class="carousel-inner" role="listbox">
+    <div class="carousel-item active">
+      <div class="view">
+        <p class="newstext"><a href="news.html">Michael van Gerwen ist Darts Premier League Sieger!</a></p>
+        <div class="mask rgba-black-light"></div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+        <p class="newstext"><a href="news2.html">Deutschland im Achtelfinale gescheitert!</a></p>
+        <div class="mask rgba-black-strong"></div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <!--Mask color-->
+      <div class="view">
+      <p class="newstext"><a href="news3.html">World Cup: Triumph für Schottland</a></p>
+        <div class="mask rgba-black-slight"></div>
+      </div>
+    </div>
+  </div>
+  <!--/.Slides-->
+  <!--Controls-->
+  <a class="carousel-control-prev" href="#newscarousel2" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#newscarousel2" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -133,50 +172,65 @@
   </div>
 </div>
 
-<hr title="Platzhalter erstmal">
+<hr title="Platzhalter erstmal" class="hrspecial">
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEAMABTEILUNG++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <div class="gridcontainer teamcontainer" tilte="Teamabteilung">
-  <div class="headline">
-    <h2 style="margin-left:10px; margin-top: 2%;">Das Team</h2>
+  <div class="headline whitec">
+    <h2>Das Team</h2>
   </div>
-  <div class="leo gridcontainer profilegrid">
-    <div class="">
-      <img src="../pics/profilepic.png" class="profilepic" alt="">
+  <div class="leo gridcontainer profilegridleft whitebc">
+    <div class="profilepicgrid">
+      <img src="../pics/leopic.jpg" class="profilepic" style="float:right" alt="">
     </div>
-    <div class="">
+    <div class="profiletextgrid">
       <h2 class="nameheadline">Leo BARTSCH</h2>
-      <p class ="profiledescription">Der stinkt</p>
     </div>
   </div>
-  <div class="moritz gridcontainer profilegrid">
-    <div class="">
-      <img src="../pics/profilepic.png" class="profilepic" alt="">
+  <div class="moritz gridcontainer profilegridright whitebc">
+    <div class="profilepicgrid">
+      <img src="../pics/moritzpic.jpg" class="profilepic" alt="">
     </div>
-    <div class="">
-      <h2 class="nameheadline">Moritz Weinrich</h2>
-      <p class="profiledescription">Der stinkt</p>
+    <div class="profiletextgrid">
+      <h2 class="nameheadline" style="text-align:right;">Moritz Weinrich</h2>
     </div>
   </div>
-  <div class="fabian gridcontainer profilegrid">
-    <div class="">
-      <img src="../pics/profilepic.png" class="profilepic" alt="">
+  <div class="fabian gridcontainer profilegridleft whitebc">
+    <div class="profilepicgrid">
+      <img src="../pics/fabianpic.jpg" class="profilepic" style="float:right" alt="">
     </div>
-    <div class="">
+    <div class="profiletextgrid">
       <h2 class="nameheadline">Fabian Liebing</h2>
-      <p class="profiledescription">Ganz okay</p>
     </div>
   </div>
-  <div class="phillip gridcontainer profilegrid">
-    <div class="">
-      <img src="../pics/profilepic.png" class="profilepic" alt="">
+  <div class="phillip gridcontainer profilegridright whitebc">
+    <div class="profilepicgrid">
+      <img src="../pics/phillipppic.jpg" class="profilepic" alt="">
     </div>
-    <div class="">
-      <h2 class ="nameheadline">Phillipp Raumanns</h2>
-      <p class="profiledescription">Der stinkt</p>
+    <div class="profiletextgrid">
+      <h2 class ="nameheadline">Phillllipp Raumanns</h2>
     </div>
   </div>
 </div>
-</div>
+</main>
+
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++FOOTER++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<footer class="footer">
+  <div class="implinksdiv">
+    <span class="centerblock"><a href="#">Kontakt</a></span>
+    <span class="centerblock"><a href="#">Datenschutz</a></span>
+  </div>
+  <div class="copyrightdiv">
+    <span class="centerblock">Copyright ©2019 DartsCounter</span>
+  </div>
+  <div class="backtotopdiv" id="backtotop" onclick="backtotop">
+    <span class="centerblock backtotop">↑ Back To Top ↑ </span>
+  </div>
+</footer>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++SCRIPTS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../js/start.js"></script>
 </body>
 </html>

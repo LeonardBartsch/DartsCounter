@@ -5,7 +5,8 @@ td {
 }
 
 body {
-  color: white;
+  padding-top: 15px;
+  background-color: #464545 !important;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -19,6 +20,7 @@ hr {
   margin-left: 10%;
   margin-top: 20px;
   min-width: 446px;
+  background-color: white;
 
 }
 
@@ -36,17 +38,15 @@ hr {
   grid-template-areas: ". logo . "
                        "intro intro intro"
                        "intro intro intro";
-  margin-left: 5%;
-  margin-right: 5%;
+
   margin-bottom: 0px;
-  min-width: 626px;
 }
 
 .grid1 {
   grid-area: intro;
   position: relative;
-  background-color: #464545;
-  border-radius: 15px;
+  background-color: #dff0ea;
+  box-shadow: 0px 5px 10px black;
 }
 
 .grid2 {
@@ -64,6 +64,10 @@ hr {
   margin: auto;
   height: 100%;
   border-radius: 50%;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .right {

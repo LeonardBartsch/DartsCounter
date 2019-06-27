@@ -10,6 +10,8 @@ h1 {
 
 }
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++KLASSEN++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 .maincontainer  {
   background-color: #464545;
   width:auto;
@@ -17,12 +19,21 @@ h1 {
   margin-right: 10%;
   min-width: 556px;
 }
-/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 
+.whitebc {
+  background-color: white;
+}
+
+.whitec {
+  color:white;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv {
   grid-template-columns: 1.3fr 7fr;
-  grid-template-rows: 1fr 3fr;
-  grid-template-areas: "buttons text"
+  grid-template-rows: 1fr 1fr 3fr;
+  grid-template-areas: "headline headline"
+                       "buttons text"
                        "buttons text";
   grid-column-gap: 2%;
   height: auto;
@@ -33,12 +44,16 @@ h1 {
   min-width: 446px;
 }
 
-
 .spielen1 {
+  grid-area: headline;
+}
+
+
+.spielen2 {
   grid-area: buttons;
 }
 
-.spielen2 {
+.spielen3 {
   grid-area: text;
 }
 
@@ -72,7 +87,7 @@ h1 {
   }
 
   .spielenButton:hover{
-    color: #ffffff;
+    color: #ffffff !important;
     transition: all 0.4s ease 0s;
   }
 
@@ -86,67 +101,168 @@ h1 {
     border-color: #ee9e09;
     }
 
+  .advantageheadline {
+    margin-top: 27px;
+    margin-left: 20px;
+  }
 
-    /* Neue Grid-Andordnung bei 780px */
+
     @media (max-width: 780px) {
       .spielenDiv {
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        grid-template-areas: "buttons"
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas: "headline"
+                             "buttons"
                              "text";
+      }
+      .spielenButton.orange {
+        margin-left: 90px;
       }
      }
 
 
   /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++++++*/
 
-.newscontainer {
-    height: 419px !important;
-    width: auto;
-    min-width: 446px !important;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 50px;
 
+.newscontainer {
+    height: 419px;
+    width: 1067px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-.carousel-inner {
+.newscontainer .carousel-inner {
     border-radius: 25px;
     background-color: rgba(0,0,0,0);
     box-shadow: 0px 0px 15px black;
 }
 
-.carousel-indicators li {
+.newscontainer .carousel-indicators li {
     border-radius: 50%;
     width: 14px !important;
     height: 14px !important;
     background-color: #404040;
 }
 
-.crop {
+.newscontainer .crop {
   width: 100%;
   height: 419px;
   overflow: hidden;
 }
 
-.carousel {
+.newscontainer .carousel {
   height: 419px;
+}
+
+.newscontainer2 {
+  display:none;
+}
+
+.hrspecial {
+  margin-top:90px;
+}
+
+@media (max-width:1204px) {
+  .newscontainer {
+      width: calc(1067px / 1.5);
+      height: calc(419px / 1.5);
+  }
+
+  .newscontainer .crop {
+    height: calc(419px / 1.5);
+  }
+
+  .newscontainer .carousel {
+    height: calc(419px / 1.5);
+  }
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG2+++++++++++++++++++++++++++++++++++++++++++*/
+
+.newscontainer2 {
+  margin-left: 5%;
+  margin-right: 5%;
+  width:auto;
+}
+
+.newstext {
+  text-align: center;
+  margin-left: 0px;
+  margin-top: 14px;
+}
+
+.newscontainer2 a {
+  color: white;
+}
+
+.newscontainer2 a:hover {
+  color: white;
+  opacity: 0.6;
+  text-decoration: underline;
+}
+
+
+@media (max-width: 804px) {
+  .newscontainer {
+    display: none;
+  }
+
+  .newscontainer2 {
+    display: block;
+  }
+
+  .hrspecial {
+    margin-top: 30px;
+  }
 }
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++TEAMABTEILUNG-KLASSEN++++++++++++++++++++++++++++++++++++*/
 
-.profilegrid {
-  border: solid;
+.teamcontainer {
+  height: 500px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 3.3fr 3.3fr;
+  grid-template-areas: "headline headline"
+                       "leo moritz"
+                       "fabian phillip";
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 30px;
+  grid-column-gap: 9px;
+  grid-row-gap: 9px;
+}
+
+.profilegridleft {
   border-radius: 10px;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1.2fr 1.5fr;
+  grid-template-areas: "pic text";
   height: 100%;
+  box-shadow: 0px 0px 20px black;
+  border-radius: 10px;
+}
+
+.profilegridright {
+  grid-template-columns: 1.5fr 1.2fr;
+  grid-template-areas: "text pic";
+  height: 100%;
+  box-shadow: 0px 0px 20px black;
+  border-radius: 10px;
+}
+
+.profilepicgrid {
+  grid-area: pic;
+}
+
+.profiletextgrid {
+  grid-area: text;
 }
 
 .profilepic {
   display: block;
   height: 200px;
-  margin: auto;
+  /*margin: auto;*/
 }
 
 .nameheadline {
@@ -160,21 +276,6 @@ h1 {
   margin-left: 5%;
   font-size: 1.2em;
 }
-
-.teamcontainer {
-  height: 500px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 3.3fr 3.3fr;
-  grid-template-areas: "headline headline"
-                       "leo moritz"
-                       "fabian phillip";
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-top: 30px;
-  grid-column-gap: 9px;
-  grid-row-gap: 9px;
-}
-
 
 .headline {
   grid-area: headline;
@@ -194,4 +295,58 @@ h1 {
 
 .phillip {
   grid-area: phillip;
+}
+
+@media(max-width:991px) {
+  .profiletextgrid {
+    display:none;
+  }
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER-KLASSEN+++++++++++++++++++++++++++++++++++++++++++++++*/
+.footer {
+  margin-top: 70px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0px -5px 15px black;
+  padding-top: 10px;
+}
+
+.copyrightdiv {
+  margin-top: 10px;
+}
+
+.backtotopdiv {
+  height: 55px;
+  border-top: solid;
+  margin-top: 10px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.backtotopdiv:hover{
+  box-shadow: 0 -7px 12px 0 rgba(0,0,0,0.24);
+}
+
+.backtotop {
+  margin-top:4px;
+  font: bold;
+  font-size: 1.5em;
+
+}
+
+.centerblock {
+  display: block;
+  text-align: center;
+}
+
+.footer a:hover {
+  color:black;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.footer a {
+  color: black;
+  text-decoration: none;
 }
