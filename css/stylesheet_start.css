@@ -17,7 +17,7 @@ h1 {
   width:auto;
   margin-left: 10%;
   margin-right: 10%;
-  min-width: 556px;
+  min-width: 595px;
 }
 
 .whitebc {
@@ -176,6 +176,10 @@ h1 {
   .newscontainer .carousel {
     height: calc(419px / 1.5);
   }
+
+  .hrspecial {
+    margin-top: 30px;
+  }
 }
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++NEWSABTEILUNG2+++++++++++++++++++++++++++++++++++++++++++*/
@@ -310,6 +314,7 @@ h1 {
   background-color: white;
   box-shadow: 0px -5px 15px black;
   padding-top: 10px;
+  min-width:744px;
 }
 
 .copyrightdiv {
