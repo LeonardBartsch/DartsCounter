@@ -1,7 +1,12 @@
+body {
+  color: white;
+}
+
 .button{
   width: 165px;
   font-size: 1.15em;
   margin: 10px;
+  margin-right: 3px;
   background-color: white;
   padding: 10px;
   border: 2px solid ;

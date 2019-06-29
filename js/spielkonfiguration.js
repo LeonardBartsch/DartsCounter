@@ -33,11 +33,23 @@ function spielerClick(id) {
 }
 
 function setsClick(id) {
+    let zahl = getButtonZahl(id);
+    if(!(zahl % 2)) {
+        if(zahl === undefined || zahl === 0) zahl = 1;
+        else zahl--;
+        document.getElementById(id).value = zahl; 
+    }
     einstellungen.sets.value = getButtonZahl(id);
     switchButton(id);
 }
 
 function legsClick(id) {
+    let zahl = getButtonZahl(id);
+    if(!(zahl % 2)) {
+        if(zahl === undefined || zahl === 0) zahl = 1;
+        else zahl--;
+        document.getElementById(id).value = zahl; 
+    }
     einstellungen.legs.value = getButtonZahl(id);
     switchButton(id);
 }

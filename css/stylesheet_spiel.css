@@ -1,6 +1,14 @@
+body {
+    color: white;
+  }
+
 .wrapper {
     margin-left: 5%;
     margin-right: 5%;
+}
+
+#spielbeschreibung {
+    line-height: 1.4em;
 }
 
 #legAnzeige {

@@ -25,6 +25,7 @@ let einstellungen = {
 
 let spieler_ = [], sets_ = [];
 let wurfElemente_, spielerElemente_;
+
 class Spieler {
     constructor(name) {
         this.name_ = name;
@@ -32,7 +33,6 @@ class Spieler {
         this.punktzahl_ = einstellungen.punkte.value;
         this.anzahlWuerfe_ = 0;
         this.average_ = 0;
-        this.zurueckgesetzt_ = false;
     }
 
     wurfEintragen(punktzahl) {
@@ -42,24 +42,19 @@ class Spieler {
             if(!inOutKorrekt(true, punktzahl)) {
                 aktuellerWurf = 3;
                 // damit undo noch klappt
-                this.letzteWuerfe_[this.aktuellesWurfSet()][indexErsterWurf] = 0;
+                this.letzteWuerfe_[this.aktuellesWurfSet()][indexErsterWurf].punktzahl = 0;
                 this.letzteWuerfe_.push(neuesWurfSet());
                 return;
             }
         }
 
         this.punktzahl_ -= punktzahl;
-        this.letzteWuerfe_[this.aktuellesWurfSet()][3 - aktuellerWurf] = punktzahl;
+        this.letzteWuerfe_[this.aktuellesWurfSet()][3 - aktuellerWurf].punktzahl = punktzahl;
         this.anzahlWuerfe_++;
-        //this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3;
-        
+                
         if(this.punktzahl_ < 0) {
             this.rollBack();
         }else {
-            if(this.zurueckgesetzt_ === true) {
-            this.zurueckgesetzt_ = false;
-            }
-
             // checken, ob der letzte Wurf richtig gemacht wurde
             if(this.punktzahl_ === 0) {
                 if(!inOutKorrekt(false, punktzahl)){
@@ -81,14 +76,14 @@ class Spieler {
     }
 
     undoLastThrow() {
-        let punktzahl, i = wurfDavor(indexErsterWurf - (aktuellerWurf - 1)), zuEnde = false;
+        let punktzahl, i = wurfDavor(indexErsterWurf - (aktuellerWurf - 1)), zuEnde = false, zurueckgegangen = 0;
         let indexWurfSet = this.aktuellesWurfSet();
         if(i === indexLetzterWurf) indexWurfSet--;
 
         if(indexWurfSet < 0) return false;
 
         do {
-            punktzahl = this.letzteWuerfe_[indexWurfSet][i];
+            punktzahl = this.letzteWuerfe_[indexWurfSet][i].punktzahl;
             console.log(punktzahl);
             if(indexWurfSet === 0 && i === indexErsterWurf) {
                 zuEnde = true;
@@ -98,6 +93,7 @@ class Spieler {
             if(i === indexLetzterWurf){
                 indexWurfSet--;
             }
+            zurueckgegangen++;
         }while(punktzahl === platzhalter && !zuEnde)
 
         if(punktzahl === platzhalter) return false;
@@ -107,27 +103,26 @@ class Spieler {
             indexWurfSet++;
         }
         
-        this.letzteWuerfe_[indexWurfSet][i] = platzhalter;
-        if(this.zurueckgesetzt_) {
+        this.letzteWuerfe_[indexWurfSet][i].punktzahl = platzhalter;
+        if(this.letzteWuerfe_[indexWurfSet][i].ueberworfen) {
             let punktzahlVorherigeWuerfe = 0;
             for(let index = indexErsterWurf; index > i; index--) {
-                punktzahlVorherigeWuerfe += this.letzteWuerfe_[indexWurfSet][index];
+                punktzahlVorherigeWuerfe += this.letzteWuerfe_[indexWurfSet][index].punktzahl;
             }
             this.punktzahl_ -= (punktzahlVorherigeWuerfe);
-            this.zurueckgesetzt_ = false;
+            this.letzteWuerfe_[indexWurfSet][i].ueberworfen = false;
         }else {
             this.punktzahl_ += punktzahl;
         }
         // damit undo beim ersten Wurf funktioniert, Abfrage, ob Anzahl Würfe größer 0   
         if(this.anzahlWuerfe_ > 0){
-            this.anzahlWuerfe_--;
+            this.anzahlWuerfe_ -= zurueckgegangen;
         }
-        //this.average_ = this.anzahlWuerfe_ > 0 ? (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3 : 0; 
-
+        
         aktuellerWurf = 3 - i;
 
         this.setAverage();
-        
+                
         for(let j = this.aktuellesWurfSet(); j > indexWurfSet; j--){
             this.letzteWuerfe_.pop();
         }
@@ -137,9 +132,11 @@ class Spieler {
     }
 
     rollBack() {
+        this.letzteWuerfe_[this.aktuellesWurfSet()][3 - aktuellerWurf].ueberworfen = true;
+
         for(let i = indexErsterWurf; i >= indexLetzterWurf; i--) {
             if((indexErsterWurf - i) <= (aktuellerWurf - 1)) {
-                let punktzahl = this.letzteWuerfe_[this.aktuellesWurfSet()][i];
+                let punktzahl = this.letzteWuerfe_[this.aktuellesWurfSet()][i].punktzahl;
                 if(punktzahl !== platzhalter) {
                     console.log(punktzahl);
                     this.punktzahl_ += punktzahl;
@@ -149,7 +146,6 @@ class Spieler {
 
         this.anzahlWuerfe_ += 3 - aktuellerWurf;
         aktuellerWurf = 3;
-        this.zurueckgesetzt_ = true;
     }
 
     werteZurueckSetzen() {
@@ -157,14 +153,15 @@ class Spieler {
         this.average_ = 0;
         this.letzteWuerfe_ = [neuesWurfSet()];
         this.punktzahl_ = einstellungen.punkte.value;
-        this.zurueckgesetzt_ = false;
     }
 
     setAverage() {
-        if(aktuellerWurf === 3 && this.anzahlWuerfe_ > 0) {
+        if(this.anzahlWuerfe_ > 0){
             this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3;
-            //this.average_ = arr.reduce((a,b) => a + b, 0) / arr.length
+        }else {
+            this.average_ = 0;
         }
+                   
     }
 
     aktuellesWurfSet() {
@@ -229,6 +226,13 @@ class Set {
     }
 }
 
+class Wurf {
+    constructor(punktzahl) {
+        this.punktzahl = punktzahl;
+        this.ueberworfen = false;
+    }
+}
+
 window.onload = function() {
     spielEinstellungen();
 
@@ -238,24 +242,6 @@ window.onload = function() {
     punktButtons.forEach(x => x.addEventListener('click', function() {
         werfen(Number(x.innerHTML.match(/\d+/g)[0]));
     }));
-}
-
-function initialisieren() {
-    wurfElemente_ = document.getElementsByClassName("wurf");
-    spielerElemente_ = document.getElementsByClassName("spielerkachel");
-    for(let i = 1; i <= einstellungen.spieler.value.length; i++) {
-        let name = einstellungen.spieler.value[i - 1];
-        spieler_.push(new Spieler(name)); 
-        // Spieler-Kacheln sichtbar machen
-        document.getElementById('name' + i).innerHTML = name;
-        anzeigeAktualisieren(i, 0);
-
-        spielerElemente_[i - 1].style.display = 'inline-block';
-              
-    }
-
-    sets_.push(new Set())
-
 }
 
 function spielEinstellungen() {
@@ -287,6 +273,48 @@ function spielEinstellungen() {
     }
 }
 
+function initialisieren() {
+    document.getElementById('spielart').innerHTML = 'Normales Spiel';
+    
+    let beschreibungsText = "Die Spieler werfen der Reihe nach jeweils drei Darts. Wer zuerst null Punkte hat, gewinnt. <br>";
+    beschreibungsText += 'Regeln: Best of ' + einstellungen.sets.value + ' Sets, Best of ' + einstellungen.legs.value +
+                         ' Legs, ' +  inOutString(einstellungen.wurfIn.value) + ' In, ' + inOutString(einstellungen.wurfOut.value) +
+                         ' Out';
+    document.getElementById('spielbeschreibung').innerHTML = beschreibungsText;
+    
+    wurfElemente_ = document.getElementsByClassName("wurf");
+    spielerElemente_ = document.getElementsByClassName("spielerkachel");
+    for(let i = 1; i <= einstellungen.spieler.value.length; i++) {
+        let name = einstellungen.spieler.value[i - 1];
+        spieler_.push(new Spieler(name)); 
+        // Spieler-Kacheln sichtbar machen
+        document.getElementById('name' + i).innerHTML = name;
+        anzeigeAktualisieren(i, 0);
+
+        spielerElemente_[i - 1].style.display = 'inline-block';
+              
+    }
+
+    sets_.push(new Set())
+
+}
+
+function inOutString(value) {
+    let result;
+    switch(value) {
+        case inOut.single:
+            result = 'Single'; break;
+        case inOut.double:
+            result = 'Double'; break;
+        case inOut.master:
+            result = 'Master'; break;
+        default:
+            result = 'falscher Wert'
+    }
+
+    return result;
+}
+
 function inOutKorrekt(inWurf, punktzahl){
     let multiplier = getMultiplier(), wurfKorrekt = true;
     let einstellung = inWurf ? einstellungen.wurfIn.value : einstellungen.wurfOut.value;
@@ -313,7 +341,8 @@ function selectMultiplier(id, buchstabeFuerPunktButton) {
 }
 
 function neuesWurfSet() {
-    return [platzhalter, platzhalter, platzhalter];
+    //return [platzhalter, platzhalter, platzhalter];
+    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)]
 }
 
 function switchSelectedElement(id, basicClass, ausgewaehltClass) {
@@ -501,7 +530,7 @@ function undo() {
         }
         let letzteWuerfe = spielerLetzterWurf.letzteWuerfe();
         for(let i = 0; i < wurfElemente_.length; i++) {
-            let punktzahl = letzteWuerfe[indexErsterWurf-i];
+            let punktzahl = letzteWuerfe[indexErsterWurf-i].punktzahl;
             wurfElemente_[i].innerHTML = punktzahl !== platzhalter ? punktzahl : 0;
         }
         
