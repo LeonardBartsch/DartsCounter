@@ -31,9 +31,9 @@ hr {
 }
 
 .upperpart {
-  height: 200px;
+  height: 250px;
   width: auto;
-  grid-template-rows: 1fr 1fr 1.5fr;
+  grid-template-rows: 1.3fr 1fr 1.2fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: ". logo . "
                        "intro intro intro"
@@ -53,6 +53,7 @@ hr {
 .grid2 {
   grid-area: 1 / 2 / 3 / 3;
   z-index: 1;
+  cursor: none;
 }
 
 .breitgezogen {
@@ -63,8 +64,7 @@ hr {
 .logo {
   display: block;
   margin: auto;
-  height: 100%;
-  border-radius: 50%;
+  width: 200px;
 }
 
 .logo:hover {
@@ -135,6 +135,10 @@ input::placeholder {
     grid-area: 2 / 1 / 4 / 2;
   }
 
+  .logo {
+    width: 175px;
+  }
+
 @media (max-width: 590px) {
   .fixedwidth {
     width: 170px;
@@ -147,4 +151,54 @@ input::placeholder {
     margin-left: 5.5px;
     height: 90%;
   }
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER-KLASSEN+++++++++++++++++++++++++++++++++++++++++++++++*/
+.footer {
+  margin-top: 70px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0px -5px 15px black;
+  padding-top: 10px;
+  min-width:744px;
+  color:black;
+}
+
+.copyrightdiv {
+  margin-top: 10px;
+}
+
+.backtotopdiv {
+  height: 55px;
+  border-top: solid;
+  margin-top: 10px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.backtotopdiv:hover{
+  box-shadow: 0 -7px 12px 0 rgba(0,0,0,0.24);
+}
+
+.backtotop {
+  margin-top:4px;
+  font: bold;
+  font-size: 1.5em;
+
+}
+
+.centerblock {
+  display: block;
+  text-align: center;
+}
+
+.footer a:hover {
+  color:black;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.footer a {
+  color: black;
+  text-decoration: none;
 }
