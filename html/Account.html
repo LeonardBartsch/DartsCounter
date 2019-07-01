@@ -3,13 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Startseite</title>
-    <link rel="stylesheet" href="../css/stylesheet_main.css">
+    <!--<link rel="stylesheet" href="../css/stylesheet_main.css">-->
     <link rel="stylesheet" href="../css/stylesheet_account.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <script src="../js/Account.js"></script>
+    <script src="../js/Navigationsleiste.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <header title="Upperpart" class="gridcontainer upperpart">
   <div class="grid1">
     <span class="adtext">Dein Darts-Counter!</span>
@@ -33,88 +36,160 @@
     </div>
   </div>
   <div class="grid2">
-    <a href="index.html"><img src="../pics/Logo.png" class="logo" alt=""></a>
+    <a href="index.html"><img src="../pics/Logo.jpg" class="logo" alt=""></a>
   </div>
 </header>
 
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Username+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  <div class="Usernamefeld">
-    <table class"Profilzeile">
+<div class="head">
+
+  <div class="navwrapper" style="height: 40px;">
+    <nav class="nav" id="nav" style="height: 40px;">
+      <ul>
+        <li> <a href="../html/index.html">Home</a></li>
+        <li> <a href="../html/spielauswahl.html">Spielauswahl</a></li>
+        <li> <a href="../html/spielkonfiguration.html">Spielkonfiguration</a></li>
+        <li> <a href="../html/Account.html">Account</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <div class="user">
+    <div class="userpic">
+      <img src="../pics/default-profile.jpeg" alt="PB" height="200px" width="200px">
+    </div>
+    <div class="username">
+      <p>Max Mustermann</p>
+    </div>
+    <div class="userschrift userstats1">
+      <p>Siege: ???</p>
+      <br>
+      <p>Niederlagen: ???</p>
+      <br>
+      <p>S/N-Quote: ???</p>
+    </div>
+    <div class=" userschrift userstats2">
+      <p>Erzfeind: ???</p>
+      <br>
+      <p>Lieblingsgegner: ???</p>
+      <br>
+      <p>Average: ???</p>
+    </div>
+  </div>
+
+  <div class="einstellungen">
+    <div class="menue">
+      <table class="menuepunkttabelle">
         <tr>
-          <td><p class="Profilbild"> PB </p></td>
-          <td class="Username"><h4>"Username"</h4></td>
+          <td class="tablecell" style="text-align: center;">
+            <button id="button1" class="buttons" type="button" name="Sicherheit" onclick="switch1()">Sicherheit</button>
+          </td>
         </tr>
-    </table>
-  </div>
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Trennlinie+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-  <div>
-    <hr class="veriLine1">
-  </div>
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Dropdown Versuch mit Ul+++++++++++++++++++++++++++++++++++++++++-->
-  <nav class="Accountmenue">
-    <ul class="Menueliste">
-      <li class="Accountinfo">Accountinformationen
-        <ul class="Dropdowns">
-          <li>
-            <form class="BenutzerSubmit" action="index.html" method="post">
-              Benutzernamen ändern: <input type="text" name="" value="" placeholder="Max_Mustermann">
-            </form>
-          </li>
-          <br>
-          <br>
-          <li>
-            <form class="PasswortSubmit" action="index.html" method="get">
-              Passwort ändern: <input type="text" name="" value="" placeholder="***********">
-            </form>
-          </li>
-          <br>
-          <br>
-          <li>
-            <form class="GeheimfrageSubmit" action="index.html" method="post">
-              Geheimfrage ändern: <input type="text" name="" value="" placeholder="Geburtstag Mutter?">
-            </form>
-          </li>
-        </ul>
-      </li>
-      <li class="Accountstatistiken">Statistiken
-        <ul class="Dropdowns">
-          <li>
-            <form class="" action="index.html" method="get">
-              Erzfeind: <output class="automatischeAusgaben" name="result">Das Massefieh</output>
-            </form>
-          </li>
-          <br>
-          <li>
-            <form class="" action="index.html" method="post">
-              Lieblingsgegner: <output class="automatischeAusgaben" name="result">Der Lange</output>
-            </form>
-          </li>
-          <br>
-          <li>
-            <form class="" action="index.html" method="post">
-              gewonnene Spiele | verlorene Spiele | Quote: <form class="" action="index.html" method="post"><output class="automatischeAusgaben" name="result"> 2 </output>   <output class="automatischeAusgaben" name="result"> 1541 </output>   <output class="automatischeAusgaben" name="result"> 0,14% </output></form>
-            </form>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
+        <tr>
+          <td class="tablecell" style="text-align: center;">
+            <button id="button2" class="buttons" type="button" name="Accountinfo" onclick="colorswitch2(); toggleMenu1();">Accountinfo</button>
+          </td>
+        </tr>
+        <tr>
+          <td class="tablecell" style="text-align: center;">
+            <button id="button3" class="buttons" type="button" name="Comingsoon" onclick="colorswitch3(); toggleMenu3();">Coming soon</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <div class="untermenue" id="sicherheitUm">
+      <div class="passwort">
+        <p class="einstellungentext">Passwort: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="sicherheitsfrage">
+        <p class="einstellungentext">Sicherheitsfrage: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="antwortSFrage">
+        <p class="einstellungentext">Antwort für die Frage: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+    </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <div class="untermenue" id="accountinfoUm">
+      <div class="benutzername">
+        <p class="einstellungentext">Benutzername: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="email">
+        <p class="einstellungentext">E-mail: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="Anzeigename">
+        <p class="einstellungentext">Anzeigename: ???</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+    </div>
+<!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <div class="untermenue" id="comingsoonUm">
+      <div class="comingsoon1">
+        <p class="einstellungentext">coming soon</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="comingsoon2">
+        <p class="einstellungentext">coming soon</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+      <div class="comingsoon3">
+        <p class="einstellungentext">coming soon</p>
+      </div>
+      <div class="bearbeiten" style="text-align: center;">
+        <button type="button" name="bearbeiten">bearbeiten</button>
+      </div>
+    </div>
 
-<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-<footer class="footer">
-  <div class="implinksdiv">
-    <span class="centerblock"><a href="#">Kontakt</a></span>
-    <span class="centerblock"><a href="#">Datenschutz</a></span>
   </div>
-  <div class="copyrightdiv">
-    <span class="centerblock">Copyright ©2019 DartsCounter</span>
-  </div>
-  <div class="backtotopdiv" id="backtotop" onclick="backtotop">
-    <span class="centerblock backtotop">↑ Back To Top ↑ </span>
-  </div>
-  <script src="../js/main.js"></script>
-</footer>
 
+</div>
+<!--  <form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+-->
+
+<script type="text/javascript">
+
+  var nav = document.getElementById('nav');
+    window.onscroll = function () {
+      if(window.pageYOffset > 250) {
+        document.getElementById('nav').classList.add('stickynav');
+        nav.style.position = "fixed";
+        nav.style.top = "0";
+        nav.style.marginTop = "0px";
+
+      } else {
+        nav.style.position = "relative";
+        nav.style.top = 250;
+        nav.style.marginTop = "50px";
+      }
+    }
+
+</script>
 
 </body>
 </html>
