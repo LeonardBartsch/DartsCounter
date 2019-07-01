@@ -142,7 +142,7 @@ h1 {
     border-radius: 50%;
     width: 14px !important;
     height: 14px !important;
-    background-color: #404040;
+    background-color: white;
 }
 
 .newscontainer .crop {
@@ -160,7 +160,7 @@ h1 {
 }
 
 .hrspecial {
-  margin-top:90px;
+  margin-top:50px;
 }
 
 @media (max-width:1204px) {
@@ -245,6 +245,7 @@ h1 {
   height: 100%;
   box-shadow: 0px 0px 20px black;
   border-radius: 10px;
+  transition-duration: 0.4s;
 }
 
 .profilegridright {
@@ -253,6 +254,11 @@ h1 {
   height: 100%;
   box-shadow: 0px 0px 20px black;
   border-radius: 10px;
+  transition: 0.4s;
+}
+
+.profilegridleft:hover, .profilegridright:hover {
+  box-shadow: 0px 0px 20px white;
 }
 
 .profilepicgrid {

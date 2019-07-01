@@ -8,6 +8,7 @@ body {
   padding-top: 15px;
   background-color: #464545 !important;
   font-family: 'Open Sans', sans-serif;
+  margin: 0px;
 }
 
 
@@ -30,6 +31,10 @@ hr {
   display: grid;
 }
 
+input[value] {
+  margin-top: 0px;
+}
+
 .upperpart {
   height: 250px;
   width: auto;
@@ -46,7 +51,7 @@ hr {
 .grid1 {
   grid-area: intro;
   position: relative;
-  background-color: #dff0ea;
+  background-color: white;
   box-shadow: 0px 5px 10px black;
 }
 
@@ -88,7 +93,7 @@ hr {
 .accountButton{
   border-radius: 6px;
   border: 1px solid;
-  height: 25px;
+  height:25px;
 }
 
 .accountButton.orange{
