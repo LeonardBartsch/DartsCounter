@@ -31,10 +31,6 @@ hr {
   display: grid;
 }
 
-input[value] {
-  margin-top: 0px;
-}
-
 .upperpart {
   height: 250px;
   width: auto;
@@ -208,7 +204,6 @@ input::placeholder {
   text-decoration: none;
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++Navbar+++++++++++++++++++++++++++++++++++++++++++++++*/
-
 .head {
   width: 100%;
 }
