@@ -14,8 +14,9 @@ function switch1() {
   colorswitch1();
   toggleMenu2();
 }
+
 function colorswitch1() {
-  if (document.getElementById('button1').style.background != "white") {
+  if (document.getElementById('button1').style.background = "white") {
     document.getElementById('button1').style.background = "white"
     document.getElementById('button2').style.background = "#ee9e09"
     document.getElementById('button3').style.background = "#ee9e09"
@@ -47,6 +48,8 @@ function toggleMenu1() {
     infoBox.style.display = "grid";
     sichBox.style.display = "none";
     comiBox.style.display = "none";
+  } if () {
+
   }
   else { // if is menuBox hidden, display it
     infoBox.style.display = "none";

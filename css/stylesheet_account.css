@@ -1,5 +1,5 @@
-
-.gridcontainer {
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*.gridcontainer {
   display: grid;
 }
 
@@ -117,16 +117,11 @@ input::placeholder {
     margin-left: 5.5px;
     height: 90%;
   }
-}
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+}*/
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Navbar+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 * {
   padding: 0px;
   margin: 0px;
-}
-
-body {
-  color: white;
-  font-family: 'Open Sans', sans-serif;
 }
 
 .head {
@@ -175,7 +170,7 @@ body {
 }
 
 
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++main+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .main {
   margin-left: auto;
   margin-right: auto;
@@ -183,12 +178,12 @@ body {
   margin-top: 150px ;
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++Usernamebereich+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*++++++++++++++++++++++++++++++++++++++++++Usernamebereich+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .user {
   display: grid;
   grid-template-columns: 300px 200px 1fr 1fr;
   grid-template-rows: 300px;
-  background: #464545;
+  background: #464595;
   grid-gap: 10px 10px;
   border-radius: 10px;
 
@@ -229,7 +224,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  background: #464545;
+  background: #464595;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 30% 70%;
@@ -249,13 +244,19 @@ body {
   border-radius: 10px 0 0 10px;
 }
 
-.tablecell {
-}
-
 .buttons {
   height: 50px;
   width: 100px;
   background: #ee9e09;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px black;
+}
+
+.button1 {
+  height: 50px;
+  width: 100px;
+  background: white;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 3px 3px 10px black;
@@ -267,7 +268,6 @@ body {
     grid-template-rows: repeat(3, 1fr);
   }
 
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .bearbeiten {
     align-self: center;
     text-align: center;
@@ -281,6 +281,3 @@ body {
   text-align: center;
   padding-top: 65px;
 }
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

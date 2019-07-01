@@ -1,0 +1,41 @@
+
+.head {
+  width: 100%;
+}
+.navwrapper {
+  margin-top: 50px;
+}
+.head nav {
+  background: #ee9e09;
+  padding: 10px 0px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  /*margin-top: 50px;*/
+}
+
+.nav li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 10px 40px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.nav li a {
+  text-decoration: none;
+  color: white;
+}
+
+
+.stickynav {
+  top: 0px;
+  position: fixed;
+}
+
+.nav ul li:hover {
+  background: #464545;
+  transition: 400ms;
+}

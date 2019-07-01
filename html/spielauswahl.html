@@ -5,6 +5,7 @@
         <title>Spielauswahl</title>
         <link rel="stylesheet" href="../css/stylesheet_main.css">
         <link rel="stylesheet" href="../css/stylesheet_spielauswahl.css">
+        <link rel="stylesheet" href="../css/stylesheet_navbar.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
         <script src="../js/spielauswahl.js"></script>
     </head>
@@ -37,9 +38,25 @@
             <a href="index.html"><img src="../pics/Logo.png" class="logo" alt=""></a>
           </div>
         </header>
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Spielmodi-Auswahl ++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
+        <div class="head">
+
+          <div class="navwrapper" style="height: 40px;">
+            <nav class="nav" id="nav" style="height: 40px;">
+              <ul>
+                <li> <a href="../html/index.html">Home</a></li>
+                <li> <a href="../html/spielauswahl.html">Spielauswahl</a></li>
+                <li> <a href="../html/spielkonfiguration.html">Spielkonfiguration</a></li>
+                <li> <a href="../html/Account.html">Account</a></li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+
+        <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Spielmodi-Auswahl ++++++++++++++++++++++++++++++++++++++++++++++++++++-->
         <h1 class="ueberschrift">Spielauswahl</h1>
-
         <div class="einruecken">
 
         <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Spielmodi-Auswahl ++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -93,5 +110,25 @@
   </div>
   <script src="../js/main.js"></script>
 </footer>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Script+++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<script type="text/javascript">
+
+  var nav = document.getElementById('nav');
+    window.onscroll = function () {
+      if(window.pageYOffset > 300) {
+        document.getElementById('nav').classList.add('stickynav');
+        nav.style.position = "fixed";
+        nav.style.top = "0";
+        nav.style.marginTop = "0px";
+
+      } else {
+        nav.style.position = "relative";
+        nav.style.top = 250;
+        nav.style.marginTop = "50px";
+      }
+    }
+
+</script>
+
     </body>
 </html>
