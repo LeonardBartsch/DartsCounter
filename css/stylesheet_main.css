@@ -11,9 +11,6 @@ body {
   margin: 0px;
 }
 
-
-
-
 hr {
   display: block;
   position: relative;
@@ -22,7 +19,10 @@ hr {
   margin-top: 20px;
   min-width: 446px;
   background-color: white;
+}
 
+.customcursor:hover{
+  cursor: url('../pics/dartpfeil.png'),auto;
 }
 
 
@@ -55,7 +55,6 @@ hr {
 .grid2 {
   grid-area: 1 / 2 / 3 / 3;
   z-index: 1;
-  cursor: none;
 }
 
 .breitgezogen {
@@ -130,22 +129,10 @@ input::placeholder {
   .adtext {
     display: none;
   }
-}
 
-@media (max-width:900px) {
   .grid2 {
     grid-area: 2 / 1 / 4 / 2;
   }
-
-  .logo {
-    width: 175px;
-  }
-
-@media (max-width: 590px) {
-  .fixedwidth {
-    width: 170px;
-  }
-}
 
   .logo {
     display: inline;
@@ -209,10 +196,6 @@ input::placeholder {
   width: 100%;
 }
 
-.navwrapper {
-
-}
-
 .navwrapper * {
   margin: 0px;
   z-index: 10;
@@ -241,10 +224,6 @@ input::placeholder {
 .nav li a {
   text-decoration: none;
   color: black;
-}
-
-.main {
-
 }
 
 .stickynav {
