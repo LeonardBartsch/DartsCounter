@@ -151,7 +151,7 @@ input::placeholder {
     display: inline;
     margin-top: 7px;
     margin-left: 5.5px;
-    height: 90%;
+    width: 164px;
   }
 }
 
