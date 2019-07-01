@@ -208,18 +208,15 @@ input::placeholder {
   text-decoration: none;
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++Navbar+++++++++++++++++++++++++++++++++++++++++++++++*/
-* {
-  padding: 0px;
-  margin: 0px;
-}
 
 .head {
   width: 100%;
 }
 
-.navwrapper {
-  margin-top: 0px;
+.navwrapper * {
+  margin: 0px;
 }
+
 .head nav {
   background: white;
   padding: 10px 0px;
