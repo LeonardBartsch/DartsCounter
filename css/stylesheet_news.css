@@ -1,24 +1,17 @@
+body {
+  color: white;
+  }
+
+h2 {
+  text-align: center;
+}
+
 .ueberschrift {
   display: block;
-  margin-left: 320px;
+  margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
-
-.ueberschrift2 {
-  display: block;
-  margin-left: 385px;
-  margin-right: auto;
-  width: 50%;
-}
-
-.ueberschrift3 {
-  display: block;
-  margin-left: 420px;
-  margin-right: auto;
-  width: 50%;
-}
-
 
 .bild {
   display: block;
@@ -36,12 +29,16 @@
 
 .subUeberschrift  {
   margin-top: -20px;
-  margin-left: 310px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
 
 .subUeberschrift2  {
   margin-top: -20px;
-  margin-left: 342px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 45%;
 }
 
 
