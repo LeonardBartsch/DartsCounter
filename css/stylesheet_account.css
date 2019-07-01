@@ -129,15 +129,14 @@ input::placeholder {
 }
 
 .navwrapper {
-  margin-top: 50px;
+  margin-top: 0px;
 }
 .head nav {
-  background: #ee9e09;
+  background: white;
   padding: 10px 0px;
   text-align: center;
   position: absolute;
   width: 100%;
-  /*margin-top: 50px;*/
 }
 
 .nav li {
@@ -152,7 +151,7 @@ input::placeholder {
 
 .nav li a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .main {
@@ -167,6 +166,10 @@ input::placeholder {
 .nav ul li:hover {
   background: #464545;
   transition: 400ms;
+}
+.nav ul li:hover a {
+  color: #ee9e09;
+  transition: 0ms !important;
 }
 
 
@@ -267,6 +270,12 @@ input::placeholder {
     grid-template-columns: 80% 20%;
     grid-template-rows: repeat(3, 1fr);
   }
+
+.untermenue1 {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: repeat(3, 1fr);
+}
 
 .bearbeiten {
     align-self: center;

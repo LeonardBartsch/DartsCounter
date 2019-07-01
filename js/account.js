@@ -1,4 +1,4 @@
-var yourNavigation = $(".nav");
+/*var yourNavigation = $(".nav");
     stickyDiv = "sticky";
     yourHeader = $('.header').height();
 
@@ -8,7 +8,7 @@ $(window).scroll(function() {
   } else {
     yourNavigation.removeClass(stickyDiv);
   }
-});
+});*/
 
 function switch1() {
   colorswitch1();
@@ -48,10 +48,11 @@ function toggleMenu1() {
     infoBox.style.display = "grid";
     sichBox.style.display = "none";
     comiBox.style.display = "none";
-  } if () {
-
-  }
-  else { // if is menuBox hidden, display it
+  } if (infoBox.style.display = "grid") {
+    infoBox.style.display = "grid";
+    sichBox.style.display = "none";
+    comiBox.style.display = "none";
+  } else { // if is menuBox hidden, display it
     infoBox.style.display = "none";
   }
 }
@@ -64,8 +65,11 @@ function toggleMenu2() {
     sichBox.style.display = "grid";
     infoBox.style.display = "none";
     comiBox.style.display = "none";
-  }
-  else { // if is menuBox hidden, display it
+  } if (sichBox.style.display = "grid") {
+    sichBox.style.display = "grid";
+    infoBox.style.display = "none";
+    comiBox.style.display = "none";
+  } else { // if is menuBox hidden, display it
     sichBox.style.display = "none";
   }
 }
@@ -78,8 +82,11 @@ function toggleMenu3() {
     comiBox.style.display = "grid";
     infoBox.style.display = "none";
     sichBox.style.display = "none";
-  }
-  else { // if is menuBox hidden, display it
+  } if (comiBox.style.display = "grid") {
+    comiBox.style.display = "grid";
+    sichBox.style.display = "none";
+    infoBox.style.display = "none";
+  } else { // if is menuBox hidden, display it
     comiBox.style.display = "none";
   }
 }

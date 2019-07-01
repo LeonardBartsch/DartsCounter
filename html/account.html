@@ -3,13 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Account</title>
-    <!--<link rel="stylesheet" href="../css/stylesheet_main.css">-->
     <link rel="stylesheet" href="../css/stylesheet_account.css">
     <link rel="stylesheet" href="../css/stylesheet_main.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <script src="../js/Account.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/Navigationsleiste.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
   <body>
@@ -101,7 +99,7 @@
       </table>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue" id="sicherheitUm">
+    <div class="untermenue1" id="sicherheitUm">
       <div class="passwort">
         <p class="einstellungentext">Passwort: ???</p>
       </div>
@@ -181,24 +179,6 @@
     <span class="centerblock backtotop">↑ Back To Top ↑ </span>
   </div>
 </footer>
-<script type="text/javascript">
-
-  var nav = document.getElementById('nav');
-    window.onscroll = function () {
-      if(window.pageYOffset > 315) {
-        document.getElementById('nav').classList.add('stickynav');
-        nav.style.position = "fixed";
-        nav.style.top = "0";
-        nav.style.marginTop = "0px";
-
-      } else {
-        nav.style.position = "relative";
-        nav.style.top = 250;
-        nav.style.marginTop = "50px";
-      }
-    }
-
-</script>
 
 </body>
 </html>
