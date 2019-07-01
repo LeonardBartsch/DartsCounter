@@ -233,7 +233,21 @@ class Wurf {
     }
 }
 
-window.onload = function() {
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+      window.onload = func;
+    } else {
+      window.onload = function() {
+        if (oldonload) {
+          oldonload();
+        }
+        func();
+      }
+    }
+}
+
+addLoadEvent(function() {
     spielEinstellungen();
 
     initialisieren();
@@ -242,8 +256,9 @@ window.onload = function() {
     punktButtons.forEach(x => x.addEventListener('click', function() {
         werfen(Number(x.innerHTML.match(/\d+/g)[0]));
     }));
-}
+  });
 
+  
 function spielEinstellungen() {
     let querystring = location.search;
     if (querystring == '') return;

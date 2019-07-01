@@ -140,7 +140,27 @@ function minusClick() {
 }
 
 function weiterleiten() {
-    // Spieler-Einstellungen ermitteln
+    let parameterString = getParameterString();
+    if(parameterString === '') return;
+
+    window.location.href = '../html/spiel.html?' + parameterString;
+}
+
+function favoritSpeichern() {
+    let parameterString = getParameterString();
+
+    if(parameterString === '') return;
+
+    let favoritenName = 'beispiel';
+
+    localStorage.setItem(favoritenName, parameterString);
+    
+}
+
+function getParameterString() {
+    let result = '';
+    
+    einstellungen.spieler.value = [];
     for(let i = 1; i <= anzahlSpieler_; i++) {
         let name = document.querySelector('#' + spielerInputId + i + '.spName').value
         if(name === ''){
@@ -149,19 +169,19 @@ function weiterleiten() {
         console.log(name);
         einstellungen.spieler.value.push(name);
     }
-
-    let url = '../html/spiel.html?';
     for (let property in einstellungen){
         if(einstellungen.hasOwnProperty(property)){
             if(einstellungen[property].value === 0){
                 alert('Eine Einstellung wurde nicht richtig getroffen!');
-                return;
+                return '';
             }
-            url += einstellungen[property].key + '=' + einstellungen[property].value + ';'; 
+            result += einstellungen[property].key + '=' + einstellungen[property].value + ';'; 
         }
     }
-    
-    window.location.href = url.slice(0, url.length - 1);
+
+    result.slice(0, result.length - 1);
+
+    return result;
 }
 
 const modi = {

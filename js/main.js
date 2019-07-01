@@ -1,3 +1,23 @@
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+addLoadEvent(function() {
+  window.addEventListener('scroll', toggleNavbar);
+  document.querySelectorAll(".accountButton").forEach( x => x.addEventListener("click",comingsoon));
+  document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
+});
+
 function backtotop(){
   window.scroll(0,0);
 }
@@ -20,8 +40,5 @@ function toggleNavbar() {
     }
 }
 
-window.onload = function() {
-  window.addEventListener('scroll', toggleNavbar);
-  document.querySelectorAll(".accountButton").forEach( x => x.addEventListener("click",comingsoon));
-  document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
-}
+
+

@@ -2,6 +2,11 @@ body {
   color: white;
 }
 
+main {
+  margin: 20px;
+  margin-bottom: 0px;
+}
+
 .button{
   width: 165px;
   font-size: 1.15em;
@@ -84,8 +89,24 @@ body {
   border-color: #559ef1;
 }
 
-.spielenButton:hover{
+.spielenButton:hover, .favoritButton:hover{
   transform: scale(1.1);
+}
+
+.favoritButton {
+  width: 200px;
+  font-size: 1.1em;
+  margin: 10px;
+  margin-bottom: 20px;
+  background-color: grey;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border-color: grey;
 }
 
 .grid {

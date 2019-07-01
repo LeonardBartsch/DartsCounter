@@ -2,9 +2,8 @@ body {
     color: white;
   }
 
-.wrapper {
-    margin-left: 5%;
-    margin-right: 5%;
+main {
+    margin: 50px 5% 10px 5%;
 }
 
 #spielbeschreibung {
@@ -26,10 +25,6 @@ body {
 
 .linie.obere {
     margin-top: 30px;
-}
-
-.spielartDiv {
-    margin-left: 1%;
 }
 
 .spielerkachel {
