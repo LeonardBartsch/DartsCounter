@@ -31,7 +31,7 @@ h1 {
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ SPIELENABTEIL-KLASSEN ++++++++++++++++++++++++++++++++++++++ */
 .spielenDiv {
   grid-template-columns: 1.3fr 7fr;
-  grid-template-rows: 1fr 1fr 3fr;
+  grid-template-rows: 45px 1fr 3fr;
   grid-template-areas: "headline headline"
                        "buttons text"
                        "buttons text";

@@ -14,7 +14,7 @@ function addLoadEvent(func) {
 
 addLoadEvent(function() {
   window.addEventListener('scroll', toggleNavbar);
-  document.querySelectorAll(".accountButton").forEach( x => x.addEventListener("click",comingsoon));
+  document.querySelectorAll("#comingsoon").forEach( x => x.addEventListener("click",comingsoon));
   document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
   document.querySelector(".logo").addEventListener("click",imageclick);
 });
