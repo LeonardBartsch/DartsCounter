@@ -64,8 +64,8 @@ main {
 }
 
 .wurf.ausgewaehlt {
-    background-color: rgb(236, 188, 54);
-    box-shadow: 0 0 8px rgb(243, 208, 112);
+    background-color: #ee9e09;
+    box-shadow: 0 0 8px #ee9e09; 
     color: black;
 }
 
@@ -159,7 +159,7 @@ button {
 }
 
 #spielAbschluss {
-    position: absolute;
+    position: fixed;
     top: 40%;
     left: 30%;
     width: 500px;
@@ -167,6 +167,17 @@ button {
     border: 2px solid rgba(54, 129, 127, 1.0);
     border-radius: 8px;
     text-align: center;
+    z-index: 20;
+    
+}
+
+#backdrop {
+    position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .gewonnen {

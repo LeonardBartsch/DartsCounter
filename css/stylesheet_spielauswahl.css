@@ -96,3 +96,15 @@ body {
     text-align: center;
 }
 
+.favorit {
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.favorit:hover {
+    text-decoration: underline;
+}
+
+
+

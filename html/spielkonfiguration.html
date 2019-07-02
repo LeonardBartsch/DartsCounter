@@ -134,10 +134,18 @@
       <div>
         <h3></h3>
         <input class="spielenButton" type="button" value="Spielen!" onclick="weiterleiten()">
-        <input class="favoritButton" type="button" value="Als Favorit speichern" onclick="favoritSpeichern()">
+        <input class="favoritButton" type="button" value="Als Favorit speichern" onclick="openDialog()">
       </div>
     </form>
   </table>
+      <div role="dialog" class="unsichtbar" id="favoritenDialog">
+
+        <h2>Favorit speichern...</h2>
+        <p> Geben Sie den Namen des Favoriten ein: </p>
+        <input type="text" id="favoritEingabe"><br>
+        <button class="dialogButton" onclick="closeDialog()">Bestätigen</button>
+        <button class="dialogButton" onclick="closeDialog(true)">Abbrechen</button>
+      </div>
     </main>
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER++++++++++++++++++++++++++++++++++++++++++-->

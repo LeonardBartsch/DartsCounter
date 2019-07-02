@@ -146,15 +146,49 @@ function weiterleiten() {
     window.location.href = '../html/spiel.html?' + parameterString;
 }
 
-function favoritSpeichern() {
-    let parameterString = getParameterString();
+function favoritSpeichern(name) {
+    if(name === '') return;
 
+    let parameterString = getParameterString();
     if(parameterString === '') return;
 
-    let favoritenName = 'beispiel';
-
-    localStorage.setItem(favoritenName, parameterString);
+    localStorage.setItem(name, parameterString);
     
+}
+
+function openDialog() {
+    let dialog = document.getElementById('favoritenDialog'), textfeld = document.getElementById('favoritEingabe');
+    dialog.classList.remove(unsichtbarClass);
+    textfeld.focus();
+    let div = document.createElement('div');
+	div.id = 'backdrop';
+    document.body.appendChild(div);
+    let left = (window.outerWidth/2)-(dialog.offsetWidth/2), top = (window.outerHeight/2)-(dialog.offsetHeight/2);
+    dialog.style.left = left + 'px';
+    dialog.style.top = top + 'px';
+    document.addEventListener('keydown', handleKeydown);
+}
+
+function closeDialog(abbrechen) {
+    let dialog = document.getElementById('favoritenDialog'), textfeld = document.getElementById('favoritEingabe');
+    let name = textfeld.value;
+    textfeld.value = '';
+    dialog.classList.add(unsichtbarClass);
+    document.getElementById('backdrop').remove();
+    document.removeEventListener('keydown', handleKeydown);
+    
+    if(abbrechen) name = '';
+    
+    favoritSpeichern(name);
+}
+
+function handleKeydown(event) {
+    switch(event.keyCode) {
+        case 13:
+            closeDialog(); break;
+        case 27:
+            closeDialog(true); break;
+    }
 }
 
 function getParameterString() {

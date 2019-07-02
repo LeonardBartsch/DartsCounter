@@ -15,7 +15,7 @@ let aktuellerSpieler = 1, aktuellerWurf = 1, aktuellesLeg = 1, aktuellesSet = 1;
 
 // Spiel-Einstellungen
 let einstellungen = {
-    spieler: {key: spielerParam, value: []},
+    spieler: {key: spielerParam, value: ['Spieler 1', 'Spieler 2']},
     legs: {key: legsParam, value: 1},
     sets: {key: setsParam, value: 1},
     punkte: {key: punkteParam, value: 501},
@@ -271,6 +271,7 @@ function spielEinstellungen() {
         value = paar[1];
         
         if(key === spielerParam) {
+            einstellungen.spieler.value = [];
             let namen = value.split(',');
             for(let j = 0; j < namen.length; j++) {
                 name = decodeURIComponent(namen[j]);
@@ -356,8 +357,7 @@ function selectMultiplier(id, buchstabeFuerPunktButton) {
 }
 
 function neuesWurfSet() {
-    //return [platzhalter, platzhalter, platzhalter];
-    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)]
+    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)];
 }
 
 function switchSelectedElement(id, basicClass, ausgewaehltClass) {
@@ -496,9 +496,23 @@ function showSpielAbschluss(siegerIndex) {
                     }else {
                         document.getElementById(x).classList.add(unsichtbarClass_);
                     }
-                })
+                });
 
-    document.getElementById("spielAbschluss").classList.remove(unsichtbarClass_);
+    let fenster = document.getElementById('spielAbschluss');
+    fenster.classList.remove(unsichtbarClass_);
+    document.getElementById('single').focus();
+    let div = document.createElement('div');
+	div.id = 'backdrop';
+    document.body.appendChild(div);
+    let left = (window.outerWidth/2)-(fenster.offsetWidth/2), top = (window.outerHeight/2)-(fenster.offsetHeight/2);
+    fenster.style.left = left + 'px';
+    fenster.style.top = top + 'px';
+    document.addEventListener('keydown', handleKeydown);
+    
+}
+
+function handleKeydown(event) {
+    if(event.keyCode === 13) handleContinue();
 }
 
 function changeWurfElement(wurfNr) {
@@ -584,5 +598,8 @@ function handleContinue() {
             console.log('Neues Set');
         }
         document.getElementById('legAnzeige').innerHTML = 'Set ' + aktuellesSet + ', Leg ' + (sets_[aktuellesSet - 1].anzahlAbgeschlosseneLegs() + 1);
+
+        document.getElementById('backdrop').remove();
+        document.removeEventListener('keydown', handleKeydown);
     }
 }

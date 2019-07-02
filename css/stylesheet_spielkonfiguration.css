@@ -21,6 +21,11 @@ main {
   text-align: center;
   color: #ee9e09;
   border-color: #ee9e09;
+  cursor: pointer;
+}
+
+input[type=number].button {
+  cursor: auto;
 }
 
 .button:hover{
@@ -107,6 +112,45 @@ main {
   text-align: center;
   color: white;
   border-color: grey;
+}
+
+#favoritenDialog {
+  background-color: rgb(54, 129, 127);
+  border: 1px solid rgb(54, 129, 127);
+  border-radius: 5px;
+  z-index: 20;
+  position: fixed;
+  padding: 20px;
+  padding-top: 0px;
+  box-shadow: 0 0 5px white;
+}
+
+.dialogButton {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: black;
+  background-color: rgba(54, 129, 127, 1.0);
+  text-decoration: none;
+  border: none;
+}
+
+.dialogButton:hover {
+  text-shadow: 0 0 10px white;
+}
+
+#favoritEingabe {
+  width: 100%;
+}
+
+#backdrop {
+	/* Ebene zwischen Hintergrund und Dialog-Box */
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .grid {
