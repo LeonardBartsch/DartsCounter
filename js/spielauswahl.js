@@ -37,8 +37,8 @@ let favoritenKeys = [];
 function favoritenErmitteln() {
     let keys = Object.keys(localStorage), length = keys.length;
 
-        if(length === 0) {
-            document.getElementById('favoriten').classList.add('unsichtbar');
+        if(length > 0) {
+            document.getElementById('favoriten').classList.remove('unsichtbar');
         }
 
         for(i = 0; i < length; i++) {

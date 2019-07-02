@@ -1,10 +1,16 @@
 'use strict';
 
+// ------------------------------------------- Globale Variablen -------------------------------------------------------------------
 const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0, unsichtbarClass_ = 'unsichtbar'; 
 const inOut = {
     single: 1,
     double: 2,
     master: 3
+}
+const Gewinn = {
+    Leg: 0,
+    Set: 1,
+    Match: 2
 }
 
 const spielerParam = 'spieler', legsParam = 'legs', setsParam = 'sets', punkteParam = 'punktzahl', 
@@ -26,6 +32,7 @@ let einstellungen = {
 let spieler_ = [], sets_ = [];
 let wurfElemente_, spielerElemente_;
 
+// ----------------------------------------------------- Klassen --------------------------------------------------------------
 class Spieler {
     constructor(name) {
         this.name_ = name;
@@ -233,6 +240,8 @@ class Wurf {
     }
 }
 
+
+// ------------------------------------------------- Initialisieren der Seite -----------------------------------------------
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -331,76 +340,7 @@ function inOutString(value) {
     return result;
 }
 
-function inOutKorrekt(inWurf, punktzahl){
-    let multiplier = getMultiplier(), wurfKorrekt = true;
-    let einstellung = inWurf ? einstellungen.wurfIn.value : einstellungen.wurfOut.value;
-
-    if(einstellung === inOut.single){
-
-    }else if(einstellung === inOut.double){
-        if(!((multiplier === 2 && ![0, 25].includes(punktzahl)) || punktzahl === 50)){
-            wurfKorrekt = false;
-        }
-    }else {
-        if((multiplier === 1 && punktzahl !== 50) || [0, 25].includes(punktzahl)){
-            wurfKorrekt = false;
-        }
-    }
-
-    return wurfKorrekt;
-}
-
-function selectMultiplier(id, buchstabeFuerPunktButton) {
-    if(switchSelectedElement(id, "multiplierButton", "ausgewaehlt")){
-        buchstabeVorPunkteSchreiben(buchstabeFuerPunktButton, "punktButton");
-    }
-}
-
-function neuesWurfSet() {
-    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)];
-}
-
-function switchSelectedElement(id, basicClass, ausgewaehltClass) {
-    if(document.getElementById(id).classList.contains(ausgewaehltClass)) return false; 
-
-    let elemente = document.getElementsByClassName(basicClass + " " + ausgewaehltClass);
-
-    if(elemente.length > 1){ 
-        console.log("Mehrere ausgewählte Elemente");
-        return false;
-    }
-
-    if(elemente.length > 0) {
-        elemente.item(0).classList.remove(ausgewaehltClass);
-    }
-
-    document.getElementById(id).classList.add(ausgewaehltClass);
-
-    return true;
-}
-
-function wurfDavor(index) {
-    return index === indexErsterWurf ? indexLetzterWurf : index + 1;
-}
-
-function wurfDanach(index) {
-    return index === indexLetzterWurf ? indexErsterWurf : index - 1;
-}
-
-function buchstabeVorPunkteSchreiben(buchstabe, className) {
-    let buttons = document.getElementsByClassName(className);
-
-    for(let i = 0; i < buttons.length; i++) {
-        let item = buttons.item(i);
-        /* Verhindern, dass untere Reihe mit geändert wird */ 
-        if(item.className.length > className.length) continue; 
-
-        let zahl = item.innerHTML.match(/\d+/g)[0];
-
-        item.innerHTML = buchstabe + zahl;
-    }
-}
-
+// ------------------------------------------- Funktionen für den Spielablauf ----------------------------------------------------
 function werfen(punktzahl) {
     if(![0, 25, 50].includes(punktzahl)){
         punktzahl *= getMultiplier();
@@ -451,31 +391,80 @@ function anzeigeAktualisieren(zuAktualisierenderSpielerNr, geworfenePunkte) {
     }
 }
 
-const Gewinn = {
-    Leg: 0,
-    Set: 1,
-    Match: 2
-}
+function naechsterWurf() {
+    aktuellerWurf = aktuellerWurf === 3 ? 1 : aktuellerWurf + 1;
 
-function gewinnErmitteln(spielerIndex) {
-    let gewonneneSets = 0;
-    for(let i = 0; i < sets_.length; i++) {
-        if(sets_[i].sieger() === spielerIndex) {
-            gewonneneSets++;
-        }
-    }
-    console.log('gewonnene Sets: ' + gewonneneSets);
-    if(sets_[aktuellesSet - 1].sieger() === spielerIndex){
-        if(gewonneneSets >= einstellungen.sets.value / 2){
-            return Gewinn.Match;
-        }else {
-            return Gewinn.Set;
-        }
-    }else {
-        return Gewinn.Leg;
+    changeWurfElement(aktuellerWurf);
+
+    if(aktuellerWurf === 1){
+        // Punktzahlen der Würfe nullen 
+        wuerfeNullen();
+        naechsterSpieler();
     }
 }
 
+function changeWurfElement(wurfNr) {
+    switchSelectedElement(wurfElemente_[wurfNr - 1].id, "wurf", "ausgewaehlt");
+}
+
+function naechsterSpieler() {
+    aktuellerSpieler = aktuellerSpieler === einstellungen.spieler.value.length ? 1 : aktuellerSpieler + 1;
+
+    changeSpielerElement(aktuellerSpieler);
+}
+
+function changeSpielerElement(spielerNr) {
+    switchSelectedElement(spielerElemente_[spielerNr - 1].id, "spielerkachel", "ausgewaehlt");
+}
+
+function wuerfeNullen() {
+    for(let i = 0; i < wurfElemente_.length; i++) {
+        wurfElemente_[i].innerHTML = 0;
+    }
+}
+
+function undo() {
+    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spieler.value.length : aktuellerSpieler - 1) : 
+                                   aktuellerSpieler;
+    let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
+    if(spielerLetzterWurf.undoLastThrow()) {
+        changeWurfElement(aktuellerWurf);
+        if(spielerLetzterWurfNummer !== aktuellerSpieler) {
+            aktuellerSpieler = spielerLetzterWurfNummer;
+            changeSpielerElement(aktuellerSpieler);
+        }
+        let letzteWuerfe = spielerLetzterWurf.letzteWuerfe();
+        for(let i = 0; i < wurfElemente_.length; i++) {
+            let punktzahl = letzteWuerfe[indexErsterWurf-i].punktzahl;
+            wurfElemente_[i].innerHTML = punktzahl !== platzhalter ? punktzahl : 0;
+        }
+        
+        anzeigeAktualisieren(spielerLetzterWurfNummer, 0);
+    }
+}
+
+function selectMultiplier(id, buchstabeFuerPunktButton) {
+    if(switchSelectedElement(id, "multiplierButton", "ausgewaehlt")){
+        buchstabeVorPunkteSchreiben(buchstabeFuerPunktButton, "punktButton");
+    }
+}
+
+function buchstabeVorPunkteSchreiben(buchstabe, className) {
+    let buttons = document.getElementsByClassName(className);
+
+    for(let i = 0; i < buttons.length; i++) {
+        let item = buttons.item(i);
+        /* Verhindern, dass untere Reihe mit geändert wird */ 
+        if(item.className.length > className.length) continue; 
+
+        let zahl = item.innerHTML.match(/\d+/g)[0];
+
+        item.innerHTML = buchstabe + zahl;
+    }
+}
+
+
+// --------------------------------------------- Spiel-Abschluss -------------------------------------------------------
 function showSpielAbschluss(siegerIndex) {
     
     sets_[aktuellesSet - 1].neuerSieger(siegerIndex);
@@ -511,60 +500,27 @@ function showSpielAbschluss(siegerIndex) {
     
 }
 
+function gewinnErmitteln(spielerIndex) {
+    let gewonneneSets = 0;
+    for(let i = 0; i < sets_.length; i++) {
+        if(sets_[i].sieger() === spielerIndex) {
+            gewonneneSets++;
+        }
+    }
+    console.log('gewonnene Sets: ' + gewonneneSets);
+    if(sets_[aktuellesSet - 1].sieger() === spielerIndex){
+        if(gewonneneSets >= einstellungen.sets.value / 2){
+            return Gewinn.Match;
+        }else {
+            return Gewinn.Set;
+        }
+    }else {
+        return Gewinn.Leg;
+    }
+}
+
 function handleKeydown(event) {
     if(event.keyCode === 13) handleContinue();
-}
-
-function changeWurfElement(wurfNr) {
-    switchSelectedElement(wurfElemente_[wurfNr - 1].id, "wurf", "ausgewaehlt");
-}
-
-function changeSpielerElement(spielerNr) {
-    switchSelectedElement(spielerElemente_[spielerNr - 1].id, "spielerkachel", "ausgewaehlt");
-}
-
-function naechsterWurf() {
-    aktuellerWurf = aktuellerWurf === 3 ? 1 : aktuellerWurf + 1;
-
-    changeWurfElement(aktuellerWurf);
-
-    if(aktuellerWurf === 1){
-        // Punktzahlen der Würfe nullen 
-        wuerfeNullen();
-        naechsterSpieler();
-    }
-}
-
-function wuerfeNullen() {
-    for(let i = 0; i < wurfElemente_.length; i++) {
-        wurfElemente_[i].innerHTML = 0;
-    }
-}
-
-function naechsterSpieler() {
-    aktuellerSpieler = aktuellerSpieler === einstellungen.spieler.value.length ? 1 : aktuellerSpieler + 1;
-
-    changeSpielerElement(aktuellerSpieler);
-}
-
-function undo() {
-    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spieler.value.length : aktuellerSpieler - 1) : 
-                                   aktuellerSpieler;
-    let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
-    if(spielerLetzterWurf.undoLastThrow()) {
-        changeWurfElement(aktuellerWurf);
-        if(spielerLetzterWurfNummer !== aktuellerSpieler) {
-            aktuellerSpieler = spielerLetzterWurfNummer;
-            changeSpielerElement(aktuellerSpieler);
-        }
-        let letzteWuerfe = spielerLetzterWurf.letzteWuerfe();
-        for(let i = 0; i < wurfElemente_.length; i++) {
-            let punktzahl = letzteWuerfe[indexErsterWurf-i].punktzahl;
-            wurfElemente_[i].innerHTML = punktzahl !== platzhalter ? punktzahl : 0;
-        }
-        
-        anzeigeAktualisieren(spielerLetzterWurfNummer, 0);
-    }
 }
 
 function neuesLeg() {
@@ -602,4 +558,56 @@ function handleContinue() {
         document.getElementById('backdrop').remove();
         document.removeEventListener('keydown', handleKeydown);
     }
+}
+
+
+// ---------------------------------------------- Hilfsfunktionen -----------------------------------------------------------
+function inOutKorrekt(inWurf, punktzahl){
+    let multiplier = getMultiplier(), wurfKorrekt = true;
+    let einstellung = inWurf ? einstellungen.wurfIn.value : einstellungen.wurfOut.value;
+
+    if(einstellung === inOut.single){
+
+    }else if(einstellung === inOut.double){
+        if(!((multiplier === 2 && ![0, 25].includes(punktzahl)) || punktzahl === 50)){
+            wurfKorrekt = false;
+        }
+    }else {
+        if((multiplier === 1 && punktzahl !== 50) || [0, 25].includes(punktzahl)){
+            wurfKorrekt = false;
+        }
+    }
+
+    return wurfKorrekt;
+}
+
+function neuesWurfSet() {
+    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)];
+}
+
+function switchSelectedElement(id, basicClass, ausgewaehltClass) {
+    if(document.getElementById(id).classList.contains(ausgewaehltClass)) return false; 
+
+    let elemente = document.getElementsByClassName(basicClass + " " + ausgewaehltClass);
+
+    if(elemente.length > 1){ 
+        console.log("Mehrere ausgewählte Elemente");
+        return false;
+    }
+
+    if(elemente.length > 0) {
+        elemente.item(0).classList.remove(ausgewaehltClass);
+    }
+
+    document.getElementById(id).classList.add(ausgewaehltClass);
+
+    return true;
+}
+
+function wurfDavor(index) {
+    return index === indexErsterWurf ? indexLetzterWurf : index + 1;
+}
+
+function wurfDanach(index) {
+    return index === indexLetzterWurf ? indexErsterWurf : index - 1;
 }

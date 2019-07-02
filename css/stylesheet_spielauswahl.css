@@ -70,9 +70,10 @@ body {
     min-width: 750px;
     height: 219px;
     margin-left: 10px;
-    border: 2px black solid;
+    border: 2px rgb(54, 129, 127) solid;
     border-radius: 5px;
     width: 100%;
+    background-color: rgb(54, 129, 127);
 }
 .einruecken {
     margin-left: 200px;
