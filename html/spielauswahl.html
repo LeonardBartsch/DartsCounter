@@ -80,10 +80,36 @@
                         </td>
                         <td>
                             <div class="beschreibungDiv">
-                                <span id="standardText" style="display: block;" class="beschreibungText">Standard-Text</span>
-                                <span id="normal" class="unsichtbar beschreibungText">Normales Spiel</span>
-                                <span id="bob" class="unsichtbar beschreibungText">Bob's 27</span>
-                                <span id="cricket" class="unsichtbar beschreibungText">Cricket</span>
+                                <span id="standardText" style="display: block;" class="beschreibungText">
+                                  Beschreibung der Spiele
+                                </span>
+                                <span id="normal" class="unsichtbar beschreibungText">
+                                  Normales Spiel:<br><br>
+                                  Du hast hintereinander drei Würfe, bei denen die Pfeile auf die Scheibe geworfen werden und stecken bleiben müssen.
+                                  Die dabei geworfenen Punkte werden von der zu erreichenden Punktzahl (301/501/701) abgezogen.
+                                  Anschließend ist der nächste Spieler mit drei Würfen dran, bis man selbst wieder an der Reihe ist.
+                                  Das Spiel gewinnst Du, wenn dein Ausgangspunktestand zuerst auf genau NULL herunter gespielt ist!
+                                  Schaffst Du das nicht, weil mit Deiner letzten Runde zu viele Punkte erzielt wurden, wird diese Runde annulliert und es müssen nochmals mit drei Würfen die Felder getroffen werden, um genau auf Null zu kommen und das Spiel zu gewinnen.
+                                </span>
+                                <span id="cricket" class="unsichtbar beschreibungText">
+                                  Scoring-Spiel:<br><br>
+                                  Du versuchst die Segmente #15 bis #20 und das Bull möglichst schnell dreimal zu treffen.
+                                  Sobald ein Feld, entweder durch dreimal ein Single-, je einmal ein Single- und Double- oder einmal das Triple-Segment getroffen wurde, ist es geschlossen.
+                                  Jeder weitere Treffer von Dir wird als Punktzahl notiert, sofern der Gegner es noch nicht dreimal getroffen hat.
+                                  Beispiel: Du beginnst, triffst Single #5 (Fehlwurf), Single #20 (ein Treffer) und Triple #20 (drei Treffer), so hast Du das #20er Segment geschlossen und bekommst weitere 20 Punkte als Guthaben notiert.
+                                  Das Spiel gewinnt der Spieler, der ALLE Zahlen und das Bull abgedeckt, und die MEISTEN Punkte erzielt hat!
+                              </span>
+                                <span id="bob" class="unsichtbar beschreibungText">
+                                  Doppel-Felder-Trainingsspiel:<br><br>
+                                  Du bekommst 27 Punkte gutgeschrieben.
+                                  Starte mit Doppel 1, wirf alle 3 Pfeile auf die Doppel 1!
+                                  Triffst Du die Doppel 1 einmal, dann addiere 2 Punkte zu den 27 = 29 Punkte.
+                                  Solltest Du die Doppel 1 zwei mal treffen, dann addiere 4 Punkte = 31.
+                                  Solltest die Doppel 1 NICHT getroffen werden, dann subtrahiere 2 Punkte = 25 Punkte.
+                                  Danach geht es auf die Doppel 2, wirf alle 3 Pfeile!
+                                  Jetzt gehst Du jedes Doppel der Reihe nach durch, immer alle drei Pfeile auf dieses Doppel.
+                                  Das Spiel endet wenn Du auf das BullEye geworfen hast ODER wenn das Guthaben einen negativen Wert hat.
+                              </span>
                             </div>
                         </td>
                     </tr>
