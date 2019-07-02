@@ -28,9 +28,9 @@ function comingsoon(){
 }
 
 function toggleNavbar() {
-  var nav = document.getElementById('nav');
+  var nav = document.getElementById('navvvv');
   if(window.pageYOffset > 265) {
-      document.getElementById('nav').classList.add('stickynav');
+      document.getElementById('navvvv').classList.add('stickynavvvv');
       nav.style.position = "fixed";
       nav.style.top = "0";
       nav.style.marginTop = "0px";

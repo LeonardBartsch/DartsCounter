@@ -11,6 +11,9 @@ body {
   margin: 0px;
 }
 
+
+
+
 hr {
   display: block;
   position: relative;
@@ -19,10 +22,7 @@ hr {
   margin-top: 20px;
   min-width: 446px;
   background-color: white;
-}
 
-.customcursor:hover{
-  cursor: url('../pics/dartpfeil.png'),auto;
 }
 
 
@@ -55,6 +55,7 @@ hr {
 .grid2 {
   grid-area: 1 / 2 / 3 / 3;
   z-index: 1;
+  cursor: none;
 }
 
 .breitgezogen {
@@ -129,16 +130,28 @@ input::placeholder {
   .adtext {
     display: none;
   }
+}
 
+@media (max-width:900px) {
   .grid2 {
     grid-area: 2 / 1 / 4 / 2;
   }
 
   .logo {
+    width: 175px;
+  }
+
+@media (max-width: 590px) {
+  .fixedwidth {
+    width: 170px;
+  }
+}
+
+  .logo {
     display: inline;
     margin-top: 7px;
     margin-left: 5.5px;
-    width: 164px;
+    height: 90%;
   }
 }
 
@@ -192,18 +205,21 @@ input::placeholder {
   text-decoration: none;
 }
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++Navbar+++++++++++++++++++++++++++++++++++++++++++++++*/
-.head {
+.headddd {
   width: 100%;
 }
 
-.navwrapper * {
-  margin: 0px;
-  z-index: 10;
-  padding-bottom: 20px;
+.navwrapperrrr {
 
 }
 
-.head nav {
+.navwrapperrrr * {
+  margin: 0px;
+  z-index: 10;
+
+}
+
+.headddd .navvvv {
   background: white;
   padding: 10px 0px;
   text-align: center;
@@ -211,7 +227,7 @@ input::placeholder {
   width: 100%;
 }
 
-.nav li {
+.navvvv .liiii {
   list-style-type: none;
   display: inline-block;
   padding: 10px 40px;
@@ -221,21 +237,25 @@ input::placeholder {
   border-radius: 10px;
 }
 
-.nav li a {
+.navvvv .liiii .anchorrrr {
   text-decoration: none;
   color: black;
 }
 
-.stickynav {
+.main {
+
+}
+
+.stickynavvvv {
   top: 0px;
   position: fixed;
 }
 
-.nav ul li:hover {
+.navvvv .ullll .liiii:hover {
   background: #464545;
   transition: 400ms;
 }
-.nav ul li:hover a {
+.navvvv .ullll .liiii:hover .anchorrrr {
   color: #ee9e09;
   transition: 0ms !important;
 }
