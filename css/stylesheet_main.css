@@ -11,9 +11,6 @@ body {
   margin: 0px;
 }
 
-
-
-
 hr {
   display: block;
   position: relative;
@@ -25,7 +22,7 @@ hr {
 }
 
 .customcursor:hover{
-  cursor: url('../pics/dartpfeil.png'),auto;
+  cursor: url('../pics/dartpfeilcursor.png'),auto;
 }
 
 
@@ -125,36 +122,36 @@ input::placeholder {
   font-family: Consolas,monaco,monospace;
   position: absolute;
   transform: rotate(-7deg);
-  left: 37px;
-  top: 50px;
+  left: 45px;
+  top: 33px;
+}
+
+.adpic{
+  position: absolute;
+  left: 280px;
+  bottom: -20px;
+  width: 150px;
+  transform: rotate(-140deg);
 }
 
 @media (max-width:971px) {
   .adtext {
     display: none;
   }
-}
 
-@media (max-width:900px) {
+  .adpic {
+    display: none;
+  }
+
   .grid2 {
     grid-area: 2 / 1 / 4 / 2;
   }
 
   .logo {
-    width: 175px;
-  }
-
-@media (max-width: 590px) {
-  .fixedwidth {
-    width: 170px;
-  }
-}
-
-  .logo {
     display: inline;
     margin-top: 7px;
     margin-left: 5.5px;
-    height: 90%;
+    width: 165px;
   }
 }
 
