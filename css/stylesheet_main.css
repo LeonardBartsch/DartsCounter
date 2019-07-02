@@ -259,3 +259,21 @@ input::placeholder {
   color: #ee9e09;
   transition: 0ms !important;
 }
+
+.icon {
+  width: 20px;
+}
+
+#icons {
+  display: none;
+}
+
+@media (max-width: 993px) {
+  #names {
+    display: none;
+  }
+
+  #icons {
+    display: block;
+  }
+}
