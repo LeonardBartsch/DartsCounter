@@ -22,7 +22,10 @@ hr {
   margin-top: 20px;
   min-width: 446px;
   background-color: white;
+}
 
+.customcursor:hover{
+  cursor: url('../pics/dartpfeil.png'),auto;
 }
 
 
