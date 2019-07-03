@@ -39,6 +39,16 @@ function colorswitch3() {
   }
 }
 
+function colorswitch(number) {
+  for(let i = 1; i<= 3; i++) {
+    if(number === i){
+      document.getElementById('button' + i).classList.add('ausgewaehlt');
+    }else {
+      document.getElementById('button' + i).classList.remove('ausgewaehlt');
+    }
+  }
+}
+
 
 function toggleMenu1() {
   var infoBox = document.getElementById('accountinfoUm');
