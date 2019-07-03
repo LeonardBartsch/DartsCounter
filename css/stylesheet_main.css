@@ -245,8 +245,8 @@ input::placeholder {
   color: black;
 }
 
-.main {
-
+.navvvv .liiii .anchorrrr:hover {
+  cursor: pointer;
 }
 
 .stickynavvvv {
@@ -254,13 +254,9 @@ input::placeholder {
   position: fixed;
 }
 
-.navvvv .ullll .liiii:hover {
-  background: #464545;
-  transition: 400ms;
-}
-.navvvv .ullll .liiii:hover .anchorrrr {
+.navvvv .ullll .liiii .anchorrrr:hover {
   color: #ee9e09;
-  transition: 0ms !important;
+  transition: 200ms;
 }
 
 .icon {
