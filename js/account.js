@@ -1,19 +1,9 @@
-/*var yourNavigation = $(".nav");
-    stickyDiv = "sticky";
-    yourHeader = $('.header').height();
-
-$(window).scroll(function() {
-  if( $(this).scrollTop() > yourHeader ) {
-    yourNavigation.addClass(stickyDiv);
-  } else {
-    yourNavigation.removeClass(stickyDiv);
-  }
-});*/
-
 function switch1() {
   colorswitch1();
   toggleMenu2();
 }
+
+
 
 function colorswitch1() {
   if (document.getElementById('button1').style.background = "white") {
@@ -54,7 +44,7 @@ function toggleMenu1() {
   var infoBox = document.getElementById('accountinfoUm');
   var sichBox = document.getElementById('sicherheitUm');
   var comiBox = document.getElementById('comingsoonUm');
-  if(infoBox.style.display == "none") { // if is menuBox displayed, hide it
+  if(infoBox.style.display == "none") {
     infoBox.style.display = "grid";
     sichBox.style.display = "none";
     comiBox.style.display = "none";
@@ -62,7 +52,7 @@ function toggleMenu1() {
     infoBox.style.display = "grid";
     sichBox.style.display = "none";
     comiBox.style.display = "none";
-  } else { // if is menuBox hidden, display it
+  } else {
     infoBox.style.display = "none";
   }
 }
@@ -71,7 +61,7 @@ function toggleMenu2() {
   var infoBox = document.getElementById('accountinfoUm');
   var sichBox = document.getElementById('sicherheitUm');
   var comiBox = document.getElementById('comingsoonUm');
-  if(sichBox.style.display == "none") { // if is menuBox displayed, hide it
+  if(sichBox.style.display == "none") {
     sichBox.style.display = "grid";
     infoBox.style.display = "none";
     comiBox.style.display = "none";
@@ -79,7 +69,7 @@ function toggleMenu2() {
     sichBox.style.display = "grid";
     infoBox.style.display = "none";
     comiBox.style.display = "none";
-  } else { // if is menuBox hidden, display it
+  } else {
     sichBox.style.display = "none";
   }
 }
@@ -88,7 +78,7 @@ function toggleMenu3() {
   var infoBox = document.getElementById('accountinfoUm');
   var sichBox = document.getElementById('sicherheitUm');
   var comiBox = document.getElementById('comingsoonUm');
-  if(comiBox.style.display == "none") { // if is menuBox displayed, hide it
+  if(comiBox.style.display == "none") {
     comiBox.style.display = "grid";
     infoBox.style.display = "none";
     sichBox.style.display = "none";
@@ -96,7 +86,7 @@ function toggleMenu3() {
     comiBox.style.display = "grid";
     sichBox.style.display = "none";
     infoBox.style.display = "none";
-  } else { // if is menuBox hidden, display it
+  } else {
     comiBox.style.display = "none";
   }
 }
