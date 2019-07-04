@@ -146,11 +146,26 @@ function weiterleiten() {
     window.location.href = '../html/spiel.html?' + parameterString;
 }
 
+const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
 function favoritSpeichern(name) {
     if(name === '') return;
 
+    if(name.search(seperator) > 0) {
+        alert('Zeichen \'' + seperator + '\' darf nicht verwendet werden!');
+        return;
+    }
+
     let parameterString = getParameterString();
     if(parameterString === '') return;
+
+    let keyStringAlt = localStorage.getItem(keyFuerFavoritenKeys), keyStringNeu = '';
+    if(keyStringAlt === '' || keyStringAlt === null) {
+        keyStringNeu = name;
+    }else {
+        keyStringNeu = keyStringAlt + seperator + name; 
+    }
+
+    localStorage.setItem(keyFuerFavoritenKeys, keyStringNeu);
 
     localStorage.setItem(name, parameterString);
     
