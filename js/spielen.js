@@ -490,9 +490,7 @@ function showSpielAbschluss(siegerIndex) {
     let fenster = document.getElementById('spielAbschluss');
     fenster.classList.remove(unsichtbarClass_);
     document.getElementById('single').focus();
-    let div = document.createElement('div');
-	div.id = 'backdrop';
-    document.body.appendChild(div);
+    showHideBackdrop();
     let left = (window.outerWidth/2)-(fenster.offsetWidth/2), top = (window.outerHeight/2)-(fenster.offsetHeight/2);
     fenster.style.left = left + 'px';
     fenster.style.top = top + 'px';
@@ -555,7 +553,7 @@ function handleContinue() {
         }
         document.getElementById('legAnzeige').innerHTML = 'Set ' + aktuellesSet + ', Leg ' + (sets_[aktuellesSet - 1].anzahlAbgeschlosseneLegs() + 1);
 
-        document.getElementById('backdrop').remove();
+        showHideBackdrop();
         document.removeEventListener('keydown', handleKeydown);
     }
 }

@@ -91,12 +91,13 @@ hr {
   border-radius: 6px;
   border: 1px solid;
   height:25px;
+  width: 115px;
 }
 
 .accountButton.orange{
   background-color: #ee9e09;
   border-color: #ee9e09;
-  width: 110px;
+  
 }
 .accountButton.grey{
   background-color: #a9aaa9;
@@ -212,13 +213,17 @@ input::placeholder {
   min-width: 744px;
 }
 
-.navwrapperrrr {
+.link {
+  margin-left: 5px;
+}
 
+.link:hover {
+  text-decoration: none;
 }
 
 .navwrapperrrr * {
   margin: 0px;
-  z-index: 100;
+  z-index: 30;
 
 }
 
@@ -275,4 +280,16 @@ input::placeholder {
   #icons {
     display: block;
   }
+}
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Klassen, die mehrfach benötigt werden +++++++++++++++++++++++++++++++++++++++++++++*/
+
+#backdrop {
+  position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 31;
 }

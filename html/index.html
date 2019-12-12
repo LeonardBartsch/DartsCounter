@@ -17,7 +17,7 @@
   <body>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
-<header title="Upperpart" class="gridcontainer upperpart">
+<header class="gridcontainer upperpart">
   <div class="grid1">
     <span class="adtext">Dein Darts-Counter!</span>
     <img class="adpic" src="../pics/dartpfeilpic.png" alt="">
@@ -26,15 +26,16 @@
         <table>
           <tr>
             <td><span class="loginfont">Username:</span> </td>
-            <td><input type="text" class="fixedwidth" name="Username" placeholder="Username"></td>
+            <td><input type="text" class="fixedwidth" name="username" placeholder="Username"></td>
           </tr>
           <tr>
             <td><span class="loginfont">Password:</span> </td>
-            <td><input type="text" class="fixedwidth" name="Password" placeholder="Password"></td>
+            <td><input type="password" class="fixedwidth" name="password" placeholder="Password"></td>
           </tr>
           <tr>
-            <td><input type="submit" class="accountButton orange customcursor" style="height:28px;" id="comingsoon" name="Login" value="Login"></td>
-            <td><input type="submit" class="accountButton grey fixedwidth customcursor" style="height:28px;" id="comingsoon" name="Registrieren" value="Registrieren"></td>
+            <td colspan="2"><input type="submit" class="accountButton orange customcursor" style="height:28px;" name="Login" value="Login">
+            <!--<td><input type="submit" class="accountButton grey fixedwidth customcursor" style="height:28px;" id="comingsoon" name="Registrieren" value="Registrieren"></td>-->
+            <a href="javascript:undefined;" style="cursor: pointer;" class="link" onclick="showHideRegistrieren();">Noch nicht registriert?</a></td>
           </tr>
         </table>
       </form>
@@ -252,5 +253,22 @@
   </div>
 </footer>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++SCRIPTS++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<div id="registrieren">
+  <div>
+  <span class="schliessenX" onclick="showHideRegistrieren();">x</span>
+  </div>
+  <form action="href=#">
+    <div>
+    <div class="grid-container">
+      <span class="label">Username: </span><input type="text" name="username" placeholder="z. Bsp. &quot;MaxMustermann1999&quot;">
+      <span class="label">E-Mail: </span><input type="text" name="email" placeholder="E-Mail">
+      <span class="label">Passwort: </span><input type="password" name="passwort" placeholder="Passwort">
+      <span class="label">Passwort wiederholen: </span><input type="password" name="passwortWiederholen" placeholder="Passwort wiederholen">
+      <input type="submit" class="buttonColumn" value="Registrieren">
+    </div></div>
+  </div>
+    </form>
+  </form>
+</div>
 </body>
 </html>

@@ -314,3 +314,69 @@ h1 {
     display:none;
   }
 }
+
+#registrieren {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 30%;
+  width: 500px;
+  background-color: rgba(54, 129, 127, 1.0);
+  border: 2px solid rgba(54, 129, 127, 1.0);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 33;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: none;
+  padding: 10px;
+}
+
+input::placeholder {
+  font-weight: 300;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.buttonColumn {
+  grid-column: 1/ span 2;
+  margin: 0 25% 0 25%;
+  margin: 10px;
+  background: white;
+  padding: 5px;
+  border: 2px solid #ee9e09;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.buttonColumn:hover {
+  background: #ee9e09;
+  border-color: #ee9e09;
+  transition: all 0.4s ease 0s;
+}
+
+.label{
+  text-align: left;
+}
+
+.schliessenX{
+  display: block;
+  font-size: 1.3em;
+  text-align: right;
+  margin-right: -10px;
+  font-weight: 600;
+}
+
+.schliessenX:hover{
+  cursor: pointer;
+  text-shadow: 0 0 4px white;
+}

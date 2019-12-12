@@ -44,3 +44,26 @@ function toggleNavbar() {
 function imageclick(){
   window.location.href = "../html/index.html";
 }
+
+function showHideBackdrop(){
+  const divId = 'backdrop';
+
+  if(document.getElementById(divId) !== null){
+    document.getElementById(divId).remove();
+  }else{
+    let div = document.createElement('div');
+    div.id = 'backdrop';
+    document.body.appendChild(div);
+  }
+}
+
+function computedStyle(el,style) {
+  var cs;
+  if (typeof el.currentStyle != 'undefined'){
+      cs = el.currentStyle;
+  }
+  else {
+      cs = document.defaultView.getComputedStyle(el,null);
+  }
+  return  cs[style];
+}

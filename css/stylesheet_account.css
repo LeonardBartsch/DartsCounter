@@ -58,39 +58,40 @@
   margin-bottom: 100px;
 }
 
-.menue {
+/*.menue {
   list-style: none;
   color: Black;
-}
+}*/
 
 .menuepunkttabelle {
   background: darkgrey;
   background-color: none;
-  width: 100%;
-  height: 100%;
+  width: 70%;
+  /*height: 100%;*/
   border-radius: 10px 0 0 10px;
 }
 
 .buttons {
-  width: 165px;
+  width: 100%;
+  height: 50px;
   font-size: 1.15em;
-  margin: 10px;
+  /*margin: 10px;*/
   margin-right: 3px;
-  background-color: white;
+  background-color: none;
   padding: 10px;
-  border: 2px solid ;
-  border-radius: 6px;
+  border: none;
+  border-bottom: 1px solid black;
   display: inline-block;
   text-decoration: none;
   text-align: center;
   color: #ee9e09;
-  border-color: #ee9e09;
+  border-color: none;
   cursor: pointer;
 }
 
 .buttons.ausgewaehlt {
   background: #ee9e09;
-  border: 2px solid #ee9e09;
+  /*border: 2px solid #ee9e09*/;
   color: white;
 }
 
@@ -98,7 +99,7 @@
   color: #fff;
   transition: all 0.4s ease 0s;
   background-color: #ee9e09;
-  border-color: #ee9e09;
+  border-color: none;
 }
 
 .button1 {

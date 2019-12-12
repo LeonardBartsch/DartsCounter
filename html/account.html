@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/stylesheet_main.css">
     <link rel="icon" type="image/png" href="../pics/Logo.png">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
-    <script src="../js/Account.js"></script>
+    <script src="../js/account.js"></script>
     <script src="../js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </head>
@@ -87,8 +87,9 @@
   </div>
 
   <div class="einstellungen">
-    <div class="menue">
-      <table class="menuepunkttabelle">
+    <!--<div class="menue">-->
+      <div class="menuepunkttabelle">
+      <!--<table class="menuepunkttabelle">
         <tr>
           <td class="tablecell" style="text-align: center;">
             <button id="button1" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="colorswitch(1); toggleMenu2();">Sicherheit</button>
@@ -104,10 +105,14 @@
             <button id="button3" class="buttons" type="button" name="Comingsoon" onclick="colorswitch(3); toggleMenu3();">Coming soon</button>
           </td>
         </tr>
-      </table>
+      </table>-->
+        <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Sicherheit</button>
+        <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Accountinfo</button>
+        <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Coming soon</button>
+      
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue1" id="sicherheitUm">
+    <div class="untermenue1" id="einstellungenSicherheit">
       <div class="passwort">
         <p class="einstellungentext">Passwort: ???</p>
       </div>
@@ -128,7 +133,7 @@
       </div>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue" id="accountinfoUm">
+    <div class="untermenue" id="einstellungenAccount">
       <div class="benutzername">
         <p class="einstellungentext">Benutzername: ???</p>
       </div>
@@ -149,7 +154,7 @@
       </div>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue" id="comingsoonUm">
+    <div class="untermenue" id="einstellungenComingSoon">
       <div class="comingsoon1">
         <p class="einstellungentext">coming soon</p>
       </div>
