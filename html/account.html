@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -47,16 +47,16 @@
   <div class="navwrapperrrr" style="height: 40px;">
     <nav class="navvvv" id="navvvv" style="height: 40px;">
       <ul class="ullll" id="names">
-        <li class="liiii"> <a class="anchorrrr" href="../html/index.html">Home</a></li>
-        <li class="liiii"> <a class="anchorrrr" href="../html/spielauswahl.html">Spielauswahl</a></li>
+        <li class="liiii"> <a class="anchorrrr" id="homeNav">Home</a></li>
+        <li class="liiii"> <a class="anchorrrr" id="auswahlNav">Spielauswahl</a></li>
         <li class="liiii" id="comingsoon"> <a class="anchorrrr">Dart-News</a></li>
-        <li class="liiii"> <a class="anchorrrr" href="../html/account.html">Account</a></li>
+        <li class="liiii"> <a class="anchorrrr" id="accountNav">Account</a></li>
       </ul>
       <ul class="ullll" id="icons">
-        <li class="liiii"> <a class="anchorrrr" href="../html/index.html"><img src="../pics/homeicon.png" class="icon" /></a></li>
-        <li class="liiii"> <a class="anchorrrr" href="../html/spielauswahl.html"><img src="../pics/playingicon.png" class="icon" /></a></li>
-        <li class="liiii" id="comingsoon"> <a class="anchorrrr" href="../html/spielkonfiguration.html"><img src="../pics/newsicon.png" class="icon" /></a></li>
-        <li class="liiii"> <a class="anchorrrr" href="../html/account.html"><img src="../pics/Accounticon.png" class="icon" /></a></li>
+        <li class="liiii"> <a class="anchorrrr" id="homeNav"><img src="../pics/homeicon.png" class="icon" /></a></li>
+        <li class="liiii"> <a class="anchorrrr" id="auswahlNav"><img src="../pics/playingicon.png" class="icon" /></a></li>
+        <li class="liiii" id="comingsoon"> <a class="anchorrrr"><img src="../pics/newsicon.png" class="icon"/></a></li>
+        <li class="liiii"> <a class="anchorrrr" id="accountNav"><img src="../pics/Accounticon.png" class="icon" /></a></li>
       </ul>
     </nav>
   </div>
@@ -87,29 +87,10 @@
   </div>
 
   <div class="einstellungen">
-    <!--<div class="menue">-->
-      <div class="menuepunkttabelle">
-      <!--<table class="menuepunkttabelle">
-        <tr>
-          <td class="tablecell" style="text-align: center;">
-            <button id="button1" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="colorswitch(1); toggleMenu2();">Sicherheit</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="tablecell" style="text-align: center;">
-            <button id="button2" class="buttons" type="button" name="Accountinfo" onclick="colorswitch(2); toggleMenu1();">Accountinfo</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="tablecell" style="text-align: center;">
-            <button id="button3" class="buttons" type="button" name="Comingsoon" onclick="colorswitch(3); toggleMenu3();">Coming soon</button>
-          </td>
-        </tr>
-      </table>-->
-        <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Sicherheit</button>
-        <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Accountinfo</button>
-        <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Coming soon</button>
-      
+    <div class="menuepunkttabelle">
+      <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Sicherheit</button>
+      <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Accountinfo</button>
+      <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Coming soon</button>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="untermenue1" id="einstellungenSicherheit">
@@ -174,7 +155,6 @@
         <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
       </div>
     </div>
-
   </div>
 
 </div>

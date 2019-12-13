@@ -17,6 +17,7 @@ addLoadEvent(function() {
   document.querySelectorAll("#comingsoon").forEach( x => x.addEventListener("click",comingsoon));
   document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
   document.querySelector(".logo").addEventListener("click",imageclick);
+  setNavbarReferences();
 });
 
 function backtotop(){
@@ -43,6 +44,19 @@ function toggleNavbar() {
 
 function imageclick(){
   window.location.href = "../html/index.html";
+}
+
+function setNavbarReferences() {
+  let dictionary = {
+    homeNav: '../html/index.html',
+    auswahlNav: '../html/spielauswahl.html',
+    accountNav: '../html/account.html'
+  };
+
+  for(var key in dictionary){
+    let filePath = dictionary[key];
+    document.querySelectorAll('#' + key).forEach(x => x.href = filePath);
+  }
 }
 
 function showHideBackdrop(){
