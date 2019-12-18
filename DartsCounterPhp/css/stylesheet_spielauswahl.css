@@ -1,0 +1,107 @@
+body {
+    color: white;
+}
+
+.spielModiButton {
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.3rem;
+    display: inline-block;
+    padding: 20px 0px 3px 0px;
+    height: 50px;
+    width: 95%;
+    margin-right: 5px;
+    color: white;
+    background-color: #ee9e09;
+    border-right: 5px;
+    border-left: 5px;
+    border-color: #ee9e09;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.spielModiButton.trenner {
+    border-bottom: rgb(0, 0, 0) 1px solid;
+}
+
+.spielModiButton.oben {
+    border-top: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.spielModiButton.unten {
+    border-bottom: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.spielModiButton:hover {
+    background-color: #f5c423;
+    transition: all 0.4s ease 0s;
+    border-right-color: #f5c423;
+    border-left-color: #f5c423;
+}
+
+.spielModiButton.oben:hover {
+    border-top-color: #f5c423;
+}
+
+.spielModiButton.unten:hover {
+    border-bottom-color: #f5c423;
+}
+
+.tabelle {
+    margin-top: 50px;
+    margin-right: auto;
+    width: 80%;
+}
+
+.spielModiDiv {
+    margin-top: 75px;
+}
+
+.modi {
+    width: 200px;
+
+}
+
+.beschreibungDiv {
+    min-width: 750px;
+    height: 219px;
+    margin-left: 10px;
+    border: 2px rgb(54, 129, 127) solid;
+    border-radius: 5px;
+    width: 100%;
+    background-color: rgb(54, 129, 127);
+}
+.einruecken {
+    margin-left: 200px;
+}
+
+.unsichtbar {
+    display: none;
+}
+
+.favoritenDiv {
+    margin-top: 40px;
+}
+
+.beschreibungText {
+    margin: 8px;
+}
+
+.ueberschrift {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.favorit {
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.favorit:hover {
+    text-decoration: underline;
+}

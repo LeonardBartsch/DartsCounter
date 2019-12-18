@@ -1,0 +1,364 @@
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ELEMENT-"KLASSEN"+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+td {
+  padding-bottom:5px;
+}
+
+body {
+  padding-top: 15px;
+  background-color: #464545 !important;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0px;
+}
+
+hr {
+  display: block;
+  position: relative;
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 20px;
+  min-width: 446px;
+  background-color: white;
+}
+
+.customcursor:hover{
+  cursor: url('../pics/dartpfeilcursor.png'),auto;
+}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++UPPERPART-KLASSEN++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.gridcontainer {
+  display: grid;
+}
+
+.upperpart {
+  height: 250px;
+  width: auto;
+  grid-template-rows: 1.3fr 1fr 1.2fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: ". logo . "
+                       "intro intro intro"
+                       "intro intro intro";
+
+  margin-bottom: 0px;
+  min-width: 744px;
+  border-bottom: 1px solid black;
+}
+
+.grid1 {
+  grid-area: intro;
+  position: relative;
+  background-color: white;
+  box-shadow: 0px 5px 10px black;
+}
+
+.grid2 {
+  grid-area: 1 / 2 / 3 / 3;
+  z-index: 1;
+  cursor: none;
+}
+
+.breitgezogen {
+  width: 100%;
+  height: 100%;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  width: 200px;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.right {
+  right: 25px;
+  top: 20%;
+  position: absolute;
+  z-index: 2;
+}
+
+.loginfont {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: black;
+}
+
+.accountButton{
+  border-radius: 6px;
+  border: 1px solid;
+  height:25px;
+  width: 115px;
+}
+
+.accountButton.orange{
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+  
+}
+.accountButton.grey{
+  background-color: #a9aaa9;
+  border-color: #a9aaa9;
+}
+
+.accountButton:hover{
+  transform: scale(1.05);
+}
+
+.fixedwidth {
+  width: 200px;
+}
+
+input::placeholder {
+  color: black;
+}
+
+.adtext {
+  color: black;
+  font-size: 35px;
+  font-weight: bold;
+  font-family: Consolas,monaco,monospace;
+  position: absolute;
+  transform: rotate(-7deg);
+  left: 45px;
+  top: 33px;
+}
+
+.adpic{
+  position: absolute;
+  left: 280px;
+  bottom: -20px;
+  width: 150px;
+  transform: rotate(-140deg);
+}
+
+@media (max-width:1125px){
+  .adpic {
+    display: none;
+  }
+}
+
+@media (max-width:971px) {
+  .adtext {
+    display: none;
+  }
+
+  .grid2 {
+    grid-area: 2 / 1 / 4 / 2;
+  }
+
+  .logo {
+    display: inline;
+    margin-top: 7px;
+    margin-left: 5.5px;
+    width: 165px;
+  }
+}
+
+#registrieren {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 30%;
+  width: 500px;
+  background-color: rgba(54, 129, 127, 1.0);
+  border: 2px solid rgba(54, 129, 127, 1.0);
+  border-radius: 8px;
+  text-align: center;
+  z-index: 33;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  background-color: none;
+  padding: 10px;
+}
+
+input::placeholder {
+  font-weight: 300;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.buttonColumn {
+  grid-column: 1/ span 2;
+  margin: 0 25% 0 25%;
+  margin: 10px;
+  background: white;
+  padding: 5px;
+  border: 2px solid #ee9e09;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.buttonColumn:hover {
+  background: #ee9e09;
+  border-color: #ee9e09;
+  transition: all 0.4s ease 0s;
+}
+
+.label{
+  text-align: left;
+}
+
+.schliessenX{
+  font-size: 1.3em;
+  text-align: right;
+  margin-right: -10px;
+  font-weight: 600;
+}
+
+.schliessenX:hover{
+  cursor: pointer;
+  text-shadow: 0 0 4px white;
+}
+
+.hinweisTextRegistrieren{
+  color: black;
+}
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER-KLASSEN+++++++++++++++++++++++++++++++++++++++++++++++*/
+.footer {
+  margin-top: 70px;
+  background-color: white;
+  box-shadow: 0px -5px 15px black;
+  padding-top: 10px;
+  min-width:744px;
+  color:black;
+}
+
+.copyrightdiv {
+  margin-top: 10px;
+}
+
+.backtotopdiv {
+  height: 55px;
+  border-top: solid;
+  margin-top: 10px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  background-color: white;
+}
+
+.backtotopdiv:hover{
+  box-shadow: 0 -7px 12px 0 rgba(0,0,0,0.24);
+}
+
+.backtotop {
+  margin-top:4px;
+  font: bold;
+  font-size: 1.5em;
+
+}
+
+.centerblock {
+  display: block;
+  text-align: center;
+}
+
+.footer a:hover {
+  color:black;
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+.footer a {
+  color: black;
+  text-decoration: none;
+}
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++Navbar+++++++++++++++++++++++++++++++++++++++++++++++*/
+.headddd {
+  width: 100%;
+  min-width: 744px;
+}
+
+.link {
+  margin-left: 5px;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.navwrapperrrr * {
+  margin: 0px;
+  z-index: 30;
+
+}
+
+.headddd .navvvv {
+  background: white;
+  padding: 5px 0px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+}
+
+.navvvv .liiii {
+  list-style-type: none;
+  display: inline-block;
+  padding: 10px 40px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.navvvv .liiii .anchorrrr {
+  text-decoration: none;
+  color: black;
+}
+
+.navvvv .liiii .anchorrrr:hover {
+  cursor: pointer;
+}
+
+.stickynavvvv {
+  top: 0px;
+  position: fixed;
+}
+
+.navvvv .ullll .liiii .anchorrrr:hover {
+  color: #ee9e09;
+  transition: 200ms;
+}
+
+.icon {
+  width: 20px;
+}
+
+#icons {
+  display: none;
+}
+
+@media (max-width: 993px) {
+  #names {
+    display: none;
+  }
+
+  #icons {
+    display: block;
+  }
+}
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Klassen, die mehrfach benötigt werden +++++++++++++++++++++++++++++++++++++++++++++*/
+
+#backdrop {
+  position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 31;
+}

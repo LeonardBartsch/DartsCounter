@@ -1,0 +1,176 @@
+body {
+  color: white;
+}
+
+main {
+  margin: 20px;
+  margin-bottom: 0px;
+}
+
+.button{
+  width: 165px;
+  font-size: 1.15em;
+  margin: 10px;
+  margin-right: 3px;
+  background-color: white;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: #ee9e09;
+  border-color: #ee9e09;
+  cursor: pointer;
+}
+
+input[type=number].button {
+  cursor: auto;
+}
+
+.button:hover{
+  color: #fff;
+  transition: all 0.4s ease 0s;
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+}
+
+.button.plusMinus {
+  width: 130px;
+  font-size: 1em;
+}
+
+.namen {
+  margin: 10px;
+}
+
+.spielerSpan {
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+
+.spName {
+  margin: 5px;
+  border: 2px solid rgba(54, 129, 127, 1.0);
+  border-radius: 3px;
+  font-size: 1.15em;
+  width: 300px;
+  padding: 7px 3px 7px 3px;
+  color: white;
+  background-color: rgba(54, 129, 127, 1.0);
+  caret-color: white !important;
+}
+
+.spName::placeholder {
+  color: white;
+}
+
+/* visuell Vorausgewählte */
+.button.auswahl{
+  background: #ee9e09;
+  border: 2px solid #ee9e09;
+  color: white;
+}
+
+.auswahl:hover{
+  color: #fff;
+  transition: all 0.4s ease 0s;
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+}
+
+.spielenButton {
+  width: 200px;
+  font-size: 1.5em;
+  margin: 10px;
+  background-color: #559ef1;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border-color: #559ef1;
+}
+
+.spielenButton:hover, .favoritButton:hover{
+  transform: scale(1.1);
+}
+
+.favoritButton {
+  width: 200px;
+  font-size: 1.1em;
+  margin: 10px;
+  margin-bottom: 20px;
+  background-color: grey;
+  padding: 10px;
+  border: 2px solid ;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border-color: grey;
+}
+
+#favoritenDialog {
+  background-color: rgb(54, 129, 127);
+  border: 1px solid rgb(54, 129, 127);
+  border-radius: 5px;
+  z-index: 20;
+  position: fixed;
+  padding: 20px;
+  padding-top: 0px;
+  box-shadow: 0 0 5px white;
+}
+
+.dialogButton {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: black;
+  background-color: rgba(54, 129, 127, 1.0);
+  text-decoration: none;
+  border: none;
+}
+
+.dialogButton:hover {
+  text-shadow: 0 0 10px white;
+}
+
+#favoritEingabe {
+  width: 100%;
+}
+
+#backdrop {
+	/* Ebene zwischen Hintergrund und Dialog-Box */
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.grid {
+  margin-left: 10px;
+  width: 80%;
+  display: grid;
+  grid-template-columns: 50px auto;
+  grid-template-rows: 1fr 1fr;
+}
+
+.inOutSpan {
+  font-size: 1.3em;
+  margin-top: 20px;
+  text-align: left;
+}
+
+::placeholder {
+  color: #ee9e09;
+}
+
+.unsichtbar {
+  display: none;
+}

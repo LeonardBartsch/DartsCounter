@@ -1,0 +1,152 @@
+.main {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 100px ;
+}
+
+/*++++++++++++++++++++++++++++++++++++++++++Usernamebereich+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.user {
+  display: grid;
+  grid-template-columns: 300px 200px 1fr 1fr;
+  grid-template-rows: 300px;
+  background: #9999;
+  grid-gap: 10px 10px;
+  border-radius: 10px;
+
+}
+
+.userpic {
+  grid-column: 1 / 2;
+  align-self: center;
+  justify-self: center;
+}
+
+.username {
+  grid-column: 2 / 3;
+  align-self: center;
+  color: white;
+  font-size: 30px;
+}
+
+.userstats1 {
+  align-self: center;
+  text-align: center;
+}
+
+.userstats2 {
+  align-self: center;
+  text-align: center;
+}
+
+.userschrift {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++Einstellungen+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.einstellungen {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  background: #9999;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 500px;
+  margin-bottom: 100px;
+}
+
+/*.menue {
+  list-style: none;
+  color: Black;
+}*/
+
+.menuepunkttabelle {
+  background: darkgrey;
+  background-color: none;
+  width: 70%;
+  /*height: 100%;*/
+  border-radius: 10px 0 0 10px;
+}
+
+.buttons {
+  width: 100%;
+  height: 50px;
+  font-size: 1.15em;
+  /*margin: 10px;*/
+  margin-right: 3px;
+  background-color: none;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid black;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  color: #ee9e09;
+  border-color: none;
+  cursor: pointer;
+}
+
+.buttons.ausgewaehlt {
+  background: #ee9e09;
+  /*border: 2px solid #ee9e09*/;
+  color: white;
+}
+
+.buttons:hover {
+  color: #fff;
+  transition: all 0.4s ease 0s;
+  background-color: #ee9e09;
+  border-color: none;
+}
+
+.button1 {
+  height: 50px;
+  width: 100px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px black;
+}
+
+.untermenue {
+    display: none;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+.untermenue1 {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.bearbeiten {
+    align-self: center;
+    text-align: center;
+    height: 30px;
+    width: 70px;
+}
+
+.einstellungentext {
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  padding-top: 35px;
+}
+
+.bottuns {
+  border-radius: 5px;
+  background-color: #559ef1;
+  border: 1px solid #559ef1;
+  color: black;
+  width: 100px;
+  height: 30px;
+
+}
+
+.bottuns:hover {
+  transform: scale(1.1);
+}
