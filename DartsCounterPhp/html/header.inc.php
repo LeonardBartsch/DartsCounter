@@ -16,7 +16,7 @@ if($geradeEingeloggt){
     $error = true;
     $errorText = 'Username oder Passwort nicht angegeben!';
   }else{
-    $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_LB', 'Leipzig2018!');
+    $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
     $statement = $pdo->prepare('select * from Spieler where username = :username');
     $statement->execute(array(':username' => $username));
     $user = $statement->fetch();
@@ -120,7 +120,7 @@ if($registrierenAnzeigen){
     $errorText = 'Passwörter stimmen nicht überein!';
   }
 
-  $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_LB', 'Leipzig2018!');
+  $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
 
   if(!$error){
     // schauen, ob es bereits jemanden mit diesem Username oder dieser E-Mail gibt
