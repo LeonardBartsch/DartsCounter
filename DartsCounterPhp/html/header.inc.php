@@ -1,11 +1,4 @@
 <?php
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
 $error = $loginErfolgreich = false;
 $errorText = $eingeloggterUser = '';
 $geradeEingeloggt = (isset($_GET['login']) and $_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['usernameLogin']));
@@ -16,7 +9,9 @@ if($geradeEingeloggt){
     $error = true;
     $errorText = 'Username oder Passwort nicht angegeben!';
   }else{
-    $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+    if(!isset($pdo)){
+      $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+    }
     $statement = $pdo->prepare('select * from Spieler where username = :username');
     $statement->execute(array(':username' => $username));
     $user = $statement->fetch();
@@ -120,7 +115,9 @@ if($registrierenAnzeigen){
     $errorText = 'Passwörter stimmen nicht überein!';
   }
 
-  $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+  if(!isset($pdo)){
+    $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+  }
 
   if(!$error){
     // schauen, ob es bereits jemanden mit diesem Username oder dieser E-Mail gibt
@@ -137,16 +134,39 @@ if($registrierenAnzeigen){
   }
 
   if(!$error){
+    // Zufällige Zahl zur Bestätigung der E-Mail generieren
+    $randomNumber = random_int(0, 1000000);
     // Daten speichern
-    $statement = $pdo->prepare('insert into Spieler (username, email, passwort, angelegtam, geaendertam) 
-                                values (:username, :email, :passwort, NOW(), NOW())');
+    $statement = $pdo->prepare('insert into Spieler (username, email, passwort, status, emailBestaetigungNummer, angelegtam, geaendertam) 
+                                values (:username, :email, :passwort, :status, :randomNummer, NOW(), NOW())');
     $result = $statement->execute(array(':username' => $username, ':email' => $email, 
-                                        ':passwort' => password_hash($passwort, PASSWORD_DEFAULT)));
+                                        ':passwort' => password_hash($passwort, PASSWORD_DEFAULT), ':status' => Status::Offen,
+                                        ':randomNummer' => $randomNumber));
     if(!$result){
       $error = true;
       $errorText = 'Registrierung fehlgeschlagen!';
     }else{
       $anmeldungErfolgreich = true;
+
+      // Bestätigungs-Mail schicken
+      $betreff = 'Anmeldung bei Triple20';
+      $header = "Content-type: text/html; charset=utf-8\r\n";
+      $body = "
+      <html>
+        <body>
+          Hallo $username,
+          <p>
+            Wir freuen uns, dass du jetzt Teil der Triple20-Community bist! 
+            Damit du den kompletten Spielspaß erfahren kannst, bestätige deine E-Mail bitte mit dem folgenden Link:
+            <p><a href='triple20.bplaced.net/html/bestaetigen.php?username=$username&zahl=$randomNumber'>Link</a></p>                
+            <p>Viel Spaß beim Spielen,<br>
+               Dein Triple20-Team
+            </p>
+          </p>
+        </body>
+      </html>";
+
+      mail($email, $betreff, $body, $header);
     }
   }
 
@@ -171,7 +191,7 @@ if($registrierenAnzeigen){
     if($error){
       $hinweisText = $errorText;
     }elseif($anmeldungErfolgreich){
-      $hinweisText = 'Registrierung erfolgreich! Sie können sich nun einloggen!';
+      $hinweisText = 'Registrierung erfolgreich! Es wurde eine Bestätigungs-Mail verschickt! Sie können sich nun einloggen!';
     }
     if($hinweisText <> ''){
       echo "<span class='hinweisTextRegistrieren'> " . $hinweisText . "</span>";

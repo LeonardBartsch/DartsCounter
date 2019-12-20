@@ -7,13 +7,15 @@
 
 /*++++++++++++++++++++++++++++++++++++++++++Usernamebereich+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .user {
+  background: #9999;
+  border-radius: 10px;
+}
+
+.userGrid {
   display: grid;
   grid-template-columns: 300px 200px 1fr 1fr;
   grid-template-rows: 300px;
-  background: #9999;
   grid-gap: 10px 10px;
-  border-radius: 10px;
-
 }
 
 .userpic {
@@ -43,6 +45,45 @@
   font-size: 20px;
   color: white;
   font-weight: bold;
+}
+
+.editPic {
+  margin-left: 10px;
+  height: 20px;
+  width: 20px;
+}
+
+.editPic:active {
+  height: 15px;
+  width: 15px;
+}
+
+.einstellungName {
+  color: black;
+}
+
+.orangeText {
+  color: #ee9e09;
+}
+
+.einstellungenInput {
+  height: 25px;
+  width: 250px;
+  font-size: 18px;
+}
+
+.aenderungenButton {
+  border-radius: 6px;
+  border: 1px solid;
+  height:30px;
+  width: 250px;
+  background-color: #ee9e09;
+  border-color: #ee9e09;
+  margin: 0 20px 20px 0;
+}
+
+.aenderungenButton:hover{
+  transform: scale(1.05);
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++Einstellungen+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .einstellungen {
@@ -131,10 +172,10 @@
 }
 
 .einstellungentext {
-  font-size: 30px;
+  font-size: 15px;
   color: white;
   text-align: center;
-  padding-top: 35px;
+  /*padding-top: 35px;*/
 }
 
 .bottuns {

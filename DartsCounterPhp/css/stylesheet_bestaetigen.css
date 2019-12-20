@@ -1,0 +1,14 @@
+.content {
+    text-align: center;
+    margin-top: 40px;
+    color: white;
+}
+
+.zurStartseite {
+    color: #ee9e09;
+
+}
+
+.zurStartseite:hover {
+    color: rgb(230, 107, 7);
+}

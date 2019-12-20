@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+include('generalFunctions.inc.php');
+include('enums.inc.php');
+ ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

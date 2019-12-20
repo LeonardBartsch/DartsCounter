@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+include('generalFunctions.inc.php');
+include('enums.inc.php');
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -15,58 +19,92 @@
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Upperpart++++++++++++++++++++++++++++++++++++++++++++++++++-->
 <?php
 include('header.inc.php');
+
+$angemeldet = isset($_SESSION['username']);
+$userGefunden = false;
+
+if($angemeldet) {
+  $username = $_SESSION['username'];
+
+  if(!isset($pdo)) $pdo = getPDO();
+
+  $statement = $pdo->prepare('select * from Spieler where username = :username');
+  $result = $statement->execute(array('username' => $username));
+
+  if($result){
+    $user = $statement->fetch();
+    if($user){
+      $userGefunden = true;
+      $sicherheitsFrage = $user['Sicherheitsfrage'];
+    }
+  }
+}
+
+if($userGefunden): 
 ?>
 
 <div class="main" id="main">
-  <div class="user">
-    <div class="userpic">
-      <img src="../pics/default-profile.jpeg" alt="PB" height="200px" width="200px">
+  <form class="user" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+    <div class="userGrid">
+      <div class="userpic">
+        <img src="../pics/default-profile.jpeg" alt="PB" height="200px" width="200px">
+      </div>
+      <div class="username">
+        <p class="orangeText"><?php echo $username ?></p>
+      </div>
+      <div class="userschrift userstats1">
+        <p>
+          <span class="einstellungName">E-Mail:</span>
+          <input type="text" class="einstellungenInput" name="emailEinstellung" value="<?php echo $user['EMail'] ?>">
+          <img src="../pics/edit.png" alt="Edit" class="editPic">
+        </p>
+        <br>
+        <p>
+          <span class="einstellungName">Sicherheitsfrage:</span> 
+          <select name="sicherheitsFrageEinstellung" class="einstellungenInput">
+            <option <?php if($sicherheitsFrage === Sicherheitsfrage::Keine) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Keine); ?></option>
+            <option <?php if($sicherheitsFrage === Sicherheitsfrage::LaengeDesGlieds) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::LaengeDesGlieds); ?></option>
+            <option <?php if($sicherheitsFrage === Sicherheitsfrage::Lieblingsfilm) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Lieblingsfilm); ?></option>
+            <option <?php if($sicherheitsFrage === Sicherheitsfrage::AnzahlSexpartner) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::AnzahlSexpartner); ?></option>
+          </select>
+        </p>
+        <br>
+        <p>
+          <span class="einstellungName">Antwort auf Sicherheitsfrage: </span>
+          <input type="text" class="einstellungenInput" name="sicherheitsfrageAntwortEinstellung" value="<?php echo $user['SicherheitsfrageAntwort']; ?>">
+          <img src="../pics/edit.png" alt="Edit" class="editPic">
+        </p>
+      </div>
+      <div class="userschrift userstats2">
+        <p>
+          <span class="einstellungName">Anzeigename: </span> 
+          <input type="text" class="einstellungenInput" name="anzeigeNameEinstellung" value="<?php echo $user['Anzeigename']; ?>">
+          <img src="../pics/edit.png" alt="Edit" class="editPic">
+        </p>
+      </div>
     </div>
-    <div class="username">
-      <p>Max Mustermann</p>
+    <div style="text-align:right;">
+      <input type="submit" name="submitAenderungen" value="Änderungen speichern" class="aenderungenButton">
     </div>
-    <div class="userschrift userstats1">
-      <p>Siege: ???</p>
-      <br>
-      <p>Niederlagen: ???</p>
-      <br>
-      <p>S/N-Quote: ???</p>
-    </div>
-    <div class=" userschrift userstats2">
-      <p>Erzfeind: ???</p>
-      <br>
-      <p>Lieblingsgegner: ???</p>
-      <br>
-      <p>Average: ???</p>
-    </div>
-  </div>
+  </form>
 
+  <h2>Statistiken</h2>
   <div class="einstellungen">
     <div class="menuepunkttabelle">
-      <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Sicherheit</button>
-      <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Accountinfo</button>
-      <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Coming soon</button>
+      <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Allgemein</button>
+      <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Freunde</button>
+      <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Favoriten</button>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="untermenue1" id="einstellungenSicherheit">
-      <div class="passwort">
-        <p class="einstellungentext">Passwort: ???</p>
-      </div>
-      <div class="bearbeiten" style="text-align: center;">
+      <p class="einstellungentext">Siege: ???</p>
+      <!--<div class="bearbeiten" style="text-align: center;">
         <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
-      </div>
-      <div class="sicherheitsfrage">
-        <p class="einstellungentext">Sicherheitsfrage: ???</p>
-      </div>
-      <div class="bearbeiten" style="text-align: center;">
-        <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
-      </div>
-      <div class="antwortSFrage">
-        <p class="einstellungentext">Antwort für die Frage: ???</p>
-      </div>
-      <div class="bearbeiten" style="text-align: center;">
-        <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
-      </div>
+      </div>-->
+      <p class="einstellungentext">Niederlagen: ???</p>
+      <p class="einstellungentext">Lieblingsgegner: ???</p>
+      <p class="einstellungentext">Erzfeind: ???</p>
+      <p class="einstellungentext">Average: ???</p>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
     <div class="untermenue" id="einstellungenAccount">
@@ -113,6 +151,13 @@ include('header.inc.php');
   </div>
 
 </div>
+
+<?php else: ?>
+
+  <div>
+    <span><?php echo $angemeldet? 'Fehler beim Ermitteln der Account-Daten!' : 'Bitte einloggen'; ?></span>
+  </div> 
+<?php endif ?>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER++++++++++++++++++++++++++++++++++++++++++++-->
 
 <footer class="footer">
