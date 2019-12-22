@@ -5,40 +5,31 @@
   margin-top: 100px ;
 }
 
-/*++++++++++++++++++++++++++++++++++++++++++Usernamebereich+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/*++++++++++++++++++++++++++++++++++++++++++User-Bereich mit Einstellungen+++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 .user {
   background: #9999;
   border-radius: 10px;
+  padding: 20px 0 20px 0;
 }
 
 .userGrid {
   display: grid;
-  grid-template-columns: 300px 200px 1fr 1fr;
-  grid-template-rows: 300px;
-  grid-gap: 10px 10px;
+  grid-template-columns: 20% 20% auto auto;
+  grid-template-rows: repeat(5, auto);
+  grid-gap: 10px;
 }
 
 .userpic {
-  grid-column: 1 / 2;
+  grid-row: 1 / span 4;
   align-self: center;
   justify-self: center;
 }
 
 .username {
-  grid-column: 2 / 3;
+  grid-row: 1 / span 4;
   align-self: center;
   color: white;
   font-size: 30px;
-}
-
-.userstats1 {
-  align-self: center;
-  text-align: center;
-}
-
-.userstats2 {
-  align-self: center;
-  text-align: center;
 }
 
 .userschrift {
@@ -60,6 +51,7 @@
 
 .einstellungName {
   color: black;
+  font-weight: bold;
 }
 
 .orangeText {
@@ -69,7 +61,7 @@
 .einstellungenInput {
   height: 25px;
   width: 250px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .aenderungenButton {
@@ -79,15 +71,25 @@
   width: 250px;
   background-color: #ee9e09;
   border-color: #ee9e09;
-  margin: 0 20px 20px 0;
+  margin-right: 20px;
 }
 
 .aenderungenButton:hover{
   transform: scale(1.05);
 }
-/*++++++++++++++++++++++++++++++++++++++++++++++++++++Einstellungen+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-.einstellungen {
+
+.aenderungenButtonDiv {
+  grid-column: 3 / span 2;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++Statistiken+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.statistikenHeading {
   margin-top: 50px;
+  color: white;
+  text-align: center;
+}
+
+.statistikenDiv {
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -98,11 +100,6 @@
   grid-template-rows: 500px;
   margin-bottom: 100px;
 }
-
-/*.menue {
-  list-style: none;
-  color: Black;
-}*/
 
 .menuepunkttabelle {
   background: darkgrey;
@@ -153,15 +150,12 @@
 }
 
 .untermenue {
-    display: none;
     grid-template-columns: 80% 20%;
     grid-template-rows: repeat(3, 1fr);
-  }
+}
 
-.untermenue1 {
+.untermenue.ausgewaehlt {
   display: grid;
-  grid-template-columns: 80% 20%;
-  grid-template-rows: repeat(3, 1fr);
 }
 
 .bearbeiten {

@@ -178,10 +178,6 @@ button {
     display: block;
 }
 
-.unsichtbar {
-    display: none;
-}
-
 .continueButton {
     margin: 20px;
     font-size: 1.2em;

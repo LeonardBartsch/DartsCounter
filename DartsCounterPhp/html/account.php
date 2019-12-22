@@ -21,6 +21,22 @@ include('enums.inc.php');
 include('header.inc.php');
 
 $angemeldet = isset($_SESSION['username']);
+
+// Änderungen speichern
+if($angemeldet and $_SERVER["REQUEST_METHOD"] === "POST" and isset($_POST['submitAenderungen'])){
+  $sicherheitsFrage = intval(test_input($_POST['sicherheitsFrageEinstellung']));
+  $sicherheitsAntwort = $sicherheitsFrage === Sicherheitsfrage::Keine? '' : $_POST['sicherheitsfrageAntwortEinstellung'];
+  $anzeigeName = $_POST['anzeigeNameEinstellung'];
+
+  $pdo = getPDO();
+  $statement = $pdo->prepare('update Spieler set sicherheitsfrage = :sicherheitsfrage, sicherheitsfrageantwort = :antwort,
+                 anzeigename = :anzeigename where username = :username');
+  $result = $statement->execute(array(':sicherheitsfrage' => $sicherheitsFrage, ':antwort' => $sicherheitsAntwort, 
+                             ':anzeigename' => $anzeigeName, ':username' => $_SESSION['username']));
+
+  $speichernHinweistext = $result? "Änderungen wurden erfolgreich gespeichert" : "Fehler beim Speichern der Änderungen";
+}
+
 $userGefunden = false;
 
 if($angemeldet) {
@@ -35,7 +51,7 @@ if($angemeldet) {
     $user = $statement->fetch();
     if($user){
       $userGefunden = true;
-      $sicherheitsFrage = $user['Sicherheitsfrage'];
+      $sicherheitsFrage = intval($user['Sicherheitsfrage']);
     }
   }
 }
@@ -52,51 +68,44 @@ if($userGefunden):
       <div class="username">
         <p class="orangeText"><?php echo $username ?></p>
       </div>
-      <div class="userschrift userstats1">
-        <p>
-          <span class="einstellungName">E-Mail:</span>
-          <input type="text" class="einstellungenInput" name="emailEinstellung" value="<?php echo $user['EMail'] ?>">
-          <img src="../pics/edit.png" alt="Edit" class="editPic">
-        </p>
-        <br>
-        <p>
-          <span class="einstellungName">Sicherheitsfrage:</span> 
-          <select name="sicherheitsFrageEinstellung" class="einstellungenInput">
-            <option <?php if($sicherheitsFrage === Sicherheitsfrage::Keine) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Keine); ?></option>
-            <option <?php if($sicherheitsFrage === Sicherheitsfrage::LaengeDesGlieds) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::LaengeDesGlieds); ?></option>
-            <option <?php if($sicherheitsFrage === Sicherheitsfrage::Lieblingsfilm) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Lieblingsfilm); ?></option>
-            <option <?php if($sicherheitsFrage === Sicherheitsfrage::AnzahlSexpartner) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::AnzahlSexpartner); ?></option>
-          </select>
-        </p>
-        <br>
-        <p>
-          <span class="einstellungName">Antwort auf Sicherheitsfrage: </span>
-          <input type="text" class="einstellungenInput" name="sicherheitsfrageAntwortEinstellung" value="<?php echo $user['SicherheitsfrageAntwort']; ?>">
-          <img src="../pics/edit.png" alt="Edit" class="editPic">
-        </p>
+      <span class="einstellungName">E-Mail:</span>
+      <div>
+        <input type="text" class="einstellungenInput" name="emailEinstellung" value="<?php echo $user['EMail'] ?>">
+        <img src="../pics/edit.png" alt="Edit" class="editPic">
       </div>
-      <div class="userschrift userstats2">
-        <p>
-          <span class="einstellungName">Anzeigename: </span> 
-          <input type="text" class="einstellungenInput" name="anzeigeNameEinstellung" value="<?php echo $user['Anzeigename']; ?>">
-          <img src="../pics/edit.png" alt="Edit" class="editPic">
-        </p>
+      <span class="einstellungName">Sicherheitsfrage:</span> 
+      <select name="sicherheitsFrageEinstellung" class="einstellungenInput">
+        <option value="<?php echo Sicherheitsfrage::Keine ?>" <?php if($sicherheitsFrage === Sicherheitsfrage::Keine) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Keine); ?></option>
+        <option value="<?php echo Sicherheitsfrage::LaengeDesGlieds ?>" <?php if($sicherheitsFrage === Sicherheitsfrage::LaengeDesGlieds) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::LaengeDesGlieds); ?></option>
+        <option value="<?php echo Sicherheitsfrage::Lieblingsfilm ?>" <?php if($sicherheitsFrage === Sicherheitsfrage::Lieblingsfilm) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::Lieblingsfilm); ?></option>
+        <option value="<?php echo Sicherheitsfrage::AnzahlSexpartner ?>" <?php if($sicherheitsFrage === Sicherheitsfrage::AnzahlSexpartner) echo "selected"; ?>><?php echo sicherheitsFrageToString(Sicherheitsfrage::AnzahlSexpartner); ?></option>
+      </select>
+      <span class="einstellungName">Antwort auf Sicherheitsfrage: </span>
+      <div>
+        <input type="text" class="einstellungenInput" name="sicherheitsfrageAntwortEinstellung" value="<?php echo $user['SicherheitsfrageAntwort']; ?>">
+        <img src="../pics/edit.png" alt="Edit" class="editPic">
       </div>
-    </div>
-    <div style="text-align:right;">
-      <input type="submit" name="submitAenderungen" value="Änderungen speichern" class="aenderungenButton">
+      <span class="einstellungName">Anzeigename: </span>
+      <div> 
+        <input type="text" class="einstellungenInput" name="anzeigeNameEinstellung" value="<?php echo $user['Anzeigename']; ?>">
+        <img src="../pics/edit.png" alt="Edit" class="editPic">
+      </div>
+      <div class="aenderungenButtonDiv">
+        <input type="submit" name="submitAenderungen" value="Änderungen speichern" class="aenderungenButton">
+        <span><?php echo $speichernHinweistext ?></span>
+      </div>
     </div>
   </form>
 
-  <h2>Statistiken</h2>
-  <div class="einstellungen">
+  <h2 class="statistikenHeading">Statistiken</h2>
+  <div class="statistikenDiv">
     <div class="menuepunkttabelle">
       <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Allgemein</button>
       <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Freunde</button>
       <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Favoriten</button>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue1" id="einstellungenSicherheit">
+    <div class="untermenue ausgewaehlt" id="einstellungenSicherheit">
       <p class="einstellungentext">Siege: ???</p>
       <!--<div class="bearbeiten" style="text-align: center;">
         <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
@@ -107,7 +116,7 @@ if($userGefunden):
       <p class="einstellungentext">Average: ???</p>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue" id="einstellungenAccount">
+    <div class="untermenue unsichtbar" id="einstellungenAccount">
       <div class="benutzername">
         <p class="einstellungentext">Benutzername: ???</p>
       </div>
@@ -128,7 +137,7 @@ if($userGefunden):
       </div>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue" id="einstellungenComingSoon">
+    <div class="untermenue unsichtbar" id="einstellungenComingSoon">
       <div class="comingsoon1">
         <p class="einstellungentext">coming soon</p>
       </div>
