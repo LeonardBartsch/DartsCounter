@@ -51,6 +51,9 @@ h1 {
 
 .spielen2 {
   grid-area: buttons;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .spielen3 {

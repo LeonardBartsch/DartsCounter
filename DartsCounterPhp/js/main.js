@@ -49,7 +49,7 @@ function imageclick(){
 function setNavbarReferences() {
   let dictionary = {
     homeNav: '../html/index.php',
-    auswahlNav: '../html/spielauswahl.html',
+    auswahlNav: '../html/spielauswahl.php',
     accountNav: '../html/account.php'
   };
 

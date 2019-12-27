@@ -233,6 +233,12 @@ function getParameterString() {
     return result;
 }
 
+function submitForm(action)
+    {
+        document.getElementById('columnarForm').action = action;
+        document.getElementById('columnarForm').submit();
+    }
+
 const modi = {
     normal : 1,
     cricket: 2,

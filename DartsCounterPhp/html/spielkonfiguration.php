@@ -63,7 +63,7 @@
 
     <main>
     <table>
-      <form class="Spielkonfiguration" action="Spielkonfiguration.html" method="post"> <!-- eig nicht sensitiv ->get -->
+      <form id="spielEinstellungen" method="POST">
         <h2>Spieleinstellungen</h2>
       <div class="Spieler">
         <h3>Spieler</h3>

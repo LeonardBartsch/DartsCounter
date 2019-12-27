@@ -3,12 +3,39 @@ CREATE TABLE `Spieler` (
  `EMail` varchar(100) NOT NULL,
  `Passwort` varchar(255) NOT NULL,
  `Profilbild` tinyint(4) NOT NULL,
- `Sicherheitsfrage` tinyint(4) DEFAULT NULL,
+ `Sicherheitsfrage` tinyint(4) NOT NULL,
  `SicherheitsfrageAntwort` varchar(100) DEFAULT NULL,
  `Anzeigename` varchar(50) NOT NULL,
  `Status` tinyint(4) NOT NULL,
+ `EmailBestaetigungNummer` int(11) DEFAULT NULL,
  `AngelegtAm` datetime NOT NULL,
  `GeaendertAm` datetime NOT NULL,
  PRIMARY KEY (`Username`),
  UNIQUE KEY `EMail` (`EMail`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `Favoriten` (
+ `Username` varchar(50) NOT NULL,
+ `LfdNr` int(11) NOT NULL,
+ `Name` varchar(255) NOT NULL,
+ `Spielmodus` tinyint(4) NOT NULL,
+ `Startpunktzahl` int(11) NOT NULL,
+ `AnzahlLegs` int(11) NOT NULL,
+ `AnzahlSets` int(11) NOT NULL,
+ `InWurf` tinyint(4) NOT NULL,
+ `OutWurf` tinyint(4) NOT NULL,
+ `AngelegtAm` datetime NOT NULL,
+ `GeaendertAm` datetime NOT NULL,
+ PRIMARY KEY (`Username`,`LfdNr`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `FavoritenSpieler` (
+ `Username` varchar(50) NOT NULL,
+ `LfdNrFavorit` int(11) NOT NULL,
+ `LfdNrSpieler` int(11) NOT NULL,
+ `Name` varchar(50) NOT NULL,
+ `IstUsername` tinyint(1) NOT NULL,
+ `AngelegtAm` datetime NOT NULL,
+ `GeaendertAm` datetime NOT NULL,
+ PRIMARY KEY (`Username`,`LfdNrFavorit`,`LfdNrSpieler`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

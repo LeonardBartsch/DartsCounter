@@ -30,7 +30,7 @@ const modi = {
 const modusParam = 'modus';
 
 function weiterleiten(modus) {
-    window.location.href = '../html/spielkonfiguration.html?' + modusParam + '=' + modus;
+    window.location.href = '../html/spielkonfiguration.php?' + modusParam + '=' + modus;
 }
 
 const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';

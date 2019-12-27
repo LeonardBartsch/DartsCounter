@@ -12,6 +12,24 @@ abstract class Sicherheitsfrage {
     const AnzahlSexpartner = 3;
 }
 
+abstract class InOut {
+    const Single = 1;
+    const Double = 2;
+    const Master = 3;
+}
+
+abstract Class Punktanzahl {
+    const Drei01 = 0;
+    const Fuenf01 = 1;
+    const Sieben01 = 2; 
+}
+
+abstract class Spielmodus {
+    const Normal = 0;
+    const Cricket = 1;
+    const Bob = 2;
+}
+
 
 // Enums to String
 function sicherheitsFrageToString($value) {

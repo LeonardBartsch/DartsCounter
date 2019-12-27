@@ -10,7 +10,7 @@ if($geradeEingeloggt){
     $errorText = 'Username oder Passwort nicht angegeben!';
   }else{
     if(!isset($pdo)){
-      $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+      $pdo = getPDO();
     }
     $statement = $pdo->prepare('select * from Spieler where username = :username');
     $statement->execute(array(':username' => $username));
@@ -54,14 +54,14 @@ if($geradeEingeloggt){
           <tr>
             <td colspan="2"><input type="submit" class="accountButton orange customcursor" style="height:28px;" name="Login" value="Login">
             <!--<td><input type="submit" class="accountButton grey fixedwidth customcursor" style="height:28px;" id="comingsoon" name="Registrieren" value="Registrieren"></td>-->
-            <a href="javascript:undefined;" style="cursor: pointer;" class="link" onclick="showHideRegistrieren();">Noch nicht registriert?</a></td>
+            <a href="javascript:undefined;" class="registrierenLink" onclick="showHideRegistrieren();">Noch nicht registriert?</a></td>
           </tr>
         </table>
       </form>
       <?php if($error) echo "<span>" . $errorText . "</span>"; ?>
       <?php else: ?>
-      <span>Eingeloggt als: <?php echo $eingeloggterUser ?></span><br>
-      <a href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?logout=1' ?>">Ausloggen</a>
+      <span style="color: black;">Eingeloggt als: <?php echo $eingeloggterUser ?></span><br>
+      <a class="registrierenLink" href="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?logout=1' ?>">Ausloggen</a>
       <?php endif ?>
     </div>
   </div>
@@ -116,7 +116,7 @@ if($registrierenAnzeigen){
   }
 
   if(!isset($pdo)){
-    $pdo = new PDO('mysql:host=localhost;dbname=triple20_test', 'triple20_Leo', 'triple20');
+    $pdo = getPDO();
   }
 
   if(!$error){
@@ -170,8 +170,6 @@ if($registrierenAnzeigen){
     }
   }
 
-  $pdo = null;
-
   echo "<div id='backdrop'></div>";
 }
 ?>
@@ -198,3 +196,5 @@ if($registrierenAnzeigen){
     }
   ?>
 </div>
+
+<?php unset($pdo) ?>

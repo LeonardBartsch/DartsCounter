@@ -104,6 +104,35 @@ hr {
   border-color: #a9aaa9;
 }
 
+.registrierenLink {
+  color:#007bff;
+  text-decoration:none;
+  background-color:transparent;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.registrierenLink:hover, .registrierenLink:focus {
+  color:#0056b3;
+  text-decoration: none;
+}
+  
+/*a:hover{
+  color:#0056b3;
+  text-decoration:underline
+}
+a:not([href]):not([tabindex]){
+  color:inherit;
+  text-decoration:none;
+}
+a:not([href]):not([tabindex]):focus,a:not([href]):not([tabindex]):hover{
+  color:inherit;
+  text-decoration:none
+}
+a:not([href]):not([tabindex]):focus{
+  outline:0
+}*/
+
 .accountButton:hover{
   transform: scale(1.05);
 }
@@ -280,14 +309,6 @@ input::placeholder {
 .headddd {
   width: 100%;
   min-width: 744px;
-}
-
-.link {
-  margin-left: 5px;
-}
-
-.link:hover {
-  text-decoration: none;
 }
 
 .navwrapperrrr * {
