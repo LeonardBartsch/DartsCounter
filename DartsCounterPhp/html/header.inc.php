@@ -73,16 +73,16 @@ if($geradeEingeloggt){
  <div class="navwrapperrrr" style="height: 60px;">
     <nav class="navvvv" id="navvvv" style="height: 60px;">
       <ul class="ullll" id="names">
-        <li class="liiii"> <a class="anchorrrr" id="homeNav">Home</a></li>
-        <li class="liiii"> <a class="anchorrrr" id="auswahlNav">Spielauswahl</a></li>
+        <li class="liiii"> <a class="anchorrrr" name="homeNav">Home</a></li>
+        <li class="liiii"> <a class="anchorrrr" name="auswahlNav">Spielauswahl</a></li>
         <li class="liiii" id="comingsoon"> <a class="anchorrrr">Dart-News</a></li>
-        <li class="liiii"> <a class="anchorrrr" id="accountNav">Account</a></li>
+        <li class="liiii"> <a class="anchorrrr" name="accountNav">Account</a></li>
       </ul>
       <ul class="ullll" id="icons">
-        <li class="liiii"> <a class="anchorrrr" id="homeNav"><img src="../pics/homeicon.png" class="icon" /></a></li>
-        <li class="liiii"> <a class="anchorrrr" id="auswahlNav"><img src="../pics/playingicon.png" class="icon" /></a></li>
+        <li class="liiii"> <a class="anchorrrr" name="homeNav"><img src="../pics/homeicon.png" class="icon" /></a></li>
+        <li class="liiii"> <a class="anchorrrr" name="auswahlNav"><img src="../pics/playingicon.png" class="icon" /></a></li>
         <li class="liiii" id="comingsoon"> <a class="anchorrrr"><img src="../pics/newsicon.png" class="icon"/></a></li>
-        <li class="liiii"> <a class="anchorrrr" id="accountNav"><img src="../pics/Accounticon.png" class="icon" /></a></li>
+        <li class="liiii"> <a class="anchorrrr" name="accountNav"><img src="../pics/Accounticon.png" class="icon" /></a></li>
       </ul>
     </nav>
   </div>

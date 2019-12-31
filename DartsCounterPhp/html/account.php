@@ -30,7 +30,7 @@ if($angemeldet and $_SERVER["REQUEST_METHOD"] === "POST" and isset($_POST['submi
 
   $pdo = getPDO();
   $statement = $pdo->prepare('update Spieler set sicherheitsfrage = :sicherheitsfrage, sicherheitsfrageantwort = :antwort,
-                 anzeigename = :anzeigename where username = :username');
+                 anzeigename = :anzeigename, geaendertam = NOW() where username = :username');
   $result = $statement->execute(array(':sicherheitsfrage' => $sicherheitsFrage, ':antwort' => $sicherheitsAntwort, 
                              ':anzeigename' => $anzeigeName, ':username' => $_SESSION['username']));
 

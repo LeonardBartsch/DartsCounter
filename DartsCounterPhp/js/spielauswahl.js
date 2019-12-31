@@ -1,30 +1,36 @@
 function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-      window.onload = func;
-    } else {
-      window.onload = function() {
-        if (oldonload) {
-          oldonload();
-        }
-        func();
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
       }
+      func();
     }
   }
+}
   
-  addLoadEvent(function() {
+addLoadEvent(function() {
     favoritenErmitteln();
-  });
+});
+
+$(document).ready(function(){
+  $("#normalButton").click(function(){weiterleiten(Spielmodus.Normal);});
+  $("#cricketButton").click(comingsoon);
+  $("#bobButton").click(comingsoon);
+});
 
 function beschreibungAnzeigen(divid) {
     let obj = document.getElementById(divid);
     obj.style.display = obj.style.display == 'block' ? 'none' : 'block';
 }
 
-const modi = {
-    normal : 1,
-    cricket: 2,
-    bob: 3
+const Spielmodus = {
+  Normal : 0,
+  Cricket: 1,
+  Bob: 2
 }
 
 const modusParam = 'modus';

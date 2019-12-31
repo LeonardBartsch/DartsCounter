@@ -118,7 +118,7 @@ input[type=number].button {
   background-color: rgb(54, 129, 127);
   border: 1px solid rgb(54, 129, 127);
   border-radius: 5px;
-  z-index: 20;
+  z-index: 32;
   position: fixed;
   padding: 20px;
   padding-top: 0px;
@@ -142,8 +142,8 @@ input[type=number].button {
   width: 100%;
 }
 
-#backdrop {
-	/* Ebene zwischen Hintergrund und Dialog-Box */
+/*#backdrop {
+	 Ebene zwischen Hintergrund und Dialog-Box 
 	
 	position: fixed;
 	top: 0;
@@ -151,7 +151,7 @@ input[type=number].button {
 	right: 0;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, 0.5);
-}
+}*/
 
 .grid {
   margin-left: 10px;

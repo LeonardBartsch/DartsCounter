@@ -18,19 +18,24 @@ function keyValuePair(key, value) {
 
 let anzahlSpieler_ = 2;
 
-let einstellungen = {
+/*let einstellungen = {
     spieler: {key: spielerParam, value: []},
     legs: {key: legsParam, value: 1},
     sets: {key: setsParam, value: 1},
     punkte: {key: punkteParam, value: 501},
     wurfIn: {key: inParam, value: inOut.single},
     wurfOut: {key: outParam, value: inOut.double}
-}
+};*/
 
-function spielerClick(id) {
-    einstellungen.spielerzahl.value = getButtonZahl(id);
-    switchButton(id);
-}
+let einstellungenPhp = {
+    spieler: [],
+    legs: 1,
+    sets: 1,
+    punkte: 501,
+    wurfIn: inOut.single,
+    wurfOut: inOut.double,
+    favoritName: ''
+};
 
 function setsClick(id) {
     let zahl = getButtonZahl(id);
@@ -39,7 +44,8 @@ function setsClick(id) {
         else zahl--;
         document.getElementById(id).value = zahl; 
     }
-    einstellungen.sets.value = getButtonZahl(id);
+    //einstellungen.sets.value = getButtonZahl(id);
+    einstellungenPhp.sets = getButtonZahl(id);
     switchButton(id);
 }
 
@@ -50,22 +56,26 @@ function legsClick(id) {
         else zahl--;
         document.getElementById(id).value = zahl; 
     }
-    einstellungen.legs.value = getButtonZahl(id);
+    //einstellungen.legs.value = getButtonZahl(id);
+    einstellungenPhp.legs = getButtonZahl(id);
     switchButton(id);
 }
 
 function punktzahlClick(id) {
-    einstellungen.punkte.value = getButtonZahl(id);
+    //einstellungen.punkte.value = getButtonZahl(id);
+    einstellungenPhp.punkte = getButtonZahl(id);
     switchButton(id);
 }
 
 function inClick(zahl, id) {
-    einstellungen.wurfIn.value = getInOut(zahl);
+    //einstellungen.wurfIn.value = getInOut(zahl);
+    einstellungenPhp.wurfIn = getInOut(zahl);
     switchButton(id);
 }
 
 function outClick(zahl, id) {
-    einstellungen.wurfOut.value = getInOut(zahl);
+    //einstellungen.wurfOut.value = getInOut(zahl);
+    einstellungenPhp.wurfOut = getInOut(zahl);
     switchButton(id);
 }
 
@@ -140,13 +150,33 @@ function minusClick() {
 }
 
 function weiterleiten() {
+    spielerArrayFuellen();
+
     let parameterString = getParameterString();
     if(parameterString === '') return;
 
     window.location.href = '../html/spiel.html?' + parameterString;
 }
 
+function spielerArrayFuellen() {
+    einstellungenPhp.spieler = [];
+    for(let i = 1; i <= anzahlSpieler_; i++) {
+        let name = document.querySelector('#' + spielerInputId + i + '.spName').value
+        if(name === ''){
+            name = 'Spieler ' + i;
+        }
+        console.log(name);
+        einstellungenPhp.spieler.push(name);
+    }
+}
+
 const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
+const PhpStatus = {
+    Fehlgeschlagen: 0,
+    Erfolgreich: 1,
+    NichtAngemeldet: 2
+};
+
 function favoritSpeichern(name) {
     if(name === '') return;
 
@@ -155,6 +185,28 @@ function favoritSpeichern(name) {
         return;
     }
 
+    spielerArrayFuellen();
+    einstellungenPhp.favoritName = name;
+
+    $.post("favoritSpeichern.php", JSON.stringify(einstellungenPhp), function(data){
+        let dataInt = parseInt(data);
+        let text = '';
+        switch(dataInt){
+            case PhpStatus.Erfolgreich:
+                text = 'Speichern erfolgreich!'; break;
+            case PhpStatus.NichtAngemeldet:
+                text = 'Favorit wurde lokal gespeichert!'; 
+                saveFavoritLocal(name);
+                break;
+            default:
+                text = 'Konnte nicht gespeichert werden!';
+        }
+
+        $("#favoritSpeichernHinweistext").text(text);
+    })
+}
+
+function saveFavoritLocal(name) {
     let parameterString = getParameterString();
     if(parameterString === '') return;
 
@@ -165,10 +217,11 @@ function favoritSpeichern(name) {
         keyStringNeu = keyStringAlt + seperator + name; 
     }
 
+    // Hier werden in einem Item die Keys für alle Favoriten gespeichert
     localStorage.setItem(keyFuerFavoritenKeys, keyStringNeu);
 
+    // Hier wird Favorit an sich gespeichert
     localStorage.setItem(name, parameterString);
-    
 }
 
 function openDialog() {
@@ -192,7 +245,7 @@ function closeDialog(abbrechen) {
     document.getElementById('backdrop').remove();
     document.removeEventListener('keydown', handleKeydown);
     
-    if(abbrechen) name = '';
+    if(abbrechen) return;
     
     favoritSpeichern(name);
 }
@@ -209,22 +262,13 @@ function handleKeydown(event) {
 function getParameterString() {
     let result = '';
     
-    einstellungen.spieler.value = [];
-    for(let i = 1; i <= anzahlSpieler_; i++) {
-        let name = document.querySelector('#' + spielerInputId + i + '.spName').value
-        if(name === ''){
-            name = 'Spieler ' + i;
-        }
-        console.log(name);
-        einstellungen.spieler.value.push(name);
-    }
-    for (let property in einstellungen){
-        if(einstellungen.hasOwnProperty(property)){
-            if(einstellungen[property].value === 0){
+    for (let property in einstellungenPhp){
+        if(einstellungenPhp.hasOwnProperty(property)){
+            if(einstellungenPhp[property] === 0){
                 alert('Eine Einstellung wurde nicht richtig getroffen!');
                 return '';
             }
-            result += einstellungen[property].key + '=' + einstellungen[property].value + ';'; 
+            result += property + '=' + einstellungenPhp[property] + ';'; 
         }
     }
 
@@ -233,16 +277,15 @@ function getParameterString() {
     return result;
 }
 
-function submitForm(action)
-    {
-        document.getElementById('columnarForm').action = action;
-        document.getElementById('columnarForm').submit();
-    }
+function submitForm(action) {
+    document.getElementById('columnarForm').action = action;
+    document.getElementById('columnarForm').submit();
+}
 
-const modi = {
-    normal : 1,
-    cricket: 2,
-    bob: 3
+const Spielmodus = {
+    Normal : 0,
+    Cricket: 1,
+    Bob: 2
 }
 
 const modusParam = 'modus';

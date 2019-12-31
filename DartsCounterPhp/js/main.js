@@ -17,6 +17,10 @@ addLoadEvent(function() {
   document.querySelectorAll("#comingsoon").forEach( x => x.addEventListener("click",comingsoon));
   document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
   document.querySelector(".logo").addEventListener("click",imageclick);
+  //setNavbarReferences();
+});
+
+$(document).ready(function(){
   setNavbarReferences();
 });
 
@@ -53,10 +57,11 @@ function setNavbarReferences() {
     accountNav: '../html/account.php'
   };
 
-  for(var key in dictionary){
-    let filePath = dictionary[key];
-    document.querySelectorAll('#' + key).forEach(x => x.href = filePath);
-  }
+  $.each(dictionary, function(key, value){
+    $("[name='" + key + "']").each(function(){
+      $(this).attr("href", value);
+    });
+  });
 }
 
 function showHideBackdrop(){
