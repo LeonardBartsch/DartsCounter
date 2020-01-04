@@ -1,26 +1,8 @@
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
-
-addLoadEvent(function() {
+$(document).ready(function(){
   window.addEventListener('scroll', toggleNavbar);
   document.querySelectorAll("#comingsoon").forEach( x => x.addEventListener("click",comingsoon));
-  document.querySelector(".backtotopdiv").addEventListener("click",backtotop);
-  document.querySelector(".logo").addEventListener("click",imageclick);
-  //setNavbarReferences();
-});
-
-$(document).ready(function(){
+  $(".backtotopdiv").click(backtotop);
+  $(".logo").click(imageclick);
   setNavbarReferences();
 });
 

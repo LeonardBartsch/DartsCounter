@@ -97,6 +97,8 @@ body {
 }
 
 .favorit {
+    text-decoration: none;
+    color: #ee9e09; 
     font-size: 1.1em;
     cursor: pointer;
     margin-top: 5px;
@@ -104,4 +106,15 @@ body {
 
 .favorit:hover {
     text-decoration: underline;
+}
+
+.deletePic {
+    margin-left: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.deletePic:active {
+    height: 15px;
+    width: 15px;
 }

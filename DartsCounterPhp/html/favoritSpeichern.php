@@ -76,17 +76,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!$error){
         // Daten speichern
         $username = $_SESSION['username'];
-        $lfdNr = getNeueLfdNr($username);
-
-        // LfdNr, Username und Favoritenname zu Sql-Parametern hinzufügen
+        $nameFavorit = test_input($json['favoritName']);
+        // Username und Favoritenname zu Sql-Parametern hinzufügen
         $sqlParams[':username'] = $username;
-        $sqlParams[':lfdNr'] = $lfdNr;
-        $sqlParams[':name'] = test_input($json['favoritName']);
+        $sqlParams[':name'] = $nameFavorit;
         
         $pdo = getPDO();
         $pdo->beginTransaction();
-        $statement = $pdo->prepare('insert into Favoriten (username, lfdnr, name, spielmodus, startpunktzahl, anzahllegs, anzahlsets, 
-                                    inwurf, outwurf, angelegtam, geaendertam) values(:username, :lfdNr, :name, :modus, :punkte,
+        $statement = $pdo->prepare('insert into Favoriten (username, name, spielmodus, startpunktzahl, anzahllegs, anzahlsets, 
+                                    inwurf, outwurf, angelegtam, geaendertam) values(:username, :name, :modus, :punkte,
                                     :legs, :sets, :wurfIn, :wurfOut, NOW(), NOW())');
         
         $dbResult = $statement->execute($sqlParams);
@@ -99,10 +97,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $length = count($spieler);
             do {
                 $spielerName = $spieler[$i];
-                $statement = $pdo->prepare('insert into FavoritenSpieler (username, lfdnrfavorit, lfdnrspieler, name, istusername, 
-                                            angelegtam, geaendertam) values(:username, :lfdNrFavorit, :lfdNrSpieler, :name,
+                $statement = $pdo->prepare('insert into FavoritenSpieler (username, namefavorit, lfdnr, name, istusername, 
+                                            angelegtam, geaendertam) values(:username, :nameFavorit, :lfdNr, :name,
                                             :istUsername, NOW(), NOW())');
-                $sqlParams = array(':username' => $username, ':lfdNrFavorit' => $lfdNr, ':lfdNrSpieler' => ($i + 1),
+                $sqlParams = array(':username' => $username, 'nameFavorit' => $nameFavorit, ':lfdNr' => ($i + 1),
                                 ':name' => $spielerName, ':istUsername' => false);
                 $dbResult = $statement->execute($sqlParams);
                 $i++;

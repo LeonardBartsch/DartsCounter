@@ -1,7 +1,7 @@
 <?php
 $error = $loginErfolgreich = false;
 $errorText = $eingeloggterUser = '';
-$geradeEingeloggt = (isset($_GET['login']) and $_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['usernameLogin']));
+$geradeEingeloggt = (isset($_POST['submitLogin']) and $_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['usernameLogin']));
 if($geradeEingeloggt){
   $username = test_input($_POST['usernameLogin']);
   $passwort = test_input($_POST['passwortLogin']);
@@ -41,7 +41,7 @@ if($geradeEingeloggt){
     <img class="adpic" src="../pics/dartpfeilpic.png" alt="">
     <div class="right">
       <?php if($eingeloggterUser === ''): ?>    
-      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?login=1';?>" method="POST">
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
         <table>
           <tr>
             <td><span class="loginfont">Username:</span> </td>
@@ -52,7 +52,7 @@ if($geradeEingeloggt){
             <td><input type="password" class="fixedwidth" name="passwortLogin" placeholder="Password"></td>
           </tr>
           <tr>
-            <td colspan="2"><input type="submit" class="accountButton orange customcursor" style="height:28px;" name="Login" value="Login">
+            <td colspan="2"><input type="submit" class="accountButton orange customcursor" style="height:28px;" name="submitLogin" value="Login">
             <!--<td><input type="submit" class="accountButton grey fixedwidth customcursor" style="height:28px;" id="comingsoon" name="Registrieren" value="Registrieren"></td>-->
             <a href="javascript:undefined;" class="registrierenLink" onclick="showHideRegistrieren();">Noch nicht registriert?</a></td>
           </tr>
@@ -91,7 +91,7 @@ if($geradeEingeloggt){
 <?php
 $errorText = $username = $email = $passwort = $passwortWiederholung = '';
 $error = $anmeldungErfolgreich = false;
-$registrierenAnzeigen = (isset($_GET["register"]) and $_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['username']));
+$registrierenAnzeigen = (isset($_POST["submitRegistrieren"]) and $_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST['username']));
 
 if($registrierenAnzeigen){
   $username = test_input($_POST['username']);
@@ -140,7 +140,7 @@ if($registrierenAnzeigen){
     $statement = $pdo->prepare('insert into Spieler (username, email, passwort, status, emailBestaetigungNummer, angelegtam, geaendertam) 
                                 values (:username, :email, :passwort, :status, :randomNummer, NOW(), NOW())');
     $result = $statement->execute(array(':username' => $username, ':email' => $email, 
-                                        ':passwort' => password_hash($passwort, PASSWORD_DEFAULT), ':status' => Status::Offen,
+                                        ':passwort' => password_hash($passwort, PASSWORD_DEFAULT), ':status' => AccountStatus::Offen,
                                         ':randomNummer' => $randomNumber));
     if(!$result){
       $error = true;
@@ -175,13 +175,13 @@ if($registrierenAnzeigen){
 ?>
 <div id="registrieren" <?php if($registrierenAnzeigen) {echo "style=display:block;";} ?>>
   <div style="text-align: right;"><span class="schliessenX" onclick="showHideRegistrieren();">x</span></div>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?register=1';?>" method="POST">
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
     <div class="grid-container">
       <span class="label">Username: </span><input type="text" name="username" placeholder="z. Bsp. &quot;MaxMustermann1999&quot;" value="<?php echo $username ?>">
       <span class="label">E-Mail: </span><input type="text" name="email" placeholder="E-Mail" value="<?php echo $email ?>">
       <span class="label">Passwort: </span><input type="password" name="passwort" placeholder="Passwort" value="<?php echo $passwort ?>">
       <span class="label">Passwort wiederholen: </span><input type="password" name="passwortWiederholen" placeholder="Passwort wiederholen" value="<?php echo $passwortWiederholung ?>">
-      <input type="submit" class="buttonColumn" value="Registrieren">
+      <input type="submit" class="buttonColumn" name="submitRegistrieren" value="Registrieren">
     </div>
   </form>
   <?php

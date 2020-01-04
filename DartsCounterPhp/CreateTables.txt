@@ -16,7 +16,6 @@ CREATE TABLE `Spieler` (
 
 CREATE TABLE `Favoriten` (
  `Username` varchar(50) NOT NULL,
- `LfdNr` int(11) NOT NULL,
  `Name` varchar(255) NOT NULL,
  `Spielmodus` tinyint(4) NOT NULL,
  `Startpunktzahl` int(11) NOT NULL,
@@ -26,16 +25,16 @@ CREATE TABLE `Favoriten` (
  `OutWurf` tinyint(4) NOT NULL,
  `AngelegtAm` datetime NOT NULL,
  `GeaendertAm` datetime NOT NULL,
- PRIMARY KEY (`Username`,`LfdNr`)
+ PRIMARY KEY (`Username`,`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `FavoritenSpieler` (
  `Username` varchar(50) NOT NULL,
- `LfdNrFavorit` int(11) NOT NULL,
- `LfdNrSpieler` int(11) NOT NULL,
+ `NameFavorit` varchar(255) NOT NULL,
+ `LfdNr` int(11) NOT NULL,
  `Name` varchar(50) NOT NULL,
  `IstUsername` tinyint(1) NOT NULL,
  `AngelegtAm` datetime NOT NULL,
  `GeaendertAm` datetime NOT NULL,
- PRIMARY KEY (`Username`,`LfdNrFavorit`,`LfdNrSpieler`)
+ PRIMARY KEY (`Username`,`NameFavorit`,`LfdNr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1

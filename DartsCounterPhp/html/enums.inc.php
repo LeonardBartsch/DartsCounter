@@ -1,6 +1,6 @@
 <?php
 // Enums
-abstract class Status {
+abstract class AccountStatus {
     const Offen = 0;
     const Aktiviert = 1;
 }

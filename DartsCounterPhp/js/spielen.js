@@ -242,30 +242,15 @@ class Wurf {
 
 
 // ------------------------------------------------- Initialisieren der Seite -----------------------------------------------
-function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-      window.onload = func;
-    } else {
-      window.onload = function() {
-        if (oldonload) {
-          oldonload();
-        }
-        func();
-      }
-    }
-}
-
-addLoadEvent(function() {
+$(document).ready(function(){
     spielEinstellungen();
 
     initialisieren();
 
-    let punktButtons = document.querySelectorAll(".punktButton");
-    punktButtons.forEach(x => x.addEventListener('click', function() {
-        werfen(Number(x.innerHTML.match(/\d+/g)[0]));
-    }));
-  });
+    $(".punktButton").click(function(){
+        werfen(Number($(this).html().match(/\d+/g)[0]));
+    })
+  })
 
   
 function spielEinstellungen() {

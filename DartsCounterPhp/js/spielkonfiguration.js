@@ -155,7 +155,7 @@ function weiterleiten() {
     let parameterString = getParameterString();
     if(parameterString === '') return;
 
-    window.location.href = '../html/spiel.html?' + parameterString;
+    window.location.href = '../html/spiel.php?' + parameterString;
 }
 
 function spielerArrayFuellen() {

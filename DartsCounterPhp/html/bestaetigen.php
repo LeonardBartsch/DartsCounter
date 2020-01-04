@@ -23,9 +23,9 @@ include('generalFunctions.inc.php');
             if($statement->execute(array(':username' => $username, ':nummer' => $zahl))){
                 $user = $statement->fetch();
                 if($user <> false){
-                    if(intval($user['Status']) === Status::Offen){
+                    if(intval($user['Status']) === AccountStatus::Offen){
                         $statement = $pdo->prepare('update Spieler set status = :status where username = :username');
-                        if($statement->execute(array(':status' => Status::Aktiviert, ':username' => $username))){
+                        if($statement->execute(array(':status' => AccountStatus::Aktiviert, ':username' => $username))){
                             $bestaetigungErfolgreich = true;
                             $hinweisText = 'Bestätigung erfolgreich!';
                         }

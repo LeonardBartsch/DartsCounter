@@ -1,25 +1,10 @@
-function addLoadEvent(func) {
-  var oldonload = window.onload;
-  if (typeof window.onload != 'function') {
-    window.onload = func;
-  } else {
-    window.onload = function() {
-      if (oldonload) {
-        oldonload();
-      }
-      func();
-    }
-  }
-}
-  
-addLoadEvent(function() {
-    favoritenErmitteln();
-});
-
 $(document).ready(function(){
   $("#normalButton").click(function(){weiterleiten(Spielmodus.Normal);});
   $("#cricketButton").click(comingsoon);
   $("#bobButton").click(comingsoon);
+
+  favoritenErmitteln();
+  favoritenLoeschenHinzufuegen();
 });
 
 function beschreibungAnzeigen(divid) {
@@ -40,8 +25,12 @@ function weiterleiten(modus) {
 }
 
 const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
-let favoritenKeys = [];
+let favoritenKeys = [], favoritenLokal = false;
 function favoritenErmitteln() {
+  favoritenLokal = ($("#favoritenLokal").text() == 1);
+
+  if(!favoritenLokal) return;
+
   let keyString = localStorage.getItem(keyFuerFavoritenKeys);
   console.log(keyString);
   if(keyString === '' || keyString === null) 
@@ -56,17 +45,55 @@ function favoritenErmitteln() {
 
   for(let i = 0; i < keys.length; i++) {
       console.log(i);
-      favoritenKeys.push(keys[i]);
+      let key = keys[i];
+      favoritenKeys.push(key);
       let li = document.createElement('li');
-      li.classList.add('favorit');
-      let temp = i;
-      li.addEventListener('click', function() {
-          favoritClick(temp);
-      });
-      li.innerHTML = keys[i];
+      let a = document.createElement("a");
+      a.classList.add("favorit");
+      a.innerHTML = key;
+
+      let parameterString = localStorage.getItem(key);
+      if(parameterString === null) {
+        favoritLoeschen(key);
+        console.log('Favorit nicht mehr vorhanden.');
+        continue;
+      }
+      a.href = "spiel.php?" + parameterString;
+      li.appendChild(a);
       document.getElementById('favoritenListe').appendChild(li);
   }
+}
 
+const PhpStatus = {
+  Fehlgeschlagen: 0,
+  Erfolgreich: 1,
+  NichtAngemeldet: 2
+};
+function favoritenLoeschenHinzufuegen() {
+  $("#favoritenListe .favorit").each(function(){
+    let favoritName = $(this).text();
+    let element = $("<img src='../pics/delete.jpg' class='deletePic'>").click(function(){
+      if(favoritenLokal){
+        favoritLoeschen(favoritName);
+        $(this).parent().remove();
+      }else{
+        $.post("favoritLoeschen.php", {favoritName: favoritName}, function(data){
+          let dataInt = parseInt(data);
+          switch(dataInt){
+            case PhpStatus.Erfolgreich:
+              $(".favorit:contains('" + favoritName + "')").parent().remove();
+              break;
+            case PhpStatus.NichtAngemeldet:
+              alert('Nicht mehr angemeldet');
+              break;
+            default:
+              alert('Fehler beim Löschen');
+          }
+        });   
+      }
+    });
+    $(this).after(element);
+  });
 }
 
 function favoritClick(index) {
@@ -79,7 +106,7 @@ function favoritClick(index) {
     return;
   }
 
-  window.location.href = '../html/spiel.html?' + parameterString;
+  window.location.href = '../html/spiel.php?' + parameterString;
 }
 
 function favoritLoeschen(key) {
