@@ -185,3 +185,13 @@
 .bottuns:hover {
   transform: scale(1.1);
 }
+
+/* ------------------------------------------------------------- Sonstiges ------------------------------------------------------------------- */
+
+.nichtEingeloggtSpan {
+  margin-top: 50px;
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  color: white;
+}

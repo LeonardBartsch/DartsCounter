@@ -4,7 +4,6 @@ $(document).ready(function(){
   $("#bobButton").click(comingsoon);
 
   favoritenErmitteln();
-  favoritenLoeschenHinzufuegen();
 });
 
 function beschreibungAnzeigen(divid) {
@@ -25,43 +24,56 @@ function weiterleiten(modus) {
 }
 
 const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
-let favoritenKeys = [], favoritenLokal = false;
+let favoritenKeys = []; 
 function favoritenErmitteln() {
-  favoritenLokal = ($("#favoritenLokal").text() == 1);
+  
+  $.get('../html/favoritenErmitteln.php', function(data) {
+    let favoritenLokal = (data.favoritenLokal !== false || data.favoritenLokal === "true");
 
-  if(!favoritenLokal) return;
-
-  let keyString = localStorage.getItem(keyFuerFavoritenKeys);
-  console.log(keyString);
-  if(keyString === '' || keyString === null) 
-      return;
-    
-  let keys = keyString.split(seperator);
-  if(keys.length === 0){
-    return;
-  }else { 
-    document.getElementById('favoriten').classList.remove('unsichtbar');
-  }
-
-  for(let i = 0; i < keys.length; i++) {
-      console.log(i);
-      let key = keys[i];
-      favoritenKeys.push(key);
-      let li = document.createElement('li');
-      let a = document.createElement("a");
-      a.classList.add("favorit");
-      a.innerHTML = key;
-
-      let parameterString = localStorage.getItem(key);
-      if(parameterString === null) {
-        favoritLoeschen(key);
-        console.log('Favorit nicht mehr vorhanden.');
-        continue;
+    let dictionary = {};
+    if(favoritenLokal){
+      let keyString = localStorage.getItem(keyFuerFavoritenKeys);
+      
+      let keys = [];
+      if(!(keyString === '' || keyString === null)){          
+        keys = keyString.split(seperator);      
       }
-      a.href = "spiel.php?" + parameterString;
-      li.appendChild(a);
-      document.getElementById('favoritenListe').appendChild(li);
-  }
+
+      for(let i = 0; i < keys.length; i++){
+        let key = keys[i];
+        let parameterString = localStorage.getItem(key);
+        if(parameterString === null) {
+          favoritLoeschen(key);
+          continue;
+        }
+
+        dictionary[key] = parameterString;
+      }
+    }else{
+      let favoriten = data.favoriten;
+      // Favoriten besteht aus mehren Properties, die wiederum Json sind
+      for (let key in favoriten) {
+        if (favoriten.hasOwnProperty(key)) {
+            let einstellungenJson = favoriten[key];
+            let parameterString = getParameterStringGeneral(einstellungenJson);
+
+            if(parameterString === '') continue;
+
+            dictionary[key] = parameterString;
+        }
+      }
+    }
+
+    if(Object.keys(dictionary).length > 0){
+      $('#favoriten').removeClass('unsichtbar');
+    }
+
+    for(let key in dictionary){
+      if(dictionary.hasOwnProperty(key)){
+        appendFavorit(key, dictionary[key], favoritenLokal);
+      }
+    }
+  }, 'json'); 
 }
 
 const PhpStatus = {
@@ -69,19 +81,25 @@ const PhpStatus = {
   Erfolgreich: 1,
   NichtAngemeldet: 2
 };
-function favoritenLoeschenHinzufuegen() {
-  $("#favoritenListe .favorit").each(function(){
-    let favoritName = $(this).text();
-    let element = $("<img src='../pics/delete.jpg' class='deletePic'>").click(function(){
+function appendFavorit(key, parameterString, favoritenLokal) {
+  let li = document.createElement('li');
+  let a = document.createElement("a");
+  a.classList.add("favorit");
+  a.innerHTML = key;
+  a.href = "spiel.php?" + parameterString;
+  li.appendChild(a);
+
+  $(li).append(
+    $("<img src='../pics/delete.jpg' class='deletePic'>").click(function(){
       if(favoritenLokal){
-        favoritLoeschen(favoritName);
-        $(this).parent().remove();
+        favoritLoeschen(key);
+        favoritEntfernen(key);
       }else{
-        $.post("favoritLoeschen.php", {favoritName: favoritName}, function(data){
+        $.post("favoritLoeschen.php", {favoritName: key}, function(data){
           let dataInt = parseInt(data);
           switch(dataInt){
             case PhpStatus.Erfolgreich:
-              $(".favorit:contains('" + favoritName + "')").parent().remove();
+              favoritEntfernen(key);
               break;
             case PhpStatus.NichtAngemeldet:
               alert('Nicht mehr angemeldet');
@@ -91,9 +109,17 @@ function favoritenLoeschenHinzufuegen() {
           }
         });   
       }
-    });
-    $(this).after(element);
-  });
+    }));
+
+  document.getElementById('favoritenListe').appendChild(li);
+}
+
+function favoritEntfernen(key){
+  $(".favorit:contains('" + key + "')").parent().remove();
+
+  if(!$("#favoritenListe").has("li").length){
+    $("#favoriten").addClass("unsichtbar");
+  }
 }
 
 function favoritClick(index) {

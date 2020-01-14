@@ -79,3 +79,20 @@ function computedStyle(el,style) {
   }
   return  cs[style];
 }
+
+function getParameterStringGeneral(einstellungen) {
+  let result = '';
+    
+  for (let property in einstellungen){
+      if(einstellungen.hasOwnProperty(property)){
+          if(einstellungen[property] === 0){
+              return '';
+          }
+          result += property + '=' + einstellungen[property] + ';'; 
+      }
+  }
+
+  result.slice(0, result.length - 1);
+
+  return result;
+}

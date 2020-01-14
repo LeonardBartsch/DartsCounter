@@ -164,7 +164,7 @@ if($userGefunden):
 <?php else: ?>
 
   <div>
-    <span><?php echo $angemeldet? 'Fehler beim Ermitteln der Account-Daten!' : 'Bitte einloggen'; ?></span>
+    <span class="nichtEingeloggtSpan"><?php echo $angemeldet? 'Fehler beim Ermitteln der Account-Daten!' : 'Bitte einloggen!'; ?></span>
   </div> 
 <?php endif ?>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER++++++++++++++++++++++++++++++++++++++++++++-->

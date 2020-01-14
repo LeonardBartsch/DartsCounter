@@ -260,20 +260,10 @@ function handleKeydown(event) {
 }
 
 function getParameterString() {
-    let result = '';
+    let result = getParameterStringGeneral(einstellungenPhp);
+
+    if (result === '') alert('Eine Einstellung wurde nicht richtig getroffen!');
     
-    for (let property in einstellungenPhp){
-        if(einstellungenPhp.hasOwnProperty(property)){
-            if(einstellungenPhp[property] === 0){
-                alert('Eine Einstellung wurde nicht richtig getroffen!');
-                return '';
-            }
-            result += property + '=' + einstellungenPhp[property] + ';'; 
-        }
-    }
-
-    result.slice(0, result.length - 1);
-
     return result;
 }
 

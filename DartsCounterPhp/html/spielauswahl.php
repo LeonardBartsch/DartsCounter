@@ -67,60 +67,12 @@ include('enums.inc.php');
         </table>
       </div>
 
-      <?php 
-        // Favoriten ermitteln
-        $favoritenLokal = true;
-        if(isset($_SESSION['username'])){
-          $favoritenLokal = false;
-          $username = $_SESSION['username'];
-          if(!isset($pdo)){
-            $pdo = getPDO();
-          }
-
-          $statement = $pdo->prepare('select * from Favoriten where username = :username');
-          $statement->execute(array(':username' => $username));
-          
-          $dbSpalteZuKey = array('legs' => 'AnzahlLegs', 'sets' => 'AnzahlSets', 'punkte' => 'Startpunktzahl', 'wurfIn' => 'InWurf',
-                                 'wurfOut' => 'OutWurf');
-          $dic = array();
-          //$favorit = $statement->fetch();
-          foreach($statement->fetchAll() as $favorit){
-            $nameFavorit = $favorit['Name'];
-            $statementSpieler = $pdo->prepare('select * from FavoritenSpieler where username = :username and namefavorit = :nameFavorit order by lfdnr');
-            $statementSpieler->execute(array(':username' => $username, ':nameFavorit' => $nameFavorit));
-
-            $spielerString = '';
-            //$spieler = $statementSpieler->fetch();
-            foreach($statementSpieler->fetchAll() as $spieler){
-              if($spielerString <> '') $spielerString .= ',';
-              $spielerString .= $spieler['Name'];
-
-              //$spieler = $statementSpieler->fetch();
-            }
-
-            $parameterString = "spieler=$spielerString;";
-            foreach($dbSpalteZuKey as $key => $spalte){
-              $wert = $favorit[$spalte];
-              $parameterString .= "$key=$wert;"; 
-            }
-
-            $dic[$nameFavorit] = $parameterString;
-          }
-        }
-      ?>
       <!--+++++++++++++++++++++++++++++++++++++++++++++++++++ Favoriten ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-      <div class="favoritenDiv">
-        <h2 id="favoriten" class="<?php if($favoritenLokal or count($dic) === 0) echo 'unsichtbar'; ?>">Favoriten</h1>
+      <div id="favoriten" class="favoritenDiv unsichtbar">
+        <h2>Favoriten</h2>
         <ul id="favoritenListe">
-          <?php 
-          if(!$favoritenLokal){
-            foreach($dic as $key => $value){
-              echo "<li><a href='spiel.php?$value' class='favorit'>$key</a></li>";
-            }
-          }
-          ?>
+        
         </ul>
-        <span hidden id="favoritenLokal"><?php echo $favoritenLokal; ?></span>
       </div>
     </div>
 
