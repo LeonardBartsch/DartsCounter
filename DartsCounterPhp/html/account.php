@@ -28,11 +28,11 @@ if($angemeldet and $_SERVER["REQUEST_METHOD"] === "POST" and isset($_POST['submi
   $sicherheitsAntwort = $sicherheitsFrage === Sicherheitsfrage::Keine? '' : $_POST['sicherheitsfrageAntwortEinstellung'];
   $anzeigeName = $_POST['anzeigeNameEinstellung'];
 
-  $pdo = getPDO();
-  $statement = $pdo->prepare('update Spieler set sicherheitsfrage = :sicherheitsfrage, sicherheitsfrageantwort = :antwort,
-                 anzeigename = :anzeigename, geaendertam = NOW() where username = :username');
-  $result = $statement->execute(array(':sicherheitsfrage' => $sicherheitsFrage, ':antwort' => $sicherheitsAntwort, 
-                             ':anzeigename' => $anzeigeName, ':username' => $_SESSION['username']));
+  $sql = 'update Spieler set sicherheitsfrage = :sicherheitsfrage, sicherheitsfrageantwort = :antwort,
+          anzeigename = :anzeigename, geaendertam = NOW() where username = :username';
+  $params = array(':sicherheitsfrage' => $sicherheitsFrage, ':antwort' => $sicherheitsAntwort, 
+                  ':anzeigename' => $anzeigeName, ':username' => $_SESSION['username']);
+  $result = Db::execute($sql, $params);
 
   $speichernHinweistext = $result? "Änderungen wurden erfolgreich gespeichert" : "Fehler beim Speichern der Änderungen";
 }
@@ -42,17 +42,12 @@ $userGefunden = false;
 if($angemeldet) {
   $username = $_SESSION['username'];
 
-  if(!isset($pdo)) $pdo = getPDO();
+  $sql = 'select * from Spieler where username = :username';
+  $user = Db::single($sql, array('username' => $username), $success);
 
-  $statement = $pdo->prepare('select * from Spieler where username = :username');
-  $result = $statement->execute(array('username' => $username));
-
-  if($result){
-    $user = $statement->fetch();
-    if($user){
+  if($success){
       $userGefunden = true;
-      $sicherheitsFrage = intval($user['Sicherheitsfrage']);
-    }
+      $sicherheitsFrage = intval($user['Sicherheitsfrage']);    
   }
 }
 
@@ -100,12 +95,12 @@ if($userGefunden):
   <h2 class="statistikenHeading">Statistiken</h2>
   <div class="statistikenDiv">
     <div class="menuepunkttabelle">
-      <button id="buttonSicherheit" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Allgemein</button>
-      <button id="buttonAccount" class="buttons" type="button" name="Accountinfo" onclick="switchMenue('Account');">Freunde</button>
-      <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenue('ComingSoon');">Favoriten</button>
+      <button id="buttonAllgemein" class="buttons ausgewaehlt" type="button" name="Allgemein" onclick="switchMenueStatistik('Allgemein');">Allgemein</button>
+      <button id="buttonFreunde" class="buttons" type="button" name="Freunde" onclick="switchMenueStatistik('Freunde');">Freunde</button>
+      <button id="buttonComingSoon" class="buttons" type="button" name="Comingsoon" onclick="switchMenueStatistik('ComingSoon');">Coming Soon</button>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue ausgewaehlt" id="einstellungenSicherheit">
+    <div class="untermenue ausgewaehlt" id="menueAllgemein">
       <p class="einstellungentext">Siege: ???</p>
       <!--<div class="bearbeiten" style="text-align: center;">
         <button type="button" name="bearbeiten" class="bottuns">bearbeiten</button>
@@ -116,7 +111,7 @@ if($userGefunden):
       <p class="einstellungentext">Average: ???</p>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue unsichtbar" id="einstellungenAccount">
+    <div class="untermenue unsichtbar" id="menueFreunde">
       <div class="benutzername">
         <p class="einstellungentext">Benutzername: ???</p>
       </div>
@@ -137,7 +132,7 @@ if($userGefunden):
       </div>
     </div>
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    <div class="untermenue unsichtbar" id="einstellungenComingSoon">
+    <div class="untermenue unsichtbar" id="menueComingSoon">
       <div class="comingsoon1">
         <p class="einstellungentext">coming soon</p>
       </div>
@@ -159,6 +154,15 @@ if($userGefunden):
     </div>
   </div>
 
+  <!-- TODO: Favoriten bearbeiten implementieren
+  <div class="favoritenDiv unsichtbar">
+    <div class="menuepunkttabelle">
+      <button id="buttonStatistikAllgemein" class="buttons ausgewaehlt" type="button" name="Sicherheit" onclick="switchMenue('Sicherheit');">Allgemein</button>
+    </div>
+    <div class="untermenue" id="menueFavoritenLol">
+
+    </div>
+  </div>-->
 </div>
 
 <?php else: ?>

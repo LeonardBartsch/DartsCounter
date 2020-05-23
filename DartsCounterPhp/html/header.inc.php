@@ -9,14 +9,10 @@ if($geradeEingeloggt){
     $error = true;
     $errorText = 'Username oder Passwort nicht angegeben!';
   }else{
-    if(!isset($pdo)){
-      $pdo = getPDO();
-    }
-    $statement = $pdo->prepare('select * from Spieler where username = :username');
-    $statement->execute(array(':username' => $username));
-    $user = $statement->fetch();
-
-    if($user !== false and password_verify($passwort, $user['Passwort'])){
+    $sql = 'select * from Spieler where username = :username';
+    $user = Db::single($sql, array(':username' => $username), $success);
+    
+    if($success and password_verify($passwort, $user['Passwort'])){
       $_SESSION['username'] = $username;
       $loginErfolgreich = true;
       $eingeloggterUser = $username;
@@ -115,15 +111,13 @@ if($registrierenAnzeigen){
     $errorText = 'Passwörter stimmen nicht überein!';
   }
 
-  if(!isset($pdo)){
-    $pdo = getPDO();
-  }
-
   if(!$error){
     // schauen, ob es bereits jemanden mit diesem Username oder dieser E-Mail gibt
-    $statement = $pdo->prepare('select * from Spieler where username = :username or email = :email');
-    if($statement->execute(array(':username' => $username, ':email' => $email))){
-      if($statement->fetch() <> false){
+    $sql = 'select * from Spieler where username = :username or email = :email';
+    $params = array(':username' => $username, ':email' => $email);
+    $vorhandeneUser = Db::get($sql, $params, $success);
+    if($success){
+      if(count($vorhandeneUser) > 0){
         $error = true;
         $errorText = 'Es gibt bereits einen Spieler mit diesem Benutzernamen oder mit dieser E-Mail!';
       }
@@ -137,12 +131,11 @@ if($registrierenAnzeigen){
     // Zufällige Zahl zur Bestätigung der E-Mail generieren
     $randomNumber = random_int(0, 1000000);
     // Daten speichern
-    $statement = $pdo->prepare('insert into Spieler (username, email, passwort, status, emailBestaetigungNummer, angelegtam, geaendertam) 
-                                values (:username, :email, :passwort, :status, :randomNummer, NOW(), NOW())');
-    $result = $statement->execute(array(':username' => $username, ':email' => $email, 
-                                        ':passwort' => password_hash($passwort, PASSWORD_DEFAULT), ':status' => AccountStatus::Offen,
-                                        ':randomNummer' => $randomNumber));
-    if(!$result){
+    $sql = 'insert into Spieler (username, email, passwort, status, emailBestaetigungNummer, angelegtam, geaendertam) 
+            values (:username, :email, :passwort, :status, :randomNummer, NOW(), NOW())';
+    $params = array(':username' => $username, ':email' => $email, ':passwort' => password_hash($passwort, PASSWORD_DEFAULT), 
+                    ':status' => AccountStatus::Offen, ':randomNummer' => $randomNumber);
+    if(!Db::execute($sql, $params)){
       $error = true;
       $errorText = 'Registrierung fehlgeschlagen!';
     }else{
@@ -196,5 +189,3 @@ if($registrierenAnzeigen){
     }
   ?>
 </div>
-
-<?php unset($pdo) ?>

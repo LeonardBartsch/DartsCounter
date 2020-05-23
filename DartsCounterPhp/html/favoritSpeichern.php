@@ -10,16 +10,13 @@ abstract class StatusPhp {
 }
 
 function getNeueLfdNr($username) {
-    if(!isset($pdo)){
-        $pdo = getPDO();
-    }
-
+    
     // Es gibt kein Top-Keyword bei MySql
-    $statement = $pdo->prepare('select LfdNr from Favoriten where username = :username order by lfdnr desc limit 1');
-    $statement->execute(array(':username' => $username));
-    $favorit = $statement->fetch();
+    $sql = 'select LfdNr from Favoriten where username = :username order by lfdnr desc limit 1';
+    $params = array(':username' => $username);
+    $favorit = Db::single($sql, $params, $success);
 
-    if($favorit <> null){
+    if($success){
         return $favorit['LfdNr'] + 1;
     }else{
         return 1;
@@ -67,9 +64,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
 
-        if(!is_array($spieler)){
-            //die("Kein Array");
-        }
         $error = ($error or !is_array($spieler));
     }
 
@@ -81,43 +75,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $sqlParams[':username'] = $username;
         $sqlParams[':name'] = $nameFavorit;
         
-        $pdo = getPDO();
-        $pdo->beginTransaction();
-        $statement = $pdo->prepare('insert into Favoriten (username, name, spielmodus, startpunktzahl, anzahllegs, anzahlsets, 
-                                    inwurf, outwurf, angelegtam, geaendertam) values(:username, :name, :modus, :punkte,
-                                    :legs, :sets, :wurfIn, :wurfOut, NOW(), NOW())');
-        
-        $dbResult = $statement->execute($sqlParams);
-        if(!$dbResult){
-            $pdo->rollBack();
-            //die("Erste Abfrage fehlgeschlagen");
-        }else{
+        $dbResult = Db::runTransaction(function() use($sqlParams, $spieler){
+            $sql = 'insert into Favoriten (username, name, spielmodus, startpunktzahl, anzahllegs, anzahlsets, 
+                    inwurf, outwurf, angelegtam, geaendertam) values(:username, :name, :modus, :punkte,
+                    :legs, :sets, :wurfIn, :wurfOut, NOW(), NOW())';
+            
+            $dbResult = Db::execute($sql, $sqlParams);
+            if(!$dbResult) return false;
+                
             // Spieler speichern
             $i = 0;
             $length = count($spieler);
             do {
                 $spielerName = $spieler[$i];
-                $statement = $pdo->prepare('insert into FavoritenSpieler (username, namefavorit, lfdnr, name, istusername, 
-                                            angelegtam, geaendertam) values(:username, :nameFavorit, :lfdNr, :name,
-                                            :istUsername, NOW(), NOW())');
-                $sqlParams = array(':username' => $username, 'nameFavorit' => $nameFavorit, ':lfdNr' => ($i + 1),
-                                ':name' => $spielerName, ':istUsername' => false);
-                $dbResult = $statement->execute($sqlParams);
+                $sql = 'insert into FavoritenSpieler (username, namefavorit, lfdnr, name, istusername, 
+                        angelegtam, geaendertam) values(:username, :nameFavorit, :lfdNr, :name,
+                        :istUsername, NOW(), NOW())';
+                $sqlParamsNeu = array(':username' => $sqlParams[':username'], ':nameFavorit' => $sqlParams[':name'],
+                                    ':lfdNr' => ($i + 1), ':name' => $spielerName, ':istUsername' => false);
+                $dbResult = Db::execute($sql, $sqlParamsNeu);
                 $i++;
             }while($i < $length and $dbResult);
 
-            if(!$dbResult){
-                $pdo->rollBack();
-                //die("Zweite Abfrage fehlgeschlagen");
-            }else{
-                $pdo->commit();
-                $result = StatusPhp::Erfolgreich;
-            }
-        }
+            if(!$dbResult) return false;
+
+            return true;
+
+        });
+
+        if($dbResult)
+            $result = StatusPhp::Erfolgreich;
     }
 }
 
 echo $result;
 
-unset($pdo);
 ?>

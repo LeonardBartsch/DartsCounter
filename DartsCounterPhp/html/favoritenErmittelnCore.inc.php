@@ -1,30 +1,24 @@
 <?php
-session_start();
-include('generalFunctions.inc.php');
-
 $favoritenLokal = true;
 if(isset($_SESSION['username'])){
     $favoritenLokal = false;
     $username = $_SESSION['username'];
-    if(!isset($pdo)){
-      $pdo = getPDO();
-    }
-
-    $statement = $pdo->prepare('select * from Favoriten where username = :username');
-    $statement->execute(array(':username' => $username));
+    
+    $sql = 'select * from Favoriten where username = :username';
+    $favoriten = Db::get($sql, array(':username' => $username));
     
     $dbSpalteZuKey = array('legs' => 'AnzahlLegs', 'sets' => 'AnzahlSets', 'punkte' => 'Startpunktzahl', 'wurfIn' => 'InWurf',
                            'wurfOut' => 'OutWurf');
     $favoritenArray = array();
     
-    foreach($statement->fetchAll() as $favorit){
+    foreach($favoriten as $favorit){
       $nameFavorit = $favorit['Name'];
-      $statementSpieler = $pdo->prepare('select * from FavoritenSpieler where username = :username and namefavorit = :nameFavorit order by lfdnr');
-      $statementSpieler->execute(array(':username' => $username, ':nameFavorit' => $nameFavorit));
+      $sql = 'select * from FavoritenSpieler where username = :username and namefavorit = :nameFavorit order by lfdnr';
+      $spielerVonDb = Db::get($sql, array(':username' => $username, ':nameFavorit' => $nameFavorit));
 
       //$spielerString = '';
       $spielerArray = array();
-      foreach($statementSpieler->fetchAll() as $spieler){
+      foreach($spielerVonDb as $spieler){
         $spielerArray[] = $spieler['Name'];       
       }
 
@@ -45,7 +39,13 @@ if(isset($favoritenArray)){
     $result['favoriten'] = $favoritenArray;
 }
 
-echo json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
-
+/* Struktur $result: ['favoritenLokal' => false, 
+                      'favoriten' => ['Favorit1' => ['spieler' => ['Moritz', 'Fabi'],
+                                                     'legs' => 1, 'sets' => 1, 'punkte' => 501,
+                                                     'wurfIn' => 3, 'wurfOut' => 2],
+                                      'Favorit2' => [...]
+                                     ]
+                     ]
+*/
 ?>
 

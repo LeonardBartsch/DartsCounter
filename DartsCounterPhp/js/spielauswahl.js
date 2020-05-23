@@ -27,7 +27,7 @@ const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
 let favoritenKeys = []; 
 function favoritenErmitteln() {
   
-  $.get('../html/favoritenErmitteln.php', function(data) {
+  $.get('../html/favoritenErmittelnJson.php', function(data) {
     let favoritenLokal = (data.favoritenLokal !== false || data.favoritenLokal === "true");
 
     let dictionary = {};

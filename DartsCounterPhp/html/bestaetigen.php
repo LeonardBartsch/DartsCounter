@@ -18,20 +18,19 @@ include('generalFunctions.inc.php');
             $username = $_GET['username'];
             $zahl = $_GET['zahl'];
             
-            $pdo = getPDO();
-            $statement = $pdo->prepare('Select * from Spieler where username=:username and emailbestaetigungNummer=:nummer');
-            if($statement->execute(array(':username' => $username, ':nummer' => $zahl))){
-                $user = $statement->fetch();
-                if($user <> false){
-                    if(intval($user['Status']) === AccountStatus::Offen){
-                        $statement = $pdo->prepare('update Spieler set status = :status where username = :username');
-                        if($statement->execute(array(':status' => AccountStatus::Aktiviert, ':username' => $username))){
-                            $bestaetigungErfolgreich = true;
-                            $hinweisText = 'Bestätigung erfolgreich!';
-                        }
-                    }else{
-                        $hinweisText = "E-Mail wurde bereits bestätigt!";
+            $sql = 'Select * from Spieler where username=:username and emailbestaetigungNummer=:nummer';
+            $params = array(':username' => $username, ':nummer' => $zahl);
+            $user = Db::single($sql, $params, $success);
+            if($success){
+                if(intval($user['Status']) === AccountStatus::Offen){
+                    $sql = 'update Spieler set status = :status where username = :username';
+                    $params = array(':status' => AccountStatus::Aktiviert, ':username' => $username);
+                    if(Db::execute($sql, $params)){
+                        $bestaetigungErfolgreich = true;
+                        $hinweisText = 'Bestätigung erfolgreich!';
                     }
+                }else{
+                    $hinweisText = "E-Mail wurde bereits bestätigt!";
                 }
             }
         }
@@ -40,7 +39,6 @@ include('generalFunctions.inc.php');
             $hinweisText = 'Fehler!';
         }
 
-        $pdo = null;
         ?>
         <header>
             <img src="../pics/Logo.png" class="logo customcursor" alt="">

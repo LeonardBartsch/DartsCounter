@@ -23,37 +23,34 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(isset($_POST['favoritName'])){
         $name = $_POST['favoritName'];
 
-        $pdo = getPDO();
-        $statement = $pdo->prepare('select * from Favoriten where username = ? and name = ?');
+        $sql = 'select * from Favoriten where username = ? and name = ?';
         $sqlParams = array($username, $name);
-        $statement->execute($sqlParams);
-        if(!$statement->fetch()){
+        Db::single($sql, $sqlParams, $success);
+        if(!$success){
             echo Status::FavoritNichtVorhanden;
             exit();
         }
 
-        $pdo->beginTransaction();
+        $dbResult = Db::runTransaction(function() use($sqlParams) {
 
-        $statement = $pdo->prepare('delete from Favoriten where username = ? and name = ?');
-        $dbResult = $statement->execute($sqlParams);
+            $sql = 'delete from Favoriten where username = ? and name = ?';
+            $dbResult = Db::execute($sql, $sqlParams);
 
-        if(!$dbResult){
-            $pdo->rollBack();
-        }else{
-            $statement = $pdo->prepare('delete from FavoritenSpieler where username = ? and namefavorit = ?');
-            $dbResult = $statement->execute($sqlParams);
+            if(!$dbResult) return false;
+                            
+            $sql = 'delete from FavoritenSpieler where username = ? and namefavorit = ?';
+            $dbResult = Db::execute($sql, $sqlParams);
 
-            if(!$dbResult){
-                $pdo->rollBack();
-            }else{
-                $pdo->commit();
-                $result = Status::Erfolgreich;
-            }
-        }
+            if(!$dbResult) return false;
+
+            return true;
+        });
+
+        if($dbResult)
+            $result = Status::Erfolgreich;            
     }
 }
 
 echo $result;
 
-unset($pdo);
 ?>
