@@ -79,6 +79,32 @@ input[type=number].button {
   border-color: #ee9e09;
 }
 
+.ichButton {
+  background-color: grey;
+  border: 2px solid ;
+  border-radius: 6px;
+  border-color: grey;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  width: 40px;
+  margin-left: 5px;
+  cursor: pointer; 
+  font-size: 1.1em;
+}
+
+.entferneSpielerButton {
+  font-size: 1.1em;
+  color: red;
+  margin-left: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.entferneSpielerButton:hover {
+  font-size: 1.3em;
+}
+
 .spielenButton {
   width: 200px;
   font-size: 1.5em;
@@ -94,7 +120,7 @@ input[type=number].button {
   border-color: #559ef1;
 }
 
-.spielenButton:hover, .favoritButton:hover{
+.spielenButton:hover, .favoritButton:hover, .ichButton:hover {
   transform: scale(1.1);
 }
 

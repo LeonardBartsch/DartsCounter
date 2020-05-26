@@ -25,7 +25,8 @@ CREATE TABLE `Favoriten` (
  `OutWurf` tinyint(4) NOT NULL,
  `AngelegtAm` datetime NOT NULL,
  `GeaendertAm` datetime NOT NULL,
- PRIMARY KEY (`Username`,`Name`)
+ PRIMARY KEY (`Username`,`Name`),
+ CONSTRAINT `Favoriten_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `Spieler` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 
 CREATE TABLE `FavoritenSpieler` (
@@ -36,5 +37,75 @@ CREATE TABLE `FavoritenSpieler` (
  `IstUsername` tinyint(1) NOT NULL,
  `AngelegtAm` datetime NOT NULL,
  `GeaendertAm` datetime NOT NULL,
- PRIMARY KEY (`Username`,`NameFavorit`,`LfdNr`)
+ PRIMARY KEY (`Username`,`NameFavorit`,`LfdNr`),
+ CONSTRAINT `FavoritenSpieler_Username_NameFavorit_Favoriten_Username_Name` FOREIGN KEY (`Username`, `NameFavorit`) REFERENCES `Favoriten` (`Username`, `Name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `Spiele` (
+ `Id` int(11) NOT NULL,
+ `Spielmodus` tinyint(4) NOT NULL,
+ `AnzahlSpieler` tinyint(4) NOT NULL,
+ `Startpunktzahl` int(11) NOT NULL,
+ `InWurf` tinyint(4) NOT NULL,
+ `OutWurf` tinyint(4) NOT NULL,
+ `AnzahlSets` tinyint(4) NOT NULL,
+ `AnzahlLegs` tinyint(4) NOT NULL,
+ `Sieger` varchar(50) DEFAULT NULL,
+ `Host` varchar(50) DEFAULT NULL,
+ `FavoritName` varchar(255) DEFAULT NULL,
+ `AngelegtAm` datetime NOT NULL,
+ `GeaendertAm` datetime NOT NULL,
+ PRIMARY KEY (`Id`),
+ KEY `Sieger` (`Sieger`),
+ KEY `Host` (`Host`,`FavoritName`),
+ CONSTRAINT `Spiele_ibfk_4` FOREIGN KEY (`Sieger`) REFERENCES `Spieler` (`Username`) ON DELETE SET NULL ON UPDATE CASCADE,
+ CONSTRAINT `Spiele_ibfk_5` FOREIGN KEY (`Host`) REFERENCES `Spieler` (`Username`) ON DELETE SET NULL ON UPDATE CASCADE,
+ ) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+CREATE TABLE `SpieleLegs` (
+ `SpielId` int(11) NOT NULL,
+ `Username` varchar(50) NOT NULL,
+ `SetNr` tinyint(4) NOT NULL,
+ `LegNr` tinyint(4) NOT NULL,
+ `EndPunktzahl` int(11) NOT NULL,
+ `Platzierung` int(11) NOT NULL,
+ `AverageGeworfen` decimal(10,0) NOT NULL,
+ `Dauer` int(11) NOT NULL,
+ `AnzahlWuerfe` int(11) NOT NULL,
+ `AnzahlUeberworfen` int(11) NOT NULL,
+ `AnzahlHundertAchtziger` int(11) NOT NULL,
+ `AnzahlNullWuerfe` int(11) NOT NULL,
+ `AngelegtAm` datetime NOT NULL,
+ `GeaendertAm` datetime NOT NULL,
+ PRIMARY KEY (`SpielId`,`Username`,`SetNr`,`LegNr`),
+ KEY `SpieleLegs_Username_Spieler_Username` (`Username`),
+ CONSTRAINT `SpieleLegs_SpielId_Spiele_Id` FOREIGN KEY (`SpielId`) REFERENCES `Spiele` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ CONSTRAINT `SpieleLegs_Username_Spieler_Username` FOREIGN KEY (`Username`) REFERENCES `Spieler` (`Username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+DELIMITER $$
+create trigger Spieler_Angemeldet BEFORE INSERT on FavoritenSpieler 
+for EACH ROW
+BEGIN
+IF New.IstUsername = 1 and Not EXISTS(Select * from Spieler where Username = New.Name) THEN
+	SET New.FavoritName = Null;
+END If;
+END; $$
+
+CREATE TRIGGER Update_Favoriten_Spieler before update on Spieler
+for each ROW
+BEGIN
+Update FavoritenSpieler Set Name = New.Username 
+Where Name = Old.Username and IstUsername = 1;
+End; $$
+
+create trigger SpieleLegs_Richtige_Nummern BEFORE insert on SpieleLegs
+for each ROW
+BEGIN
+IF EXISTS(Select * from Spiele s where s.Id = New.SpielId 
+          and (s.AnzahlSets < New.SetNr Or s.AnzahlLegs < New.LegNr)) THEN
+  SET New.SpielId = Null;
+END IF;
+END; $$
+DELIMITER ;
+

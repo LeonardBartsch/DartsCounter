@@ -8,7 +8,7 @@ if(isset($_SESSION['username'])){
     $favoriten = Db::get($sql, array(':username' => $username));
     
     $dbSpalteZuKey = array('legs' => 'AnzahlLegs', 'sets' => 'AnzahlSets', 'punkte' => 'Startpunktzahl', 'wurfIn' => 'InWurf',
-                           'wurfOut' => 'OutWurf');
+                           'wurfOut' => 'OutWurf', 'modus' => 'Spielmodus');
     $favoritenArray = array();
     
     foreach($favoriten as $favorit){
@@ -19,7 +19,8 @@ if(isset($_SESSION['username'])){
       //$spielerString = '';
       $spielerArray = array();
       foreach($spielerVonDb as $spieler){
-        $spielerArray[] = $spieler['Name'];       
+        // Für jeden Spieler ein Json-Objekt mit Name und der Information, ob das der Username ist
+        $spielerArray[] = array('name' => $spieler['Name'], 'istAngemeldet' => $spieler['IstUsername']);       
       }
 
       $favoritEinstellungen = array('spieler' => $spielerArray);

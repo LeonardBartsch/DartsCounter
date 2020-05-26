@@ -11,12 +11,6 @@ function beschreibungAnzeigen(divid) {
     obj.style.display = obj.style.display == 'block' ? 'none' : 'block';
 }
 
-const Spielmodus = {
-  Normal : 0,
-  Cricket: 1,
-  Bob: 2
-}
-
 const modusParam = 'modus';
 
 function weiterleiten(modus) {
@@ -55,7 +49,8 @@ function favoritenErmitteln() {
       for (let key in favoriten) {
         if (favoriten.hasOwnProperty(key)) {
             let einstellungenJson = favoriten[key];
-            let parameterString = getParameterStringGeneral(einstellungenJson);
+            //let parameterString = getParameterStringGeneral(einstellungenJson);
+            let parameterString = encodeURI(JSON.stringify(einstellungenJson));
 
             if(parameterString === '') continue;
 
@@ -76,11 +71,6 @@ function favoritenErmitteln() {
   }, 'json'); 
 }
 
-const PhpStatus = {
-  Fehlgeschlagen: 0,
-  Erfolgreich: 1,
-  NichtAngemeldet: 2
-};
 function appendFavorit(key, parameterString, favoritenLokal) {
   let li = document.createElement('li');
   let a = document.createElement("a");

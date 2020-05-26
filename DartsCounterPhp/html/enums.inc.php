@@ -30,6 +30,12 @@ abstract class Spielmodus {
     const Bob = 2;
 }
 
+abstract class StatusPhp {
+    const Fehlgeschlagen = 0;
+    const Erfolgreich = 1;
+    const NichtAngemeldet = 2;
+}
+
 
 // Enums to String
 function sicherheitsFrageToString($value) {

@@ -3,33 +3,12 @@ session_start();
 include('enums.inc.php');
 include('generalFunctions.inc.php');
 
-abstract class StatusPhp {
-    const Fehlgeschlagen = 0;
-    const Erfolgreich = 1;
-    const NichtAngemeldet = 2;
-}
-
-function getNeueLfdNr($username) {
-    
-    // Es gibt kein Top-Keyword bei MySql
-    $sql = 'select LfdNr from Favoriten where username = :username order by lfdnr desc limit 1';
-    $params = array(':username' => $username);
-    $favorit = Db::single($sql, $params, $success);
-
-    if($success){
-        return $favorit['LfdNr'] + 1;
-    }else{
-        return 1;
-    }
-}
-
 $result = StatusPhp::Fehlgeschlagen;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Input in PHP-Array umwandeln
-    $rawBody = file_get_contents("php://input");
-    $json = json_decode($rawBody, true);
+    $json = jsonEinlesen();
     
     // Direkt abbrechen, wenn nicht angemeldet
     if(!isset($_SESSION['username'])){
@@ -87,12 +66,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $i = 0;
             $length = count($spieler);
             do {
-                $spielerName = $spieler[$i];
+                $spielerObj = $spieler[$i];
+                $spielerName = $spielerObj["name"];
+                $istUsername = $spielerObj["istAngemeldet"];
                 $sql = 'insert into FavoritenSpieler (username, namefavorit, lfdnr, name, istusername, 
                         angelegtam, geaendertam) values(:username, :nameFavorit, :lfdNr, :name,
                         :istUsername, NOW(), NOW())';
                 $sqlParamsNeu = array(':username' => $sqlParams[':username'], ':nameFavorit' => $sqlParams[':name'],
-                                    ':lfdNr' => ($i + 1), ':name' => $spielerName, ':istUsername' => false);
+                                    ':lfdNr' => ($i + 1), ':name' => $spielerName, ':istUsername' => $istUsername);
                 $dbResult = Db::execute($sql, $sqlParamsNeu);
                 $i++;
             }while($i < $length and $dbResult);

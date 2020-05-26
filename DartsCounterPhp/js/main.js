@@ -96,3 +96,20 @@ function getParameterStringGeneral(einstellungen) {
 
   return result;
 }
+
+// ---------------------------------------------- Enums ------------------------------------------------------
+const Spielmodus = {
+  Normal : 0,
+  Cricket: 1,
+  Bob: 2
+}
+const PhpStatus = {
+  Fehlgeschlagen: 0,
+  Erfolgreich: 1,
+  NichtAngemeldet: 2
+}
+const inOut = {
+  single: 1,
+  double: 2,
+  master: 3
+}

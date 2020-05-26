@@ -2,12 +2,6 @@
 
 //import {inOut, spielerParam, legsParam, setsParam, punkteParam, inParam, outParam} from './spielen.js';
 
-const inOut = {
-    single: 1,
-    double: 2,
-    master: 3
-}
-
 const spielerParam = 'spieler', legsParam = 'legs', setsParam = 'sets', punkteParam = 'punktzahl', 
       inParam = 'in', outParam = 'out';
 
@@ -15,6 +9,9 @@ function keyValuePair(key, value) {
     this.key = key;
     this.value = value;
 }
+
+// 8 mal der Wert false im Array
+let istUsername = Array(8).fill(false);
 
 let anzahlSpieler_ = 2;
 
@@ -29,6 +26,7 @@ let anzahlSpieler_ = 2;
 
 let einstellungenPhp = {
     spieler: [],
+    modus: Spielmodus.Normal,
     legs: 1,
     sets: 1,
     punkte: 501,
@@ -36,6 +34,72 @@ let einstellungenPhp = {
     wurfOut: inOut.double,
     favoritName: ''
 };
+
+let angemeldeterUser = '';
+$(document).ready(() => {
+    setAngemeldetenUser();
+
+    /*let angemeldet = (angemeldeterUser !== '');
+
+    if(angemeldet)
+        $(".ichButton").slice(0, 2).removeClass(unsichtbarClass);*/
+
+    $(".ichButton").click((event) => {
+        let index = getNrFromId(event.target.id) - 1;
+        istUsername[index] = true;
+        let textElement = $(event.target).parent().children(".spName");
+        textElement.val(angemeldeterUser);
+        textElement.prop("disabled", true);
+        $(event.target).parent().children(".entferneSpielerButton").removeClass(unsichtbarClass);
+        $(".ichButton").addClass(unsichtbarClass);
+        /*$(".ichButton").filter((x, el) => {
+            return el.id !== event.target.id;
+        }).addClass(unsichtbarClass);*/
+    });
+
+    $(".entferneSpielerButton").click((event) => {
+        let index = getNrFromId(event.target.id) - 1;
+        istUsername[index] = false;
+        let textElement = $(event.target).parent().children(".spName");
+        textElement.val("");
+        textElement.prop("disabled", false);
+        $(event.target).addClass(unsichtbarClass);
+        $(".ichButton").slice(0, anzahlSpieler_).removeClass(unsichtbarClass);
+    });
+
+    /*$(".spName").on("change", (event) => {
+        let nr = event.target.id.match(/\d{1}/g)[0];
+        let index = nr - 1; 
+        if(istUsername[index]) {
+            istUsername[index] = false;
+        }
+    });*/
+
+    /*$(document).on('focusin', 'spName', function(){
+        console.log("Saving value " + $(this).val());
+        // mit data() können Daten und Informationen an dem DOM-Element gespeichert werden
+        $(this).data('val', $(this).val());
+    }).on('change','input', function(){
+        var prev = $(this).data('val');
+        var current = $(this).val();
+        console.log("Prev value " + prev);
+        console.log("New value " + current);
+    });*/
+        
+});
+
+async function setAngemeldetenUser() {
+    await $.get("userErmitteln.php", '', (data) => {
+        angemeldeterUser =  data;
+    });
+
+    if(angemeldeterUser !== '')
+        $(".ichButton").slice(0, 2).removeClass(unsichtbarClass);
+}
+
+function getNrFromId(id) {
+    return id.match(/\d{1}/g)[0];
+}
 
 function setsClick(id) {
     let zahl = getButtonZahl(id);
@@ -139,6 +203,9 @@ function plusClick() {
     anzahlSpieler_++;
     let elemente = document.querySelectorAll('#' + spielerInputId + anzahlSpieler_)
     elemente.forEach(x => x.classList.remove(unsichtbarClass));
+
+    if(angemeldeterUser !== '')
+        $("#ichButton" + anzahlSpieler_).removeClass(unsichtbarClass);
 }
 
 function minusClick() {
@@ -146,6 +213,8 @@ function minusClick() {
         
     let elemente = document.querySelectorAll('#' + spielerInputId + anzahlSpieler_)
     elemente.forEach(x => x.classList.add(unsichtbarClass));
+    $("#ichButton" + anzahlSpieler_).addClass(unsichtbarClass);
+
     anzahlSpieler_--;
 }
 
@@ -166,16 +235,14 @@ function spielerArrayFuellen() {
             name = 'Spieler ' + i;
         }
         console.log(name);
-        einstellungenPhp.spieler.push(name);
+        einstellungenPhp.spieler.push({
+            name: name,
+            istAngemeldet: istUsername[i - 1]
+        });
     }
 }
 
 const keyFuerFavoritenKeys = 'favoritenTriple20', seperator = ';';
-const PhpStatus = {
-    Fehlgeschlagen: 0,
-    Erfolgreich: 1,
-    NichtAngemeldet: 2
-};
 
 function favoritSpeichern(name) {
     if(name === '') return;
@@ -260,8 +327,10 @@ function handleKeydown(event) {
 }
 
 function getParameterString() {
-    let result = getParameterStringGeneral(einstellungenPhp);
-
+    /*let result = getParameterStringGeneral(einstellungenPhp);
+    let resultLol = encodeURI(JSON.stringify(einstellungenPhp));
+    let resultJson = JSON.parse(decodeURI(resultLol));*/
+    let result = encodeURI(JSON.stringify(einstellungenPhp));
     if (result === '') alert('Eine Einstellung wurde nicht richtig getroffen!');
     
     return result;
@@ -272,11 +341,11 @@ function submitForm(action) {
     document.getElementById('columnarForm').submit();
 }
 
-const Spielmodus = {
+/*const Spielmodus = {
     Normal : 0,
     Cricket: 1,
     Bob: 2
-}
+}*/
 
 const modusParam = 'modus';
 

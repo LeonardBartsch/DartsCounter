@@ -165,17 +165,16 @@ include('enums.inc.php');
 
 <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++FOOTER++++++++++++++++++++++++++++++++++++++++++++-->
     <footer class="footer">
-    <div class="implinksdiv">
-        <span class="centerblock"><a href="#">Kontakt</a></span>
-        <span class="centerblock"><a href="#">Datenschutz</a></span>
-    </div>
-    <div class="copyrightdiv">
-        <span class="centerblock">Copyright ©2019 Triple20</span>
-    </div>
-    <div class="backtotopdiv" id="backtotop" onclick="backtotop">
-        <span class="centerblock backtotop" style="margin-top:10px">↑ Back To Top ↑ </span>
-    </div>
-        <script src="../js/main.js"></script>
+        <div class="implinksdiv">
+            <span class="centerblock"><a href="#">Kontakt</a></span>
+            <span class="centerblock"><a href="#">Datenschutz</a></span>
+        </div>
+        <div class="copyrightdiv">
+            <span class="centerblock">Copyright ©2019 Triple20</span>
+        </div>
+        <div class="backtotopdiv" id="backtotop" onclick="backtotop">
+            <span class="centerblock backtotop" style="margin-top:10px">↑ Back To Top ↑ </span>
+        </div>
     </footer>
 
 </html>

@@ -25,22 +25,63 @@ include('enums.inc.php');
             <input class="button plusMinus" type="button" id="1spieler" value="+" onclick="plusClick()">
             <input class="button plusMinus" type="button" id="2spieler" value="-" onclick="minusClick()">
             <div class="namen">
-              <span class="spielerSpan" id="name1">Spieler 1:</span>
-                <input class="spName" type="text" id="name1" placeholder="Spieler 1"><br id="name1">
-              <span class="spielerSpan" id="name2">Spieler 2:</span>
-                <input class="spName" type="text" id="name2" placeholder="Spieler 2"><br id="name2">
-              <span class="spielerSpan unsichtbar" id="name3">Spieler 3:</span>
-                <input class="spName unsichtbar" type="text" id="name3" placeholder="Spieler 3"><br id="name3" class="unsichtbar">
-              <span class="spielerSpan unsichtbar" id="name4">Spieler 4:</span>
-                <input class="spName unsichtbar" type="text" id="name4" placeholder="Spieler 4"><br id="name4" class="unsichtbar">
-              <span class="spielerSpan unsichtbar" id="name5">Spieler 5:</span>
-                <input class="spName unsichtbar" type="text" id="name5" placeholder="Spieler 5"><br id="name5" class="unsichtbar">
-              <span class="spielerSpan unsichtbar" id="name6">Spieler 6:</span>
-                <input class="spName unsichtbar" type="text" id="name6" placeholder="Spieler 6"><br id="name6" class="unsichtbar">
-              <span class="spielerSpan unsichtbar" id="name7">Spieler 7:</span>
-                <input class="spName unsichtbar" type="text" id="name7" placeholder="Spieler 7"><br id="name7" class="unsichtbar">
-              <span class="spielerSpan unsichtbar" id="name8">Spieler 8:</span>
-                <input class="spName unsichtbar" type="text" id="name8" placeholder="Spieler 8"><br id="name8" class="unsichtbar">
+              <div>
+                <span class="spielerSpan" id="name1">Spieler 1:</span>
+                <input class="spName" list="freunde" type="text" id="name1" placeholder="Spieler 1">
+                <input class="ichButton unsichtbar" type="button" id="ichButton1" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen1">X</span>
+                <br id="name1">
+              </div>
+              <div>
+                <span class="spielerSpan" id="name2">Spieler 2:</span>
+                <input class="spName" list="freunde" type="text" id="name2" placeholder="Spieler 2">
+                <input class="ichButton unsichtbar" type="button" id="ichButton2" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen2">X</span>
+                <br id="name2">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name3">Spieler 3:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name3" placeholder="Spieler 3">
+                <input class="ichButton unsichtbar" type="button" id="ichButton3" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen3">X</span>
+                <br id="name3" class="unsichtbar">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name4">Spieler 4:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name4" placeholder="Spieler 4">
+                <input class="ichButton unsichtbar" type="button" id="ichButton4" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen4">X</span>
+                <br id="name4" class="unsichtbar">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name5">Spieler 5:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name5" placeholder="Spieler 5">
+                <input class="ichButton unsichtbar" type="button" id="ichButton5" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen5">X</span>
+                <br id="name5" class="unsichtbar">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name6">Spieler 6:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name6" placeholder="Spieler 6">
+                <input class="ichButton unsichtbar" type="button" id="ichButton6" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen6">X</span>
+                <br id="name6" class="unsichtbar">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name7">Spieler 7:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name7" placeholder="Spieler 7">
+                <input class="ichButton unsichtbar" type="button" id="ichButton7" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen7">X</span>
+                <br id="name7" class="unsichtbar">
+              </div>
+              <div>
+                <span class="spielerSpan unsichtbar" id="name8">Spieler 8:</span>
+                <input class="spName unsichtbar" list="freunde" type="text" id="name8" placeholder="Spieler 8">
+                <input class="ichButton unsichtbar" type="button" id="ichButton8" value="Ich">
+                <span class="entferneSpielerButton unsichtbar" id="entfernen8">X</span>
+                <br id="name8" class="unsichtbar">
+              </div>
+              <datalist id="freunde"></datalist>
             </div>
           </div>
           <div class="Dauer">

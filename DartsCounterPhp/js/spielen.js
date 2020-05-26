@@ -2,11 +2,7 @@
 
 // ------------------------------------------- Globale Variablen -------------------------------------------------------------------
 const platzhalter = -1, indexErsterWurf = 2, indexLetzterWurf = 0, unsichtbarClass_ = 'unsichtbar'; 
-const inOut = {
-    single: 1,
-    double: 2,
-    master: 3
-}
+
 const Gewinn = {
     Leg: 0,
     Set: 1,
@@ -21,29 +17,35 @@ let aktuellerSpieler = 1, aktuellerWurf = 1, aktuellesLeg = 1, aktuellesSet = 1;
 
 // Spiel-Einstellungen
 let einstellungen = {
-    spieler: {key: spielerParam, value: ['Spieler 1', 'Spieler 2']},
-    legs: {key: legsParam, value: 1},
-    sets: {key: setsParam, value: 1},
-    punkte: {key: punkteParam, value: 501},
-    wurfIn: {key: inParam, value: inOut.single},
-    wurfOut: {key: outParam, value: inOut.double}
+    spieler: [{name: 'Spieler 1', istAngemeldet: false}, {name: 'Spieler 2', istAngemeldet: false}],
+    modus: Spielmodus.Normal,
+    legs: 1,
+    sets: 1,
+    punkte: 501,
+    wurfIn: inOut.single,
+    wurfOut: inOut.double
 }
 
 let spieler_ = [], sets_ = [];
 let wurfElemente_, spielerElemente_;
 
+// in Sekunden
+let dauerLeg = 0;
+
 // ----------------------------------------------------- Klassen --------------------------------------------------------------
 class Spieler {
-    constructor(name) {
+    constructor(name, istAngemeldet) {
         this.name_ = name;
+        this.istAngemeldet_ = istAngemeldet;
         this.letzteWuerfe_ = [neuesWurfSet()];
-        this.punktzahl_ = einstellungen.punkte.value;
+        this.punktzahl_ = einstellungen.punkte;
         this.anzahlWuerfe_ = 0;
         this.average_ = 0;
+        this.legStatistiken_ = [];
     }
 
     wurfEintragen(punktzahl) {
-        console.log('Anzahl Wurfsets vor Eintragung: ' + (this.aktuellesWurfSet() + 1));
+        //console.log('Anzahl Wurfsets vor Eintragung: ' + (this.aktuellesWurfSet() + 1));
         // checken, ob der erste Wurf richtig gemacht wurde
         if(this.anzahlWuerfe_ === 0) {
             if(!inOutKorrekt(true, punktzahl)) {
@@ -69,7 +71,7 @@ class Spieler {
                 }
             }
             
-            if(this.punktzahl_ === 1 && einstellungen.wurfOut.value !== inOut.single) {
+            if(this.punktzahl_ === 1 && einstellungen.wurfOut !== inOut.single) {
                 this.rollBack();
             }
         }
@@ -79,7 +81,7 @@ class Spieler {
         if(aktuellerWurf === 3){
             this.letzteWuerfe_.push(neuesWurfSet())
         }
-        console.log('Anzahl Wurfsets nach Eintragung: ' + (this.aktuellesWurfSet() + 1));
+        //console.log('Anzahl Wurfsets nach Eintragung: ' + (this.aktuellesWurfSet() + 1));
     }
 
     undoLastThrow() {
@@ -156,15 +158,17 @@ class Spieler {
     }
 
     werteZurueckSetzen() {
+        this.legStatistiken_.push(new SpielerStatistik(this.average_, this.letzteWuerfe_, this.punktzahl_));
+
         this.anzahlWuerfe_ = 0;
         this.average_ = 0;
         this.letzteWuerfe_ = [neuesWurfSet()];
-        this.punktzahl_ = einstellungen.punkte.value;
+        this.punktzahl_ = einstellungen.punkte;
     }
 
     setAverage() {
         if(this.anzahlWuerfe_ > 0){
-            this.average_ = (einstellungen.punkte.value - this.punktzahl_) / this.anzahlWuerfe_ * 3;
+            this.average_ = (einstellungen.punkte - this.punktzahl_) / this.anzahlWuerfe_ * 3;
         }else {
             this.average_ = 0;
         }
@@ -194,23 +198,31 @@ class Spieler {
     name() {
         return this.name_;
     }
+
+    istAngemeldet() {return this.istAngemeldet_}
+
+    legStatistik(index) {
+        return this.legStatistiken_[index];
+    }
 }
 
 class Set {
     constructor() {
         //this.setNr_ = nr;
         this.siegerLegs_ = [];
+        this.dauerLegs_ = [];
         this.sieger_ = platzhalter;
     }
 
     neuerSieger(spielerIndex) {
-        if(this.siegerLegs_.length === einstellungen.legs.value || this.sieger_ !== platzhalter) {
+        if(this.siegerLegs_.length === einstellungen.legs || this.sieger_ !== platzhalter) {
             console.log('Zu viele Sieger bzw. Sieger des Sets schon gefunden');
             return;
         }
 
         this.siegerLegs_.push(spielerIndex);
-        if(this.anzahlSiege(spielerIndex) > einstellungen.legs.value / 2){
+        this.dauerLegs_.push(dauerLeg);
+        if(this.anzahlSiege(spielerIndex) > einstellungen.legs / 2){
             this.sieger_ = spielerIndex;
         }
     }
@@ -231,6 +243,10 @@ class Set {
     sieger() {
         return this.sieger_;
     }
+
+    dauerLeg(index) {
+        return this.dauerLegs_[index];
+    }
 }
 
 class Wurf {
@@ -240,24 +256,69 @@ class Wurf {
     }
 }
 
+class SpielerStatistik {
+    constructor(average, wuerfe, punktzahl) {
+        this.average_ = average;
+        this.punktzahl_ = punktzahl;
+        this.wuerfe_ = wuerfe; 
+    }
+
+    average() {return this.average_}
+
+    punktzahl() {return this.punktzahl_}
+
+    wuerfeGesamt() {
+        //let length = this.wuerfe_.length;
+        //return length * 3 - this.wuerfe_[length - 1].filter((x) => x.punktzahl !== platzhalter).length;
+
+        return this.anzahlWuerfeMitFilter(x => x.punktzahl !== platzhalter);
+    }
+
+    ueberworfen() {
+        return this.anzahlWuerfeMitFilter(x => x.ueberworfen === true);
+    }
+
+    nullWuerfe() {
+        return this.anzahlWuerfeMitFilter(x => x.punktzahl === 0);
+    }
+
+    hundertAchtziger() {
+        return this.wuerfe_.filter(x => {
+                    return x.filter(y => y.punktzahl === 60).length === 3;
+                }).length;
+    }
+
+    anzahlWuerfeMitFilter(filterFunc) {
+        let result = 0;
+        this.wuerfe_.forEach(x => {
+            result += x.filter(filterFunc).length;
+        });
+
+        return result;
+    }
+}
+
 
 // ------------------------------------------------- Initialisieren der Seite -----------------------------------------------
 $(document).ready(function(){
     spielEinstellungen();
 
     initialisieren();
-
-    $(".punktButton").click(function(){
-        werfen(Number($(this).html().match(/\d+/g)[0]));
+    
+    $(".punktButton").each(function(index, element) {
+        let zahl = Number(element.innerHTML);
+         $(element).click(() => werfen(zahl));
     })
-  })
+
+    setInterval(() => dauerLeg += 5, 5000);
+})
 
   
 function spielEinstellungen() {
     let querystring = location.search;
     if (querystring == '') return;
     let wertestring = querystring.slice(1);
-    let paare = wertestring.split(";");
+    /*let paare = wertestring.split(";");
     let paar, key, value;
     for (let i = 0; i < paare.length; i++) {
         paar = paare[i].split("=");
@@ -280,25 +341,30 @@ function spielEinstellungen() {
                 }
             }
         }
-    }
+    }*/
+    try {
+        let json = JSON.parse(decodeURI(wertestring));
+        einstellungen = json;
+    } catch (error) {}       
+    
 }
 
 function initialisieren() {
     document.getElementById('spielart').innerHTML = 'Normales Spiel';
     
     let beschreibungsText = "Die Spieler werfen der Reihe nach jeweils drei Darts. Wer zuerst null Punkte hat, gewinnt. <br>";
-    beschreibungsText += 'Regeln: Best of ' + einstellungen.sets.value + ' Sets, Best of ' + einstellungen.legs.value +
-                         ' Legs, ' +  inOutString(einstellungen.wurfIn.value) + ' In, ' + inOutString(einstellungen.wurfOut.value) +
+    beschreibungsText += 'Regeln: Best of ' + einstellungen.sets + ' Sets, Best of ' + einstellungen.legs +
+                         ' Legs, ' +  inOutString(einstellungen.wurfIn) + ' In, ' + inOutString(einstellungen.wurfOut) +
                          ' Out';
     document.getElementById('spielbeschreibung').innerHTML = beschreibungsText;
     
     wurfElemente_ = document.getElementsByClassName("wurf");
     spielerElemente_ = document.getElementsByClassName("spielerkachel");
-    for(let i = 1; i <= einstellungen.spieler.value.length; i++) {
-        let name = einstellungen.spieler.value[i - 1];
-        spieler_.push(new Spieler(name)); 
+    for(let i = 1; i <= einstellungen.spieler.length; i++) {
+        let spielerObj = einstellungen.spieler[i - 1];
+        spieler_.push(new Spieler(spielerObj.name, spielerObj.istAngemeldet)); 
         // Spieler-Kacheln sichtbar machen
-        document.getElementById('name' + i).innerHTML = name;
+        document.getElementById('name' + i).innerHTML = spielerObj.name;
         anzeigeAktualisieren(i, 0);
 
         spielerElemente_[i - 1].style.display = 'inline-block';
@@ -393,7 +459,7 @@ function changeWurfElement(wurfNr) {
 }
 
 function naechsterSpieler() {
-    aktuellerSpieler = aktuellerSpieler === einstellungen.spieler.value.length ? 1 : aktuellerSpieler + 1;
+    aktuellerSpieler = aktuellerSpieler === einstellungen.spieler.length ? 1 : aktuellerSpieler + 1;
 
     changeSpielerElement(aktuellerSpieler);
 }
@@ -409,7 +475,7 @@ function wuerfeNullen() {
 }
 
 function undo() {
-    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spieler.value.length : aktuellerSpieler - 1) : 
+    let spielerLetzterWurfNummer = aktuellerWurf === 1 ? (aktuellerSpieler === 1 ? einstellungen.spieler.length : aktuellerSpieler - 1) : 
                                    aktuellerSpieler;
     let spielerLetzterWurf = spieler_[spielerLetzterWurfNummer - 1];
     if(spielerLetzterWurf.undoLastThrow()) {
@@ -451,7 +517,9 @@ function buchstabeVorPunkteSchreiben(buchstabe, className) {
 
 // --------------------------------------------- Spiel-Abschluss -------------------------------------------------------
 function showSpielAbschluss(siegerIndex) {
-    
+    // Timer für Dauer des Legs beenden
+    clearInterval();
+
     sets_[aktuellesSet - 1].neuerSieger(siegerIndex);
     
     let gewinn = gewinnErmitteln(siegerIndex);
@@ -490,9 +558,9 @@ function gewinnErmitteln(spielerIndex) {
             gewonneneSets++;
         }
     }
-    console.log('gewonnene Sets: ' + gewonneneSets);
+    //console.log('gewonnene Sets: ' + gewonneneSets);
     if(sets_[aktuellesSet - 1].sieger() === spielerIndex){
-        if(gewonneneSets >= einstellungen.sets.value / 2){
+        if(gewonneneSets >= einstellungen.sets / 2){
             return Gewinn.Match;
         }else {
             return Gewinn.Set;
@@ -519,14 +587,19 @@ function neuesLeg() {
         anzeigeAktualisieren(i + 1, 0);
     }
     changeSpielerElement(1);
+
+    // Timer für neues Leg wieder starten
+    dauerLeg = 0;
+    setInterval(() => dauerLeg += 5, 5000);
 }
 
 function handleContinue() {
     let siegerIndex = sets_[aktuellesSet - 1].siegerLegs_[sets_[aktuellesSet - 1].siegerLegs_.length - 1];
     let gewinn = gewinnErmitteln(siegerIndex);
 
-    console.log(siegerIndex);
+    //console.log(siegerIndex);
     if(gewinn === Gewinn.Match) {
+        spielSpeichern(siegerIndex);
         window.location.href = '../html/index.php'
     }else {
         neuesLeg();
@@ -543,11 +616,80 @@ function handleContinue() {
     }
 }
 
+function spielSpeichern(gewinnerIndex) {
+    // um Statistik-Klasse anzulegen
+    spieler_.forEach(x => x.werteZurueckSetzen());
+
+    let spielerZuSpeichern = spieler_.filter(x => x.istAngemeldet());
+
+    if(!spielerZuSpeichern.length) return;
+
+    let json = {
+        spiel: einstellungen,
+        spieler: [],
+        sieger: ''
+    };
+
+    spielerZuSpeichern.forEach(x => json.spieler.push({
+        username: x.name(),
+        legs: []
+    }));
+
+    if(spielerZuSpeichern.includes(spieler_[gewinnerIndex])){
+        json.sieger = spieler_[gewinnerIndex].name();
+    }
+
+    // Json befüllen
+    let legNr = 0;
+    for(let i = 0; i < sets_.length; i++){
+        let set = sets_[i];
+
+        for(let j = 0; j < set.anzahlAbgeschlosseneLegs(); j++){
+            let dauer = set.dauerLeg(j);
+            let platzierungenLeg = spieler_.sort((x, y) => x.punktzahl - y.punktzahl);
+
+            spielerZuSpeichern.forEach((spieler, index) => {
+                let statistik = spieler.legStatistik(legNr);
+                let platzierung = platzierungenLeg.findIndex(x => Object.is(x, spieler)) + 1;
+
+                json.spieler[index].legs.push({
+                    set: i + 1,
+                    leg: j + 1,
+                    platzierung: platzierung,
+                    average: statistik.average(),
+                    nullWuerfe: statistik.nullWuerfe(),
+                    ueberworfen: statistik.ueberworfen(),
+                    hundertAchtziger: statistik.hundertAchtziger(),
+                    wuerfeGesamt: statistik.wuerfeGesamt(),
+                    punktzahl: statistik.punktzahl(),
+                    dauer: dauer
+                })
+            });
+
+            legNr++;
+        }
+    }
+
+    // Json an Server schicken
+    $.post("spielSpeichern.php", JSON.stringify(json), function(data){
+        let dataInt = parseInt(data);
+        let text = '';
+        switch(dataInt){
+            case PhpStatus.Erfolgreich:
+                text = 'Speichern erfolgreich!'; break;
+            default:
+                text = 'Konnte nicht gespeichert werden!';
+        }
+        console.log(data);
+        console.log(text);
+    });
+}
+
 
 // ---------------------------------------------- Hilfsfunktionen -----------------------------------------------------------
 function inOutKorrekt(inWurf, punktzahl){
     let multiplier = getMultiplier(), wurfKorrekt = true;
-    let einstellung = inWurf ? einstellungen.wurfIn.value : einstellungen.wurfOut.value;
+    let einstellung = inWurf ? einstellungen.wurfIn : einstellungen.wurfOut;
 
     if(einstellung === inOut.single){
 
@@ -565,7 +707,7 @@ function inOutKorrekt(inWurf, punktzahl){
 }
 
 function neuesWurfSet() {
-    return [new Wurf(-1), new Wurf(-1), new Wurf(-1)];
+    return [new Wurf(platzhalter), new Wurf(platzhalter), new Wurf(platzhalter)];
 }
 
 function switchSelectedElement(id, basicClass, ausgewaehltClass) {
